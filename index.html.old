@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Eko — Portofolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#faf7f2;--fg:#1d1b18;--mute:#6f6a62;--card:#fff;--line:#e8e2d8;--acc:#d9531e;--r:16px;
+--serif:'Fraunces',Georgia,'Times New Roman',serif;--sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161412;--fg:#f1ece4;--mute:#a39c90;--card:#201d1a;--line:#34302b;--acc:#ff8a57}}
+:root[data-theme="dark"]{--bg:#161412;--fg:#f1ece4;--mute:#a39c90;--card:#201d1a;--line:#34302b;--acc:#ff8a57}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--sans)}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.logo{font:700 22px var(--serif);text-decoration:none}.logo b{color:var(--acc)}
+nav{display:flex;gap:4px;align-items:center;overflow-x:auto}
+nav a{text-decoration:none;padding:6px 12px;border-radius:99px;color:var(--mute);font-weight:500;font-size:15px;white-space:nowrap}
+nav a.on,nav a:hover{background:var(--card);color:var(--fg)}
+nav button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:99px;width:34px;height:34px;cursor:pointer}
+.hero{padding:72px 0 40px}
+.hero small{color:var(--acc);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.hero h1{font:700 clamp(36px,7vw,64px)/1.08 var(--serif);margin:12px 0 16px;max-width:15em}
+.hero p{color:var(--mute);font-size:18px;max-width:34em;margin:0 0 24px}
+.btn{display:inline-block;background:var(--fg);color:var(--bg);padding:11px 20px;border-radius:99px;text-decoration:none;font-weight:600;margin:0 8px 8px 0}
+.btn.alt{background:transparent;color:var(--fg);border:1px solid var(--line)}
+h2.sec{font:700 28px var(--serif);margin:48px 0 18px;display:flex;justify-content:space-between;align-items:baseline}
+h2.sec a{font:500 14px var(--sans);color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-decoration:none;display:block;transition:transform .2s}
+.card:hover{transform:translateY(-3px)}
+.cover{aspect-ratio:4/3;display:grid;place-items:center;font:700 64px var(--serif);color:#fff;background-size:cover;background-position:center}
+.card .in{padding:14px 16px 18px}
+.tag{font-size:12px;font-weight:600;color:var(--acc);text-transform:uppercase;letter-spacing:.06em}
+.card h3{margin:4px 0 4px;font:700 19px var(--serif)}
+.card p{margin:0;color:var(--mute);font-size:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--fg);padding:6px 14px;border-radius:99px;cursor:pointer;font:500 14px var(--sans)}
+.chip.on{background:var(--fg);color:var(--bg)}
+.socials{display:flex;gap:10px;flex-wrap:wrap}
+.socials a{border:1px solid var(--line);background:var(--card);padding:8px 16px;border-radius:99px;text-decoration:none;font-weight:500;font-size:15px}
+.socials a:hover{border-color:var(--acc);color:var(--acc)}
+.post-row{display:block;text-decoration:none;padding:20px 0;border-bottom:1px solid var(--line)}
+.post-row h3{font:700 24px/1.25 var(--serif);margin:4px 0 6px}
+.post-row p{margin:0;color:var(--mute)}
+.meta{color:var(--mute);font-size:14px}
+article{max-width:680px;margin:0 auto;padding:48px 0 24px}
+article h1{font:700 clamp(32px,6vw,46px)/1.15 var(--serif);margin:8px 0 12px}
+article .body{font:19px/1.8 var(--serif);font-weight:500}
+article .body h2{font:700 26px var(--serif);margin:2em 0 .4em}
+article .body blockquote{margin:1.6em 0;padding-left:18px;border-left:3px solid var(--acc);color:var(--mute);font-style:italic}
+.back{display:inline-block;margin-top:32px;color:var(--acc);text-decoration:none;font-weight:600}
+.detail{display:grid;gap:28px;padding:40px 0;grid-template-columns:1fr}
+@media(min-width:800px){.detail{grid-template-columns:1.2fr 1fr}}
+.detail .cover{border-radius:var(--r);font-size:110px}
+.detail h1{font:700 38px/1.15 var(--serif);margin:6px 0 10px}
+.facts{list-style:none;padding:0;margin:18px 0;color:var(--mute)}.facts li{padding:8px 0;border-bottom:1px solid var(--line)}
+footer{border-top:1px solid var(--line);margin-top:64px;padding:36px 0 40px;color:var(--mute);font-size:14px}
+footer .socials{margin:14px 0}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<a class="logo" href="#/">eko<b>.</b></a>
+<nav id="nav"></nav>
+</div></header>
+<main class="wrap" id="app"></main>
+<footer><div class="wrap"><div id="foot"></div></div></footer>
+
+<script>
+/* ====== EDIT BAGIAN INI SAJA ====== */
+const SITE={
+  name:'Eko',
+  tagline:'Desainer, pembuat website, dan pengembang proyek kreatif.',
+  intro:'Aku membuat identitas visual, label produk, website, dan proyek computer vision dari Surabaya. Di sini kumpulan karya dan tulisanku.',
+  email:'halo@contoh.com',
+  socials:[ // ganti '#' dengan link aslimu
+    {n:'Instagram',u:'#'},{n:'LinkedIn',u:'#'},{n:'GitHub',u:'#'},
+    {n:'TikTok',u:'#'},{n:'YouTube',u:'#'},{n:'WhatsApp',u:'#'}
+  ]
+};
+/* cat: desain | website | proyek.  img: isi data:URI gambar jika ada, kosongkan untuk cover warna */
+const WORKS=[
+ {id:'gerigi',cat:'desain',t:'Identitas Shuttle GERIGI ITS',d:'Logo dan identitas visual layanan shuttle mahasiswa baru.',hue:18,year:'2025',role:'Logo, warna, aset sosmed',img:'',body:'Logo dirancang agar mudah dikenali di seragam, bus, dan media sosial. Ganti teks ini dengan cerita proses: brief, sketsa, alasan pilihan warna, dan hasil akhirnya.'},
+ {id:'label',cat:'desain',t:'Label Produk dalam.dapur',d:'Desain label untuk sayur hidroponik dan kue rumahan.',hue:140,year:'2025',role:'Desain label & kemasan',img:'',body:'Label dibuat hangat dan jujur, sesuai karakter usaha rumahan. Tambahkan foto mockup dan variasi label di sini.'},
+ {id:'logo-umkm',cat:'desain',t:'Seri Logo UMKM',d:'Kumpulan logo untuk usaha kecil di sekitar kampus.',hue:262,year:'2024',role:'Logo & panduan singkat',img:'',body:'Tempat menaruh beberapa logo sekaligus beserta konteks tiap klien.'},
+ {id:'dd-web',cat:'website',t:'Landing Page dalam.dapur',d:'Halaman penjualan sederhana untuk produk rumahan.',hue:95,year:'2025',role:'Desain & pengembangan web',img:'',link:'#',body:'Landing page cepat, ringan, dan mudah dibuka dari HP. Cantumkan link live dan teknologi yang dipakai.'},
+ {id:'dash',cat:'website',t:'Dashboard Driver Shuttle',d:'Aplikasi web untuk memantau driver dan rute shuttle.',hue:210,year:'2025',role:'Perancangan & pengembangan',img:'',link:'#',body:'Ceritakan masalah yang diselesaikan, fitur utama, dan hasilnya untuk operasional shuttle.'},
+ {id:'cv',cat:'proyek',t:'Estimasi Volume Botol dengan CV',d:'Menghitung volume botol yang mengapung dari gambar kamera.',hue:185,year:'2026',role:'Computer vision',img:'',link:'#',body:'Jelaskan pendekatan, tantangan (pantulan air, sudut kamera), dan akurasi yang dicapai.'}
+];
+/* body tulisan: HTML biasa (<p>, <h2>, <blockquote>). Boleh sepanjang apa pun. */
+const POSTS=[
+ {id:'mulai-dari-brief',t:'Dari Brief Singkat ke Logo yang Dipakai Bertahun-tahun',date:'2026-09-20',tag:'Desain',ex:'Cara aku mengubah permintaan "yang penting bagus" menjadi arah visual yang jelas.',
+  body:`<p>Hampir semua proyek logo dimulai dari kalimat yang sama: "yang penting bagus." Tugas pertama bukan menggambar, melainkan menggali apa arti bagus bagi klien.</p><h2>1. Tanyakan hal yang tidak berhubungan dengan visual</h2><p>Siapa pelanggannya? Di mana logo akan paling sering terlihat? Jawabannya menentukan ukuran, kontras, dan tingkat detail.</p><blockquote>Logo yang baik bisa dikenali saat kecil, hitam putih, dan dilihat sekilas.</blockquote><h2>2. Sketsa kasar dulu</h2><p>Sebelum membuka software, buat puluhan sketsa jelek. Ganti paragraf ini dengan tulisanmu sendiri.</p>`},
+ {id:'belajar-cv',t:'Catatan Belajar Computer Vision untuk Pemula Nekat',d:'',date:'2026-08-02',tag:'Teknologi',ex:'Hal-hal yang kuharap kuketahui sebelum mencoba mengukur benda dari kamera.',
+  body:`<p>Computer vision terlihat seperti sihir sampai kamu mencoba mengukur sesuatu dengan benar. Tulisan ini contoh tampilan artikel panjang.</p><h2>Cahaya adalah segalanya</h2><p>Pantulan dan bayangan bisa merusak hasil lebih parah daripada algoritma yang salah. Mulai dari kondisi pencahayaan yang terkontrol.</p>`},
+ {id:'usaha-rumahan',t:'Membangun Usaha Rumahan Sambil Kuliah dan Ngoding',date:'2026-06-11',tag:'Cerita',ex:'Pelajaran dari menjalankan beberapa hal sekaligus dengan sumber daya terbatas.',
+  body:`<p>Tempat untuk cerita personalmu, seperti di Medium. Tidak ada batas panjang, tulis sebanyak yang kamu mau.</p>`}
+];
+/* ====== SELESAI ====== */
+
+/* ====== TERJEMAHAN INGGRIS / ENGLISH TRANSLATIONS (edit di sini) ====== */
+const EN={
+ site:{tagline:'Designer, web builder, and creative project maker.',intro:'I create visual identities, product labels, websites, and computer vision projects from Surabaya. Here is a collection of my work and writing.'},
+ works:{
+  gerigi:{t:'Shuttle GERIGI ITS Identity',d:'Logo and visual identity for a shuttle service for new university students.',role:'Logo, colors, social assets',body:'The logo was designed to be recognizable on uniforms, buses, and social media. Replace this text with your process story: brief, sketches, color choices, and the final result.'},
+  label:{t:'dalam.dapur Product Labels',d:'Label design for hydroponic vegetables and home-baked goods.',role:'Label & packaging design',body:'The labels feel warm and honest, matching the character of a home business. Add mockup photos and label variations here.'},
+  'logo-umkm':{t:'Small Business Logo Series',d:'A collection of logos for small businesses around campus.',role:'Logo & short guideline',body:'A place for several logos at once, with context for each client.'},
+  'dd-web':{t:'dalam.dapur Landing Page',d:'A simple sales page for home-made products.',role:'Web design & development',body:'A fast, lightweight landing page that opens well on phones. Add the live link and the tech used.'},
+  dash:{t:'Shuttle Driver Dashboard',d:'A web app for monitoring shuttle drivers and routes.',role:'Planning & development',body:'Describe the problem it solves, the main features, and the results for shuttle operations.'},
+  cv:{t:'Bottle Volume Estimation with CV',d:'Estimating the volume of a floating bottle from camera images.',role:'Computer vision',body:'Explain the approach, the challenges (water reflections, camera angle), and the accuracy achieved.'}
+ },
+ posts:{
+  'mulai-dari-brief':{t:'From a Short Brief to a Logo That Lasts for Years',tag:'Design',ex:'How I turn "just make it look good" into a clear visual direction.',body:'<p>Almost every logo project starts with the same sentence: "just make it look good." The first job is not drawing, but finding out what good means to the client.</p><h2>1. Ask things unrelated to visuals</h2><p>Who are the customers? Where will the logo appear most often? The answers decide size, contrast, and level of detail.</p><blockquote>A good logo is recognizable when small, in black and white, at a glance.</blockquote><h2>2. Rough sketches first</h2><p>Before opening any software, make dozens of ugly sketches. Replace this paragraph with your own writing.</p>'},
+  'belajar-cv':{t:'Notes from a Reckless Beginner in Computer Vision',tag:'Tech',ex:'Things I wish I knew before trying to measure objects with a camera.',body:'<p>Computer vision looks like magic until you try to measure something correctly. This post is a sample of the long-article layout.</p><h2>Light is everything</h2><p>Reflections and shadows can ruin results worse than a wrong algorithm. Start with controlled lighting.</p>'},
+  'usaha-rumahan':{t:'Running a Home Business While Studying and Coding',tag:'Story',ex:'Lessons from juggling several things at once with limited resources.',body:'<p>A place for your personal stories, like on Medium. There is no length limit, write as much as you want.</p>'}
+ }
+};
+const UI={
+ id:{home:'Beranda',works:'Karya',blog:'Blog',contact:'Kontak',all:'Semua',design:'Desain',web:'Website',proj:'Proyek',folio:'Portofolio',seeWorks:'Lihat karya',readPosts:'Baca tulisan',featured:'Karya pilihan',latest:'Tulisan terbaru',more:'Semua →',connect:'Terhubung',year:'Tahun',role:'Peran',visit:'Kunjungi proyek ↗',allWorks:'← Semua karya',allPosts:'← Semua tulisan',min:'menit baca',like:'Suka tulisan ini? Ikuti di sosial media:',cTitle:'Ada proyek? Ayo ngobrol.',cText:'Untuk desain, website, atau kolaborasi, hubungi lewat email atau sosial media.',nf:'Halaman tidak ditemukan',toHome:'Ke beranda',theme:'Ganti tema',loc:'id-ID'},
+ en:{home:'Home',works:'Works',blog:'Blog',contact:'Contact',all:'All',design:'Design',web:'Website',proj:'Projects',folio:'Portfolio',seeWorks:'See my work',readPosts:'Read my writing',featured:'Featured work',latest:'Latest posts',more:'View all →',connect:'Connect',year:'Year',role:'Role',visit:'Visit project ↗',allWorks:'← All works',allPosts:'← All posts',min:'min read',like:'Enjoyed this post? Follow on social media:',cTitle:'Got a project? Let\'s talk.',cText:'For design, websites, or collaboration, reach out by email or social media.',nf:'Page not found',toHome:'Back home',theme:'Toggle theme',loc:'en-US'}
+};
+let lang='id';
+try{const s=localStorage.getItem('lang');lang=s||((navigator.language||'id').toLowerCase().startsWith('id')?'id':'en')}catch(e){}
+const tr=k=>UI[lang][k];
+const G=(kind,o,k)=>(lang==='en'&&EN[kind][o.id]&&EN[kind][o.id][k]!=null)?EN[kind][o.id][k]:o[k];
+const site=k=>lang==='en'?EN.site[k]:SITE[k];
+
+const $=s=>document.querySelector(s);
+const CATS=[['semua','all'],['desain','design'],['website','web'],['proyek','proj']];
+const catName=c=>tr((CATS.find(x=>x[0]===c)||[0,'all'])[1]);
+const fmt=d=>new Date(d).toLocaleDateString(tr('loc'),{day:'numeric',month:'long',year:'numeric'});
+const mins=h=>Math.max(1,Math.round(h.replace(/<[^>]+>/g,' ').split(/\s+/).length/200));
+const cover=w=>{const t=G('works',w,'t');return `<div class="cover" style="background-color:hsl(${w.hue} 55% 48%);${w.img?`background-image:url('${w.img}')`:`background-image:linear-gradient(135deg,hsl(${w.hue} 60% 55%),hsl(${(w.hue+40)%360} 55% 32%))`}">${w.img?'':t[0]}</div>`};
+const wCard=w=>`<a class="card" href="#/karya/${w.id}">${cover(w)}<div class="in"><span class="tag">${catName(w.cat)}</span><h3>${G('works',w,'t')}</h3><p>${G('works',w,'d')}</p></div></a>`;
+const pRow=p=>{const b=G('posts',p,'body');return `<a class="post-row" href="#/blog/${p.id}"><span class="tag">${G('posts',p,'tag')}</span><h3>${G('posts',p,'t')}</h3><p>${G('posts',p,'ex')}</p><span class="meta">${fmt(p.date)} · ${mins(b)} ${tr('min')}</span></a>`};
+const socials=()=>`<div class="socials">${SITE.socials.map(s=>`<a href="${s.u}" target="_blank" rel="noopener">${s.n}</a>`).join('')}<a href="mailto:${SITE.email}">Email</a></div>`;
+let filter='semua';
+
+function nav(r){
+  const l=[['/','home'],['/karya','works'],['/blog','blog'],['/kontak','contact']];
+  $('#nav').innerHTML=l.map(([h,k])=>`<a href="#${h}" class="${r===h||(h!=='/'&&r.startsWith(h))?'on':''}">${tr(k)}</a>`).join('')+`<button id="lg" aria-label="Language" style="width:auto;padding:0 12px;font:600 13px var(--sans)">${lang==='id'?'EN':'ID'}</button><button id="th" aria-label="${tr('theme')}">◐</button>`;
+  $('#th').onclick=()=>{const d=document.documentElement,dark=getComputedStyle(d).getPropertyValue('--bg').trim()==='#161412';d.dataset.theme=dark?'light':'dark'};
+  $('#lg').onclick=()=>{lang=lang==='id'?'en':'id';try{localStorage.setItem('lang',lang)}catch(e){}render(true)};
+}
+function home(){
+  return `<section class="hero"><small>${tr('folio')}</small><h1>${site('tagline')}</h1><p>${site('intro')}</p><a class="btn" href="#/karya">${tr('seeWorks')}</a><a class="btn alt" href="#/blog">${tr('readPosts')}</a></section>
+  <h2 class="sec">${tr('featured')} <a href="#/karya">${tr('more')}</a></h2><div class="grid">${WORKS.slice(0,3).map(wCard).join('')}</div>
+  <h2 class="sec">${tr('latest')} <a href="#/blog">${tr('more')}</a></h2>${POSTS.slice(0,2).map(pRow).join('')}
+  <h2 class="sec">${tr('connect')}</h2>${socials()}`;
+}
+function works(){
+  const list=WORKS.filter(w=>filter==='semua'||w.cat===filter);
+  return `<h2 class="sec" style="margin-top:40px">${tr('works')}</h2><div class="chips">${CATS.map(([k,n])=>`<button class="chip ${filter===k?'on':''}" data-f="${k}">${tr(n)}</button>`).join('')}</div><div class="grid">${list.map(wCard).join('')}</div>`;
+}
+function work(id){
+  const w=WORKS.find(x=>x.id===id);if(!w)return nf();
+  return `<div class="detail">${cover(w)}<div><span class="tag">${catName(w.cat)}</span><h1>${G('works',w,'t')}</h1><p>${G('works',w,'d')}</p><ul class="facts"><li><b>${tr('year')}:</b> ${w.year}</li><li><b>${tr('role')}:</b> ${G('works',w,'role')}</li></ul><p>${G('works',w,'body')}</p>${w.link?`<a class="btn" href="${w.link}" target="_blank" rel="noopener">${tr('visit')}</a>`:''}<br><a class="back" href="#/karya">${tr('allWorks')}</a></div></div>`;
+}
+function blog(){return `<h2 class="sec" style="margin-top:40px">${tr('blog')}</h2>${POSTS.map(pRow).join('')}`}
+function post(id){
+  const p=POSTS.find(x=>x.id===id);if(!p)return nf();
+  const b=G('posts',p,'body');
+  return `<article><span class="tag">${G('posts',p,'tag')}</span><h1>${G('posts',p,'t')}</h1><div class="meta">${fmt(p.date)} · ${mins(b)} ${tr('min')}</div><div class="body" style="margin-top:28px">${b}</div><hr style="border:0;border-top:1px solid var(--line);margin:40px 0 24px"><p class="meta">${tr('like')}</p>${socials()}<a class="back" href="#/blog">${tr('allPosts')}</a></article>`;
+}
+function contact(){return `<section class="hero"><small>${tr('contact')}</small><h1>${tr('cTitle')}</h1><p>${tr('cText')}</p><a class="btn" href="mailto:${SITE.email}">${SITE.email}</a><div style="margin-top:20px">${socials()}</div></section>`}
+const nf=()=>`<section class="hero"><h1>${tr('nf')}</h1><a class="btn" href="#/">${tr('toHome')}</a></section>`;
+
+function render(keep){
+  const y=scrollY,r=(location.hash.slice(1)||'/'),p=r.split('/');
+  let h;
+  if(r==='/')h=home();else if(r==='/karya')h=works();else if(p[1]==='karya')h=work(p[2]);
+  else if(r==='/blog')h=blog();else if(p[1]==='blog')h=post(p[2]);else if(r==='/kontak')h=contact();else h=nf();
+  document.documentElement.lang=lang;
+  $('#app').innerHTML=h;nav(r);
+  $('#foot').innerHTML=`<b style="color:var(--fg)">${SITE.name}</b> — ${site('tagline')}${socials()}<div>© ${new Date().getFullYear()}</div>`;
+  window.scrollTo(0,keep===true?y:0);
+  document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{filter=b.dataset.f;render(true)});
+}
+addEventListener('hashchange',()=>render());render();
+</script>
+</body>
+</html>
