@@ -1,49 +1,316 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>dalam.dapur — katalog</title><meta name="description" content="Katalog makanan dan minuman rumahan dari dapur kami.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Lora:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f6ecd9;--fg:#3b2a1a;--mute:#8a7258;--line:#b9a07c;--acc:#b4441a;--paper:#fffaf0;--serif:'Lora',Georgia,serif;--hand:'Caveat','Comic Sans MS',cursive;box-sizing:border-box;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
-@media(prefers-color-scheme:dark){:root{--bg:#1d1510;--fg:#f3e6cf;--mute:#b79d7c;--line:#5a4631;--acc:#ff9a62;--paper:#2a1f17}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 var(--serif)}
-.wrap{max-width:760px;margin:0 auto;padding:0 22px}
-header{text-align:center;padding:56px 0 24px}
-.logo{font:700 clamp(38px,9vw,60px)/1 var(--serif);letter-spacing:-.02em}.logo b{color:var(--acc)}
-.sub{font:600 26px var(--hand);color:var(--acc);margin:6px 0 0}
-.lead{color:var(--mute);font-style:italic;max-width:30em;margin:14px auto 0}
-.orn{text-align:center;color:var(--line);letter-spacing:.6em;margin:26px 0 8px}
-nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:18px 0 6px}
-nav button{font:600 20px var(--hand);background:none;border:0;border-bottom:2px solid transparent;color:var(--mute);cursor:pointer;padding:2px 8px}
-nav button.on{color:var(--acc);border-color:var(--acc)}
-h2{font:700 26px var(--serif);margin:38px 0 6px;text-align:center}
-.row{display:flex;gap:16px;align-items:center;padding:14px 0}
-.row+.row{border-top:1px dashed var(--line)}
-.ph{flex:none;width:76px;height:84px;background:var(--paper);padding:5px 5px 18px;box-shadow:0 2px 8px #0003;transform:rotate(-3deg)}
-.row:nth-child(even) .ph{transform:rotate(3deg)}
-.ph i{display:grid;place-items:center;width:100%;height:100%;background-size:cover;background-position:center;font:700 28px var(--serif);color:#fff;font-style:normal}
-.nm{display:flex;align-items:baseline;gap:8px}.nm h3{margin:0;font:700 19px var(--serif)}
-.nm span{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px)}
-.row p{margin:2px 0 0;color:var(--mute);font-size:15px;font-style:italic}.row>div{flex:1}
-footer{text-align:center;margin-top:56px;padding:28px 0 40px;border-top:1px solid var(--line);color:var(--mute);font-size:14px}
-footer a{color:var(--acc)}
-</style></head><body>
-<header class="wrap"><div class="logo">dalam<b>.</b>dapur</div><p class="sub">dari dapur rumah kami</p>
-<p class="lead">Kumpulan makanan dan minuman yang pernah dibuat di dapur ini. Sekadar katalog untuk dilihat-lihat.</p></header>
-<main class="wrap"><div class="orn">✦ ✦ ✦</div><nav id="nav"></nav><div id="menu"></div></main>
-<footer><div class="wrap">dalam.dapur · katalog masakan rumahan · <a href="https://cahyadies.github.io">cahyadies ↗</a></div></footer>
-<script>
-const $=s=>document.querySelector(s);let f='semua';
-const M=[ // GANTI: n=nama, c=kategori, d=deskripsi, img='foto/nama.jpg'
-{n:'Brownies kukus',c:'kue',d:'Lembut, cokelat pekat.',h:20,img:''},
-{n:'Kue lapis',c:'kue',d:'Manis legit berlapis.',h:340,img:''},
-{n:'Keripik rumahan',c:'jajanan',d:'Renyah, kemasan zip.',h:45,img:''},
-{n:'Nasi kotak ayam bumbu',c:'masakan',d:'Siap antar.',h:10,img:''},
-{n:'Es teh lemon',c:'minuman',d:'Segar, tanpa pengawet.',h:60,img:''}];
-const cats=[...new Set(M.map(x=>x.c))];
-function draw(){
-$('#nav').innerHTML=['semua',...cats].map(k=>`<button class="${f===k?'on':''}" data-k="${k}">${k}</button>`).join('');
-$('#menu').innerHTML=cats.filter(c=>f==='semua'||c===f).map(c=>`<h2>${c[0].toUpperCase()+c.slice(1)}</h2>`+M.filter(x=>x.c===c).map(x=>`<div class="row"><div class="ph"><i style="${x.img?`background-image:url('${x.img}')`:`background-image:linear-gradient(135deg,hsl(${x.h} 55% 50%),hsl(${(x.h+40)%360} 50% 32%))`}">${x.img?'':x.n[0]}</i></div><div><div class="nm"><h3>${x.n}</h3><span></span></div><p>${x.d}</p></div></div>`).join('')).join('');
-document.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{f=b.dataset.k;draw()})}
-draw();
-</script></body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>dalam.dapur — katalog</title>
+    <meta
+      name="description"
+      content="Katalog makanan dan minuman rumahan dari dapur kami."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Lora:ital,wght@0,500;0,700;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f6ecd9;
+        --fg: #3b2a1a;
+        --mute: #8a7258;
+        --line: #b9a07c;
+        --acc: #b4441a;
+        --paper: #fffaf0;
+        --serif: "Lora", Georgia, serif;
+        --hand: "Caveat", "Comic Sans MS", cursive;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0);
+        padding-bottom: env(safe-area-inset-bottom, 0);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1d1510;
+          --fg: #f3e6cf;
+          --mute: #b79d7c;
+          --line: #5a4631;
+          --acc: #ff9a62;
+          --paper: #2a1f17;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font: 17px/1.6 var(--serif);
+      }
+      .wrap {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+      header {
+        text-align: center;
+        padding: 56px 0 24px;
+      }
+      .logo {
+        font: 700 clamp(38px, 9vw, 60px)/1 var(--serif);
+        letter-spacing: -0.02em;
+      }
+      .logo b {
+        color: var(--acc);
+      }
+      .sub {
+        font: 600 26px var(--hand);
+        color: var(--acc);
+        margin: 6px 0 0;
+      }
+      .lead {
+        color: var(--mute);
+        font-style: italic;
+        max-width: 30em;
+        margin: 14px auto 0;
+      }
+      .orn {
+        text-align: center;
+        color: var(--line);
+        letter-spacing: 0.6em;
+        margin: 26px 0 8px;
+      }
+      nav {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 18px 0 32px;
+      }
+      nav button {
+        font: 600 22px var(--hand);
+        background: none;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        color: var(--mute);
+        cursor: pointer;
+        padding: 2px 10px;
+      }
+      nav button.on {
+        color: var(--acc);
+        border-color: var(--acc);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 28px;
+        align-items: start;
+      }
+      .card {
+        background: var(--paper);
+        padding: 12px 12px 20px;
+        box-shadow: 0 6px 20px #0004;
+        border-radius: 3px;
+        transform: rotate(-1.2deg);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .card:nth-child(even) {
+        transform: rotate(1.2deg);
+      }
+      .card:hover {
+        transform: translateY(-4px) rotate(0deg);
+        box-shadow: 0 12px 28px #0006;
+      }
+      .ph {
+        width: 100%;
+        overflow: hidden;
+        background: #0002;
+      }
+      .ph img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .ph i {
+        display: grid;
+        place-items: center;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        font: 700 48px var(--serif);
+        color: #fff;
+        font-style: normal;
+      }
+      .info {
+        padding: 14px 6px 0;
+        text-align: center;
+      }
+      .cat {
+        display: inline-block;
+        font: 600 18px/1 var(--hand);
+        color: var(--acc);
+        margin-bottom: 4px;
+      }
+      .info h3 {
+        margin: 0;
+        font: 700 20px var(--serif);
+      }
+      .info p {
+        margin: 6px 0 0;
+        color: var(--mute);
+        font-size: 15px;
+        font-style: italic;
+      }
+      .ph[data-img] {
+        cursor: zoom-in;
+      }
+      #lb {
+        position: fixed;
+        inset: 0;
+        background: #000c;
+        display: none;
+        place-items: center;
+        padding: 24px;
+        z-index: 99;
+        cursor: zoom-out;
+      }
+      #lb.on {
+        display: grid;
+      }
+      #lb figure {
+        margin: 0;
+        background: var(--paper);
+        padding: 12px 12px 36px;
+        box-shadow: 0 12px 36px #0008;
+        text-align: center;
+      }
+      #lb img {
+        display: block;
+        max-width: min(86vw, 540px);
+        max-height: 76vh;
+        width: auto;
+        height: auto;
+      }
+      #lb figcaption {
+        font: 600 24px var(--hand);
+        color: var(--fg);
+        margin-top: 8px;
+      }
+      footer {
+        text-align: center;
+        margin-top: 56px;
+        padding: 28px 0 40px;
+        border-top: 1px solid var(--line);
+        color: var(--mute);
+        font-size: 14px;
+      }
+      footer a {
+        color: var(--acc);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="wrap">
+      <div class="logo">dalam<b>.</b>dapur</div>
+      <p class="sub">dari dapur rumah kami</p>
+      <p class="lead">
+        Kumpulan makanan dan minuman yang pernah dibuat di dapur ini. Sekadar
+        katalog untuk dilihat-lihat.
+      </p>
+    </header>
+    <main class="wrap">
+      <div class="orn">✦ ✦ ✦</div>
+      <nav id="nav"></nav>
+      <div id="menu" class="grid"></div>
+    </main>
+    <footer>
+      <div class="wrap">
+        dalam.dapur · katalog masakan rumahan ·
+        <a href="https://cahyadies.github.io">cahyadies ↗</a>
+      </div>
+    </footer>
+    <div id="lb" onclick="this.classList.remove('on')">
+      <figure>
+        <img id="lbi" alt="" />
+        <figcaption id="lbc"></figcaption>
+      </figure>
+    </div>
+    <script>
+      const $ = (s) => document.querySelector(s);
+      let f = "semua";
+      const M = [
+        // GANTI: n=nama, c=kategori, d=deskripsi, img='images/nama.jpg'
+        {
+          n: "Banana bread",
+          c: "kue",
+          d: "Harum pisang, taburan kismis & choco chips.",
+          h: 28,
+          img: "images/bananabread.jpg",
+        },
+        {
+          n: "Roti manis",
+          c: "roti",
+          d: "Aneka bentuk dan isian manis.",
+          h: 38,
+          img: "images/roti manis.jpg",
+        },
+        {
+          n: "Roti sisir",
+          c: "roti",
+          d: "Lembut berlapis dengan olesan mentega.",
+          h: 42,
+          img: "images/rotisisir.jpg",
+        },
+        {
+          n: "Roti sobek",
+          c: "roti",
+          d: "Empuk hangat, taburan keju & meses.",
+          h: 32,
+          img: "images/rotisobek.jpg",
+        },
+        {
+          n: "Samosa",
+          c: "jajanan",
+          d: "Kulit renyah dengan isian gurih berbumbu.",
+          h: 48,
+          img: "images/samosa.jpg",
+        },
+      ];
+      const cats = [...new Set(M.map((x) => x.c))];
+      function draw() {
+        $("#nav").innerHTML = ["semua", ...cats]
+          .map(
+            (k) =>
+              `<button class="${f === k ? "on" : ""}" data-k="${k}">${k}</button>`,
+          )
+          .join("");
+        $("#menu").innerHTML = M.filter((x) => f === "semua" || x.c === f)
+          .map(
+            (x) =>
+              `<div class="card"><div class="ph" ${x.img ? `data-img="${x.img}" data-cap="${x.n}"` : ""}>${x.img ? `<img src="${x.img}" alt="${x.n}" loading="lazy">` : `<i style="background-image:linear-gradient(135deg,hsl(${x.h} 55% 50%),hsl(${(x.h + 40) % 360} 50% 32%))">${x.n[0]}</i>`}</div><div class="info"><span class="cat">${x.c}</span><h3>${x.n}</h3><p>${x.d}</p></div></div>`,
+          )
+          .join("");
+        document.querySelectorAll("[data-k]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              f = b.dataset.k;
+              draw();
+            }),
+        );
+        document.querySelectorAll(".ph[data-img]").forEach(
+          (p) =>
+            (p.onclick = () => {
+              $("#lbi").src = p.dataset.img;
+              $("#lbi").alt = p.dataset.cap;
+              $("#lbc").textContent = p.dataset.cap;
+              $("#lb").classList.add("on");
+            }),
+        );
+      }
+      draw();
+    </script>
+  </body>
+</html>
