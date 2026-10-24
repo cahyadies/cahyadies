@@ -148,21 +148,85 @@
         padding: 14px 6px 0;
         text-align: center;
       }
+      .card-top {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        align-items: center;
+        margin-bottom: 4px;
+      }
       .cat {
         display: inline-block;
         font: 600 18px/1 var(--hand);
         color: var(--acc);
-        margin-bottom: 4px;
+      }
+      .badge-po {
+        font: 600 14px/1 var(--hand);
+        background: var(--bg);
+        border: 1px dashed var(--line);
+        color: var(--mute);
+        padding: 2px 8px;
+        border-radius: 99px;
       }
       .info h3 {
         margin: 0;
         font: 700 20px var(--serif);
       }
       .info p {
-        margin: 6px 0 0;
+        margin: 6px 0 12px;
         color: var(--mute);
         font-size: 15px;
         font-style: italic;
+      }
+      .btn-order {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font: 600 18px var(--hand);
+        color: var(--acc);
+        text-decoration: none;
+        border: 1px solid var(--line);
+        padding: 4px 14px;
+        border-radius: 4px;
+        background: var(--bg);
+        transition: all 0.15s ease;
+      }
+      .btn-order:hover {
+        background: var(--acc);
+        color: #fff;
+        border-color: var(--acc);
+      }
+      .notice-bar {
+        text-align: center;
+        background: var(--paper);
+        border: 1px dashed var(--line);
+        padding: 14px 18px;
+        border-radius: 6px;
+        max-width: 580px;
+        margin: 0 auto 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .notice-bar span {
+        font-size: 15px;
+        color: var(--mute);
+        font-style: italic;
+      }
+      .notice-bar a {
+        display: inline-block;
+        font: 600 19px var(--hand);
+        color: #fff;
+        background: var(--acc);
+        padding: 6px 18px;
+        border-radius: 4px;
+        text-decoration: none;
+        box-shadow: 0 2px 6px #0002;
+        transition: opacity 0.15s ease;
+      }
+      .notice-bar a:hover {
+        opacity: 0.9;
       }
       .ph[data-img] {
         cursor: zoom-in;
@@ -223,6 +287,10 @@
     </header>
     <main class="wrap">
       <div class="orn">✦ ✦ ✦</div>
+      <div class="notice-bar">
+        <span>Produk rumahan dibuat segar sesuai pesanan (Pre-Order / Freshly Made).</span>
+        <a id="waTop" href="#" target="_blank" rel="noopener">Pesan / Tanya Menu via WhatsApp ↗</a>
+      </div>
       <nav id="nav"></nav>
       <div id="menu" class="grid"></div>
     </main>
@@ -240,13 +308,28 @@
     </div>
     <script>
       const $ = (s) => document.querySelector(s);
+      
+      // KONFIGURASI WHATSAPP: Ganti dengan nomor WhatsApp aktif (gunakan kode negara tanpa +, misal 628123456789)
+      const WA_NUMBER = "6281234567890";
+      
+      const getWaLink = (item = "") => {
+        const text = item 
+          ? `Halo dalam.dapur, saya tertarik untuk pesan menu: *${item}*. Apakah masih bisa dipesan?` 
+          : `Halo dalam.dapur, saya mau tanya-tanya seputar menu dan pemesanan.`;
+        return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+      };
+
+      const waTopEl = $("#waTop");
+      if (waTopEl) waTopEl.href = getWaLink();
+
       let f = "semua";
       const M = [
-        // GANTI: n=nama, c=kategori, d=deskripsi, img='images/nama.jpg'
+        // GANTI: n=nama, c=kategori, d=deskripsi, po=status PO, img='images/nama.jpg'
         {
           n: "Banana bread",
           c: "kue",
           d: "Harum pisang, taburan kismis & choco chips.",
+          po: "PO H-1",
           h: 28,
           img: "images/bananabread.jpg",
         },
@@ -254,6 +337,7 @@
           n: "Roti manis",
           c: "roti",
           d: "Aneka bentuk dan isian manis.",
+          po: "PO H-1",
           h: 38,
           img: "images/roti manis.jpg",
         },
@@ -261,6 +345,7 @@
           n: "Roti sisir",
           c: "roti",
           d: "Lembut berlapis dengan olesan mentega.",
+          po: "PO H-1",
           h: 42,
           img: "images/rotisisir.jpg",
         },
@@ -268,6 +353,7 @@
           n: "Roti sobek",
           c: "roti",
           d: "Empuk hangat, taburan keju & meses.",
+          po: "PO H-1",
           h: 32,
           img: "images/rotisobek.jpg",
         },
@@ -275,6 +361,7 @@
           n: "Samosa",
           c: "jajanan",
           d: "Kulit renyah dengan isian gurih berbumbu.",
+          po: "PO H-1",
           h: 48,
           img: "images/samosa.jpg",
         },
@@ -290,7 +377,7 @@
         $("#menu").innerHTML = M.filter((x) => f === "semua" || x.c === f)
           .map(
             (x) =>
-              `<div class="card"><div class="ph" ${x.img ? `data-img="${x.img}" data-cap="${x.n}"` : ""}>${x.img ? `<img src="${x.img}" alt="${x.n}" loading="lazy">` : `<i style="background-image:linear-gradient(135deg,hsl(${x.h} 55% 50%),hsl(${(x.h + 40) % 360} 50% 32%))">${x.n[0]}</i>`}</div><div class="info"><span class="cat">${x.c}</span><h3>${x.n}</h3><p>${x.d}</p></div></div>`,
+              `<div class="card"><div class="ph" ${x.img ? `data-img="${x.img}" data-cap="${x.n}"` : ""}>${x.img ? `<img src="${x.img}" alt="${x.n}" loading="lazy">` : `<i style="background-image:linear-gradient(135deg,hsl(${x.h} 55% 50%),hsl(${(x.h + 40) % 360} 50% 32%))">${x.n[0]}</i>`}</div><div class="info"><div class="card-top"><span class="cat">${x.c}</span><span class="badge-po">${x.po || "PO"}</span></div><h3>${x.n}</h3><p>${x.d}</p><a class="btn-order" href="${getWaLink(x.n)}" target="_blank" rel="noopener">Pesan via WA ↗</a></div></div>`,
           )
           .join("");
         document.querySelectorAll("[data-k]").forEach(

@@ -1,6 +1,6 @@
 <!doctype html><html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>mentayasandbox — lab eksplorasi</title><meta name="description" content="Eksperimen website dan desain.">
+<title>mentayasandbox — lab eksplorasi</title><meta name="description" content="Eksperimen website, desain, dan computer vision.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -13,38 +13,91 @@ header{background:var(--bg);border-bottom:1px solid var(--line)}header .wrap{dis
 .logo{font-weight:700}.logo b{color:var(--acc)}.logo:before{content:'> ';color:var(--acc)}
 .v{color:var(--mute);font-size:12px}
 .hero{padding:52px 0 24px}.hero small{color:var(--acc)}
-h1{font:700 clamp(26px,5.5vw,44px)/1.15 var(--mono);margin:8px 0 12px;max-width:18em;background:var(--bg);display:inline}
-.lead{color:var(--mute);max-width:40em;background:var(--bg);display:inline-block;margin:14px 0 0}
+h1{font:700 clamp(26px,5.5vw,44px)/1.15 var(--mono);margin:8px 0 12px;max-width:20em;background:var(--bg);display:inline}
+.lead{color:var(--mute);max-width:44em;background:var(--bg);display:inline-block;margin:14px 0 0}
 .bar{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
-.bar button{font:600 12px var(--mono);background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:5px 12px;cursor:pointer}
+.bar button{font:600 12px var(--mono);background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:5px 12px;cursor:pointer;transition:all .15s}
 .bar button.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
 @media(max-width:760px){.cols{grid-template-columns:1fr}}
 .col{background:var(--bg);border:1px solid var(--line)}
 .col>h2{margin:0;padding:10px 14px;font:700 12px var(--mono);text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
 .col>h2 i{font-style:normal;color:var(--mute)}
-.c{display:block;color:inherit;text-decoration:none;margin:12px;border:1px solid var(--line);background:var(--card);border-left:3px solid var(--k)}
+.c{display:block;color:inherit;text-decoration:none;margin:12px;border:1px solid var(--line);background:var(--card);border-left:3px solid var(--k);cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+.c:hover{transform:translateY(-2px);box-shadow:0 4px 12px #0004}
 .c .im{height:90px;background-size:cover;background-position:center;border-bottom:1px solid var(--line)}
-.c .in{padding:10px 12px 12px}.c h3{margin:0;font:700 15px var(--mono)}.c p{margin:4px 0 8px;color:var(--mute);font-size:13px}
-.t{font-size:11px;border:1px solid var(--line);padding:1px 7px;color:var(--mute)}
-.empty{margin:12px;color:var(--mute);font-size:12px}
+.c .in{padding:12px}.c h3{margin:0;font:700 14px var(--mono)}.c p{margin:6px 0 10px;color:var(--mute);font-size:12px;line-height:1.5}
+.meta-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.t{font-size:11px;border:1px solid var(--line);padding:2px 7px;color:var(--mute);text-transform:uppercase}
+.notes-link{font-size:11px;color:var(--acc)}
+.empty{margin:16px;color:var(--mute);font-size:12px}
+#modal{position:fixed;inset:0;background:#000a;display:none;place-items:center;padding:18px;z-index:99}
+#modal.on{display:grid}
+.modal-box{background:var(--card);border:2px solid var(--line);max-width:540px;width:100%;padding:24px;box-shadow:0 12px 36px #0008}
+.modal-box h2{margin:0 0 8px;font-size:18px;color:var(--fg)}
+.modal-box .badge{display:inline-block;padding:2px 8px;font-size:11px;text-transform:uppercase;border:1px solid var(--line);margin-bottom:14px}
+.modal-box p{color:var(--mute);font-size:13px;line-height:1.6}
+.modal-box .notes{background:var(--bg);border:1px dashed var(--line);padding:12px 14px;margin:14px 0;font-size:12px;color:var(--fg)}
+.modal-box button{background:var(--acc);color:var(--bg);border:0;padding:6px 14px;font:700 12px var(--mono);cursor:pointer}
 footer{margin-top:48px;border-top:1px solid var(--line);background:var(--bg);padding:22px 0 36px;color:var(--mute);font-size:12px}footer a{color:var(--acc)}
 </style></head><body>
-<header><div class="wrap"><div class="logo">mentaya<b>.</b>sandbox</div><div class="v">lab / v0.1</div></div></header>
-<main class="wrap"><section class="hero"><small>// ruang eksplorasi</small><br><h1>Tempat mencoba hal-hal yang belum tentu jadi.</h1><br>
-<p class="lead">Eksperimen website dan desain: setengah jadi, gagal, atau sedang jalan. Karya final ada di portofolio.</p></section>
+<header><div class="wrap"><div class="logo">mentaya<b>.</b>sandbox</div><div class="v">lab / v0.2</div></div></header>
+<main class="wrap"><section class="hero"><small>// ruang eksperimen terbuka</small><br><h1>Tempat mencoba hal-hal yang belum tentu jadi.</h1><br>
+<p class="lead">Eksperimen kode, desain antarmuka, dan riset computer vision: setengah jadi, catatan belajar, atau sedang dikembangkan. Karya final terdokumentasi di portofolio.</p></section>
 <div class="bar" id="bar"></div><div class="cols" id="cols"></div></main>
+<div id="modal" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="modal-box">
+    <div id="mTag" class="badge"></div>
+    <h2 id="mTitle"></h2>
+    <p id="mDesc"></p>
+    <div id="mNotes" class="notes"></div>
+    <button onclick="$('#modal').classList.remove('on')">[tutup / esc]</button>
+  </div>
+</div>
 <footer><div class="wrap">eksperimen &amp; coretan · karya matang → <a href="https://cahyadies.github.io">cahyadies ↗</a></div></footer>
 <script>
 const $=s=>document.querySelector(s);let f='semua';
-const X=[ // GANTI. t: web/desain, s: ide/jalan/selesai, link & img opsional
-{n:'Dashboard driver shuttle',t:'web',s:'jalan',d:'Eksplor tampilan dashboard sederhana untuk driver.',link:'',img:''},
-{n:'Sistem warna hangat',t:'desain',s:'selesai',d:'Uji palet warna untuk usaha rumahan.',link:'',img:''},
-{n:'Layout katalog tanpa keranjang',t:'web',s:'ide',d:'Katalog ringan yang cepat di HP.',link:'',img:''}];
+const X=[
+  {n:'Estimasi Kontur & Refleksi Botol',t:'cv',s:'jalan',d:'Mengurangi noise pantulan cahaya pada air saat mengukur volume botol.',notes:'Riset awal menunjukkan polarizing filter fisik di lensa kamera jauh lebih efektif daripada mitigasi komputasi murni.',link:''},
+  {n:'Sistem Palet Warna dalam.dapur',t:'desain',s:'selesai',d:'Uji palet warna kertas hangat dan tipografi handwriting untuk produk rumahan.',notes:'Berhasil diimplementasikan pada katalog dalam.dapur dengan kontras rasio WCAG AA.',link:''},
+  {n:'Layout Katalog Ringan Tanpa Cart',t:'web',s:'selesai',d:'Katalog mobile super cepat tanpa library JS eksternal, langsung checkout WA.',notes:'Load time di bawah 400ms di jaringan seluler 3G.',link:''},
+  {n:'Dashboard Driver Shuttle Mahasiswa',t:'web',s:'jalan',d:'Wireframe antarmuka rute dan jadwal untuk driver shuttle kampus.',notes:'Tantangan utama ada di keterbacaan teks saat driver mengemudi di bawah terik matahari.',link:''},
+  {n:'Kalkulator Otomatis Nutrisi AB Mix',t:'web',s:'ide',d:'Alat bantu takar ppm dan EC air tandon untuk kebun hidroponik Omah Ijo.',notes:'Akan dihubungkan ke sensor mikrokontroler jika eksperimen fase 2 berhasil.',link:''}
+];
 function draw(){
-$('#bar').innerHTML=['semua','web','desain'].map(k=>`<button class="${f===k?'on':''}" data-k="${k}">${k}</button>`).join('');
-$('#cols').innerHTML=['ide','jalan','selesai'].map(s=>{const L=X.filter(x=>x.s===s&&(f==='semua'||x.t===f));
-return `<div class="col" style="--k:var(--${s})"><h2><span style="color:var(--${s})">● ${s}</span><i>${L.length}</i></h2>${L.map(x=>`<${x.link?`a href="${x.link}" target="_blank" rel="noopener"`:'div'} class="c">${x.img?`<div class="im" style="background-image:url('${x.img}')"></div>`:''}<div class="in"><h3>${x.n}</h3><p>${x.d}</p><span class="t">${x.t}</span></div></${x.link?'a':'div'}>`).join('')||'<div class="empty">// kosong</div>'}</div>`}).join('');
-document.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{f=b.dataset.k;draw()})}
+  $('#bar').innerHTML=['semua','web','desain','cv'].map(k=>`<button class="${f===k?'on':''}" data-k="${k}">${k}</button>`).join('');
+  $('#cols').innerHTML=['ide','jalan','selesai'].map(s=>{
+    const L=X.filter(x=>x.s===s&&(f==='semua'||x.t===f));
+    return `<div class="col" style="--k:var(--${s})">
+      <h2><span style="color:var(--${s})">● ${s}</span><i>${L.length}</i></h2>
+      ${L.map((x,idx)=>`
+        <div class="c" data-idx="${X.indexOf(x)}">
+          ${x.img?`<div class="im" style="background-image:url('${x.img}')"></div>`:''}
+          <div class="in">
+            <h3>${x.n}</h3>
+            <p>${x.d}</p>
+            <div class="meta-row">
+              <span class="t">${x.t}</span>
+              <span class="notes-link">detail ↗</span>
+            </div>
+          </div>
+        </div>
+      `).join('')||'<div class="empty">// belum ada item</div>'}
+    </div>`;
+  }).join('');
+  
+  document.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{f=b.dataset.k;draw()});
+  document.querySelectorAll('.c').forEach(card=>{
+    card.onclick=()=>{
+      const item=X[card.dataset.idx];
+      $('#mTag').textContent=`[ ${item.t} · status: ${item.s} ]`;
+      $('#mTitle').textContent=item.n;
+      $('#mDesc').textContent=item.d;
+      $('#mNotes').innerHTML=`<strong>// Catatan Lab:</strong><br>${item.notes}`;
+      $('#modal').classList.add('on');
+    };
+  });
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#modal').classList.remove('on')});
 draw();
 </script></body></html>

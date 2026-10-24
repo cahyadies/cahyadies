@@ -97,11 +97,72 @@
         margin-bottom: 22px;
         flex-wrap: wrap;
       }
-      .stats div {
-        font: 500 12px var(--mono);
+      .stats button {
+        font: 600 12px var(--mono);
         border: 2px solid var(--fg);
-        padding: 4px 10px;
+        background: var(--bg);
+        color: var(--fg);
+        padding: 5px 12px;
         text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .stats button.on {
+        background: var(--fg);
+        color: var(--bg);
+      }
+      .garden-banner {
+        border: 2px dashed var(--fg);
+        background: var(--card);
+        padding: 16px 20px;
+        margin-bottom: 26px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+      .garden-banner strong {
+        display: block;
+        font: 700 14px var(--mono);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .garden-banner p {
+        margin: 4px 0 0;
+        font-size: 14px;
+        color: var(--mute);
+      }
+      .btn-wa-garden {
+        font: 700 12px var(--mono);
+        text-transform: uppercase;
+        background: var(--acc);
+        color: #fff;
+        padding: 8px 16px;
+        text-decoration: none;
+        border: 2px solid var(--fg);
+        box-shadow: 3px 3px 0 var(--fg);
+        white-space: nowrap;
+      }
+      .btn-wa-garden:hover {
+        transform: translate(-1px, -1px);
+        box-shadow: 4px 4px 0 var(--fg);
+      }
+      .btn-card-order {
+        margin-top: 8px;
+        padding: 6px 10px;
+        font: 700 11px var(--mono);
+        text-transform: uppercase;
+        text-align: center;
+        background: var(--dkf);
+        color: var(--dk);
+        border: 1px solid var(--fg);
+        text-decoration: none;
+        display: block;
+      }
+      .btn-card-order:hover {
+        background: var(--acc);
+        color: #fff;
       }
       .grid {
         display: grid;
@@ -242,6 +303,15 @@
         Harga langsung dari kebun hidroponik Omah Ijo, sebagai acuan harga pasar
         bagi siapa saja.
       </p>
+
+      <div class="garden-banner">
+        <div>
+          <strong>Panen Segar Petik Langsung</strong>
+          <p>Tanpa pestisida kimia. Menerima pesanan langsung & pasokan sayur hidroponik.</p>
+        </div>
+        <a href="#" id="waOmah" class="btn-wa-garden" target="_blank" rel="noopener">Pesan Sayur via WA ↗</a>
+      </div>
+
       <div class="stats" id="st"></div>
       <div class="grid" id="g"></div>
     </main>
@@ -253,6 +323,22 @@
     </footer>
     <script>
       const UPDATED = "2026-10-16"; // GANTI tiap harga diperbarui
+      
+      // KONFIGURASI WHATSAPP: Ganti dengan nomor WhatsApp kebun (kode negara tanpa +, misal 628123456789)
+      const WA_NUMBER = "6281234567890";
+      
+      const getWaLink = (item = "") => {
+        const text = item
+          ? `Halo Omah Ijo, saya ingin pesan sayur panen: *${item}*. Apakah stoknya tersedia hari ini?`
+          : `Halo Omah Ijo, saya mau tanya ketersediaan stok panen dan pemesanan sayur.`;
+        return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+      };
+
+      const waBtn = document.getElementById("waOmah");
+      if (waBtn) waBtn.href = getWaLink();
+
+      let activeFilter = "semua";
+
       const P = [
         // CONTOH data. h=harga, prev=harga sebelumnya, s: ready/segera/habis, img='foto/nama.jpg' (opsional)
         {
@@ -285,12 +371,46 @@
           month: "short",
           year: "numeric",
         });
-      $("#st").innerHTML =
-        `<div>${P.filter((x) => x.s === "ready").length} tersedia</div><div>${P.length} jenis</div>`;
-      $("#g").innerHTML = P.map(
-        (x) =>
-          `<div class="tag ${x.s === "habis" ? "no" : ""}"><div class="pic" ${x.img ? `style="background-image:url('${x.img}')"` : ""}>${x.img ? "" : "/" + x.u}</div><div class="bd"><h3>${x.n}</h3><div class="st ${x.s}"><i></i>${L[x.s]}</div><div class="pr">${rp(x.h)}<small> /${x.u}</small></div>${dl(x)}</div></div>`,
-      ).join("");
+
+      function render() {
+        const readyCount = P.filter((x) => x.s === "ready").length;
+        const segeraCount = P.filter((x) => x.s === "segera").length;
+        const habisCount = P.filter((x) => x.s === "habis").length;
+
+        $("#st").innerHTML = `
+          <button class="${activeFilter === 'semua' ? 'on' : ''}" data-f="semua">Semua (${P.length})</button>
+          <button class="${activeFilter === 'ready' ? 'on' : ''}" data-f="ready">● Tersedia (${readyCount})</button>
+          <button class="${activeFilter === 'segera' ? 'on' : ''}" data-f="segera">◐ Segera Panen (${segeraCount})</button>
+          <button class="${activeFilter === 'habis' ? 'on' : ''}" data-f="habis">○ Habis (${habisCount})</button>
+        `;
+
+        const filtered = activeFilter === "semua" ? P : P.filter((x) => x.s === activeFilter);
+
+        $("#g").innerHTML = filtered.map(
+          (x) =>
+            `<div class="tag ${x.s === "habis" ? "no" : ""}">
+              <div class="pic" ${x.img ? `style="background-image:url('${x.img}')"` : ""}>
+                ${x.img ? "" : "/" + x.u}
+              </div>
+              <div class="bd">
+                <h3>${x.n}</h3>
+                <div class="st ${x.s}"><i></i>${L[x.s]}</div>
+                <div class="pr">${rp(x.h)}<small> /${x.u}</small></div>
+                ${dl(x)}
+                ${x.s === "ready" ? `<a class="btn-card-order" href="${getWaLink(x.n)}" target="_blank" rel="noopener">Pesan Sayur Ini ↗</a>` : ""}
+              </div>
+            </div>`,
+        ).join("");
+
+        document.querySelectorAll("#st button").forEach((b) => {
+          b.onclick = () => {
+            activeFilter = b.dataset.f;
+            render();
+          };
+        });
+      }
+
+      render();
     </script>
   </body>
 </html>

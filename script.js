@@ -249,21 +249,24 @@ function home() {
     </section>
 
     <h2 class="sec" style="margin-top: 0;">${tr('spacesTitle')}</h2>
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 56px;">
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 56px;">
       
-      <a class="card" href="https://mentayasandbox.vercel.app" target="_blank" rel="noopener noreferrer" style="padding: 24px 20px; text-align: center; background: transparent; border: 1px dashed var(--line); box-shadow: none;">
-        <h3 style="margin: 0 0 4px; font-size: 18px;">MentayaSandbox ↗</h3>
-        <p style="font-size: 14px; margin: 0; color: var(--mute);">Lab eksperimen dan eksplorasi desain maupun kode.</p>
+      <a class="card" href="https://mentayasandbox.vercel.app" target="_blank" rel="noopener noreferrer" style="padding: 20px 18px; text-decoration: none; border: 1px solid var(--line); border-left: 4px solid #4da3ff; background: var(--card); box-shadow: 0 2px 8px #0001;">
+        <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #4da3ff; letter-spacing: .05em;">// Lab Eksperimen</span>
+        <h3 style="margin: 6px 0 4px; font-size: 18px;">MentayaSandbox ↗</h3>
+        <p style="font-size: 13px; margin: 0; color: var(--mute); line-height: 1.5;">Catatan riset kode, eksperimen desain, dan computer vision.</p>
       </a>
       
-      <a class="card" href="https://dalamdapur.vercel.app" target="_blank" rel="noopener noreferrer" style="padding: 24px 20px; text-align: center; background: transparent; border: 1px dashed var(--line); box-shadow: none;">
-        <h3 style="margin: 0 0 4px; font-size: 18px;">dalam.dapur ↗</h3>
-        <p style="font-size: 14px; margin: 0; color: var(--mute);">Katalog & dukungan sistem bisnis kuliner.</p>
+      <a class="card" href="https://dalamdapur.vercel.app" target="_blank" rel="noopener noreferrer" style="padding: 20px 18px; text-decoration: none; border: 1px solid var(--line); border-left: 4px solid #b4441a; background: var(--card); box-shadow: 0 2px 8px #0001;">
+        <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #b4441a; letter-spacing: .05em;">✦ Katalog Kuliner</span>
+        <h3 style="margin: 6px 0 4px; font-size: 18px;">dalam.dapur ↗</h3>
+        <p style="font-size: 13px; margin: 0; color: var(--mute); line-height: 1.5;">Koleksi olahan dapur rumahan & pemesanan PO segar.</p>
       </a>
       
-      <a class="card" href="https://omahijo.vercel.app" target="_blank" rel="noopener noreferrer" style="padding: 24px 20px; text-align: center; background: transparent; border: 1px dashed var(--line); box-shadow: none;">
-        <h3 style="margin: 0 0 4px; font-size: 18px;">Omah Ijo ↗</h3>
-        <p style="font-size: 14px; margin: 0; color: var(--mute);">Eksperimen urban farming & log hidroponik.</p>
+      <a class="card" href="https://omahijo.vercel.app" target="_blank" rel="noopener noreferrer" style="padding: 20px 18px; text-decoration: none; border: 1px solid var(--line); border-left: 4px solid #1f7a3d; background: var(--card); box-shadow: 0 2px 8px #0001;">
+        <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #1f7a3d; letter-spacing: .05em;">● Hidroponik Live</span>
+        <h3 style="margin: 6px 0 4px; font-size: 18px;">Omah Ijo ↗</h3>
+        <p style="font-size: 13px; margin: 0; color: var(--mute); line-height: 1.5;">Papan harga kebun harian & log urban farming.</p>
       </a>
 
     </div>
