@@ -1,50 +1,296 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Omah Ijo — harga kebun hidroponik</title><meta name="description" content="Daftar harga hasil kebun hidroponik Omah Ijo.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=Inter:wght@500;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#eef2ea;--fg:#10241a;--mute:#5d6f62;--card:#fffef8;--dk:#0f2a1b;--dkf:#e8f5e0;--up:#d4452a;--down:#1f7a3d;--acc:#1f7a3d;--mono:'IBM Plex Mono',ui-monospace,monospace;--sans:'Inter',system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
-@media(prefers-color-scheme:dark){:root{--bg:#0b1710;--fg:#e8f5e0;--mute:#8fb59a;--card:#12281b;--dk:#1b4a2f;--up:#ff7a59;--down:#5be38a;--acc:#5be38a}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans)}
-.wrap{max-width:900px;margin:0 auto;padding:0 18px}
-header{border-bottom:3px solid var(--fg)}header .wrap{display:flex;justify-content:space-between;align-items:center;height:54px}
-.logo{font:700 18px var(--mono);text-transform:uppercase;letter-spacing:.08em}.logo b{color:var(--acc)}
-.upd{font:500 12px var(--mono);color:var(--mute);text-transform:uppercase}
-h1{font:700 clamp(28px,6vw,44px)/1.1 var(--sans);margin:36px 0 8px;letter-spacing:-.02em}
-.lead{color:var(--mute);margin:0 0 20px;max-width:36em}
-.stats{display:flex;gap:10px;margin-bottom:22px;flex-wrap:wrap}
-.stats div{font:500 12px var(--mono);border:2px solid var(--fg);padding:4px 10px;text-transform:uppercase}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px}
-.tag{position:relative;background:var(--card);border:3px solid var(--fg);box-shadow:5px 5px 0 var(--fg);display:flex;flex-direction:column}
-.tag:before{content:'';position:absolute;top:10px;right:12px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--fg);z-index:2}
-.pic{height:104px;border-bottom:3px solid var(--fg);background-color:var(--dk);background-image:repeating-linear-gradient(135deg,#ffffff12 0 8px,transparent 8px 16px);background-size:cover;background-position:center;display:grid;place-items:end start;padding:10px 14px;color:var(--dkf);font:700 12px var(--mono);text-transform:uppercase;letter-spacing:.08em}
-.bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
-.bd h3{margin:0;font:700 20px var(--sans)}
-.st{font:500 12px var(--mono);color:var(--mute)}.st i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:var(--down)}
-.st.segera i{background:#e0a800}.st.habis i{background:#888}
-.pr{font:700 clamp(28px,6vw,34px) var(--mono);margin-top:4px;white-space:nowrap}.pr small{font:500 13px var(--mono);color:var(--mute)}
-.d{align-self:flex-start;font:700 12px var(--mono);border:2px solid currentColor;padding:1px 8px}
-.up{color:var(--up)}.dn{color:var(--down)}.fl{color:var(--mute)}
-.tag.no{filter:grayscale(1);opacity:.6}
-.tag.no:after{content:'HABIS';position:absolute;right:-6px;bottom:48px;transform:rotate(-8deg);font:700 22px var(--mono);border:3px solid var(--up);color:var(--up);padding:0 10px;background:var(--card)}
-footer{margin:48px 0 0;padding:22px 0 36px;font:500 12px var(--mono);color:var(--mute);text-transform:uppercase;border-top:3px solid var(--fg)}footer a{color:var(--acc)}
-</style></head><body>
-<header><div class="wrap"><div class="logo">omah<b>.</b>ijo</div><div class="upd" id="u"></div></div></header>
-<main class="wrap"><h1>Harga kebun hari ini.</h1>
-<p class="lead">Harga langsung dari kebun hidroponik Omah Ijo, sebagai acuan harga pasar bagi siapa saja.</p>
-<div class="stats" id="st"></div><div class="grid" id="g"></div></main>
-<footer><div class="wrap" style="padding:0">Omah Ijo · hidroponik · harga mengikuti panen · <a href="https://cahyadies.github.io">cahyadies ↗</a></div></footer>
-<script>
-const UPDATED='2026-10-16'; // GANTI tiap harga diperbarui
-const P=[ // CONTOH data. h=harga, prev=harga sebelumnya, s: ready/segera/habis, img='foto/nama.jpg' (opsional)
-{n:'Selada hijau',u:'kg',h:35000,prev:32000,s:'ready',img:''},{n:'Pakcoy',u:'kg',h:25000,prev:25000,s:'ready',img:''},
-{n:'Kangkung',u:'ikat',h:5000,prev:6000,s:'segera',img:''},{n:'Sawi',u:'kg',h:22000,prev:22000,s:'habis',img:''}];
-const L={ready:'Tersedia',segera:'Segera panen',habis:'Habis'};
-const rp=n=>'Rp'+n.toLocaleString('id-ID');
-const dl=x=>{const d=x.h-x.prev;return d>0?`<span class="d up">▲ ${rp(d)}</span>`:d<0?`<span class="d dn">▼ ${rp(-d)}</span>`:`<span class="d fl">— tetap</span>`};
-const $=s=>document.querySelector(s);
-$('#u').textContent='Update '+new Date(UPDATED).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
-$('#st').innerHTML=`<div>${P.filter(x=>x.s==='ready').length} tersedia</div><div>${P.length} jenis</div>`;
-$('#g').innerHTML=P.map(x=>`<div class="tag ${x.s==='habis'?'no':''}"><div class="pic" ${x.img?`style="background-image:url('${x.img}')"`:''}>${x.img?'':'/'+x.u}</div><div class="bd"><h3>${x.n}</h3><div class="st ${x.s}"><i></i>${L[x.s]}</div><div class="pr">${rp(x.h)}<small> /${x.u}</small></div>${dl(x)}</div></div>`).join('');
-</script></body></html>
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Omah Ijo — harga kebun hidroponik</title>
+    <meta
+      name="description"
+      content="Daftar harga hasil kebun hidroponik Omah Ijo."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=Inter:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #eef2ea;
+        --fg: #10241a;
+        --mute: #5d6f62;
+        --card: #fffef8;
+        --dk: #0f2a1b;
+        --dkf: #e8f5e0;
+        --up: #d4452a;
+        --down: #1f7a3d;
+        --acc: #1f7a3d;
+        --mono: "IBM Plex Mono", ui-monospace, monospace;
+        --sans: "Inter", system-ui, sans-serif;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0);
+        padding-bottom: env(safe-area-inset-bottom, 0);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b1710;
+          --fg: #e8f5e0;
+          --mute: #8fb59a;
+          --card: #12281b;
+          --dk: #1b4a2f;
+          --up: #ff7a59;
+          --down: #5be38a;
+          --acc: #5be38a;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font: 16px/1.5 var(--sans);
+      }
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 18px;
+      }
+      header {
+        border-bottom: 3px solid var(--fg);
+      }
+      header .wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 54px;
+      }
+      .logo {
+        font: 700 18px var(--mono);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .logo b {
+        color: var(--acc);
+      }
+      .upd {
+        font: 500 12px var(--mono);
+        color: var(--mute);
+        text-transform: uppercase;
+      }
+      h1 {
+        font: 700 clamp(28px, 6vw, 44px)/1.1 var(--sans);
+        margin: 36px 0 8px;
+        letter-spacing: -0.02em;
+      }
+      .lead {
+        color: var(--mute);
+        margin: 0 0 20px;
+        max-width: 36em;
+      }
+      .stats {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 22px;
+        flex-wrap: wrap;
+      }
+      .stats div {
+        font: 500 12px var(--mono);
+        border: 2px solid var(--fg);
+        padding: 4px 10px;
+        text-transform: uppercase;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 22px;
+      }
+      .tag {
+        position: relative;
+        background: var(--card);
+        border: 3px solid var(--fg);
+        box-shadow: 5px 5px 0 var(--fg);
+        display: flex;
+        flex-direction: column;
+      }
+      .tag:before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--bg);
+        border: 3px solid var(--fg);
+        z-index: 2;
+      }
+      .pic {
+        height: 104px;
+        border-bottom: 3px solid var(--fg);
+        background-color: var(--dk);
+        background-image: repeating-linear-gradient(
+          135deg,
+          #ffffff12 0 8px,
+          transparent 8px 16px
+        );
+        background-size: cover;
+        background-position: center;
+        display: grid;
+        place-items: end start;
+        padding: 10px 14px;
+        color: var(--dkf);
+        font: 700 12px var(--mono);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .bd {
+        padding: 14px 16px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+      }
+      .bd h3 {
+        margin: 0;
+        font: 700 20px var(--sans);
+      }
+      .st {
+        font: 500 12px var(--mono);
+        color: var(--mute);
+      }
+      .st i {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 6px;
+        background: var(--down);
+      }
+      .st.segera i {
+        background: #e0a800;
+      }
+      .st.habis i {
+        background: #888;
+      }
+      .pr {
+        font: 700 clamp(28px, 6vw, 34px) var(--mono);
+        margin-top: 4px;
+        white-space: nowrap;
+      }
+      .pr small {
+        font: 500 13px var(--mono);
+        color: var(--mute);
+      }
+      .d {
+        align-self: flex-start;
+        font: 700 12px var(--mono);
+        border: 2px solid currentColor;
+        padding: 1px 8px;
+      }
+      .up {
+        color: var(--up);
+      }
+      .dn {
+        color: var(--down);
+      }
+      .fl {
+        color: var(--mute);
+      }
+      .tag.no {
+        filter: grayscale(1);
+        opacity: 0.6;
+      }
+      .tag.no:after {
+        content: "HABIS";
+        position: absolute;
+        right: -6px;
+        bottom: 48px;
+        transform: rotate(-8deg);
+        font: 700 22px var(--mono);
+        border: 3px solid var(--up);
+        color: var(--up);
+        padding: 0 10px;
+        background: var(--card);
+      }
+      footer {
+        margin: 48px 0 0;
+        padding: 22px 0 36px;
+        font: 500 12px var(--mono);
+        color: var(--mute);
+        text-transform: uppercase;
+        border-top: 3px solid var(--fg);
+      }
+      footer a {
+        color: var(--acc);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <div class="logo">omah<b>.</b>ijo</div>
+        <div class="upd" id="u"></div>
+      </div>
+    </header>
+    <main class="wrap">
+      <h1>Harga kebun hari ini.</h1>
+      <p class="lead">
+        Harga langsung dari kebun hidroponik Omah Ijo, sebagai acuan harga pasar
+        bagi siapa saja.
+      </p>
+      <div class="stats" id="st"></div>
+      <div class="grid" id="g"></div>
+    </main>
+    <footer>
+      <div class="wrap" style="padding: 0">
+        Omah Ijo · hidroponik · harga mengikuti panen ·
+        <a href="https://cahyadies.github.io">cahyadies ↗</a>
+      </div>
+    </footer>
+    <script>
+      const UPDATED = "2026-10-16"; // GANTI tiap harga diperbarui
+      const P = [
+        // CONTOH data. h=harga, prev=harga sebelumnya, s: ready/segera/habis, img='foto/nama.jpg' (opsional)
+        {
+          n: "Selada hijau",
+          u: "kg",
+          h: 35000,
+          prev: 32000,
+          s: "ready",
+          img: "",
+        },
+        { n: "Pakcoy", u: "kg", h: 25000, prev: 25000, s: "ready", img: "" },
+        { n: "Kangkung", u: "ikat", h: 5000, prev: 6000, s: "segera", img: "" },
+        { n: "Sawi", u: "kg", h: 22000, prev: 22000, s: "habis", img: "" },
+      ];
+      const L = { ready: "Tersedia", segera: "Segera panen", habis: "Habis" };
+      const rp = (n) => "Rp" + n.toLocaleString("id-ID");
+      const dl = (x) => {
+        const d = x.h - x.prev;
+        return d > 0
+          ? `<span class="d up">▲ ${rp(d)}</span>`
+          : d < 0
+            ? `<span class="d dn">▼ ${rp(-d)}</span>`
+            : `<span class="d fl">— tetap</span>`;
+      };
+      const $ = (s) => document.querySelector(s);
+      $("#u").textContent =
+        "Update " +
+        new Date(UPDATED).toLocaleDateString("id-ID", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        });
+      $("#st").innerHTML =
+        `<div>${P.filter((x) => x.s === "ready").length} tersedia</div><div>${P.length} jenis</div>`;
+      $("#g").innerHTML = P.map(
+        (x) =>
+          `<div class="tag ${x.s === "habis" ? "no" : ""}"><div class="pic" ${x.img ? `style="background-image:url('${x.img}')"` : ""}>${x.img ? "" : "/" + x.u}</div><div class="bd"><h3>${x.n}</h3><div class="st ${x.s}"><i></i>${L[x.s]}</div><div class="pr">${rp(x.h)}<small> /${x.u}</small></div>${dl(x)}</div></div>`,
+      ).join("");
+    </script>
+  </body>
+</html>
