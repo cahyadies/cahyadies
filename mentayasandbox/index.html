@@ -1,103 +1,674 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>mentayasandbox — lab eksplorasi</title><meta name="description" content="Eksperimen website, desain, dan computer vision.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#0d1117;--fg:#d6e2f0;--mute:#6f8196;--card:#131a24;--line:#243246;--acc:#4da3ff;--ide:#c792ea;--jalan:#ffcb6b;--selesai:#7ee787;--mono:'JetBrains Mono',ui-monospace,monospace;box-sizing:border-box;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
-@media(prefers-color-scheme:light){:root{--bg:#eef3f9;--fg:#14202e;--mute:#5d7188;--card:#fff;--line:#bccbdc;--acc:#0b63c9;--ide:#8a3fc0;--jalan:#9a6a00;--selesai:#1a7f37}}
-*{box-sizing:border-box}
-body{margin:0;color:var(--fg);font:14px/1.6 var(--mono);background-color:var(--bg);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:32px 32px;background-position:-1px -1px}
-.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
-header{background:var(--bg);border-bottom:1px solid var(--line)}header .wrap{display:flex;justify-content:space-between;align-items:center;height:52px}
-.logo{font-weight:700}.logo b{color:var(--acc)}.logo:before{content:'> ';color:var(--acc)}
-.v{color:var(--mute);font-size:12px}
-.hero{padding:52px 0 24px}.hero small{color:var(--acc)}
-h1{font:700 clamp(26px,5.5vw,44px)/1.15 var(--mono);margin:8px 0 12px;max-width:20em;background:var(--bg);display:inline}
-.lead{color:var(--mute);max-width:44em;background:var(--bg);display:inline-block;margin:14px 0 0}
-.bar{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
-.bar button{font:600 12px var(--mono);background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:5px 12px;cursor:pointer;transition:all .15s}
-.bar button.on{background:var(--acc);color:var(--bg);border-color:var(--acc)}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
-@media(max-width:760px){.cols{grid-template-columns:1fr}}
-.col{background:var(--bg);border:1px solid var(--line)}
-.col>h2{margin:0;padding:10px 14px;font:700 12px var(--mono);text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
-.col>h2 i{font-style:normal;color:var(--mute)}
-.c{display:block;color:inherit;text-decoration:none;margin:12px;border:1px solid var(--line);background:var(--card);border-left:3px solid var(--k);cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
-.c:hover{transform:translateY(-2px);box-shadow:0 4px 12px #0004}
-.c .im{height:90px;background-size:cover;background-position:center;border-bottom:1px solid var(--line)}
-.c .in{padding:12px}.c h3{margin:0;font:700 14px var(--mono)}.c p{margin:6px 0 10px;color:var(--mute);font-size:12px;line-height:1.5}
-.meta-row{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
-.t{font-size:11px;border:1px solid var(--line);padding:2px 7px;color:var(--mute);text-transform:uppercase}
-.notes-link{font-size:11px;color:var(--acc)}
-.empty{margin:16px;color:var(--mute);font-size:12px}
-#modal{position:fixed;inset:0;background:#000a;display:none;place-items:center;padding:18px;z-index:99}
-#modal.on{display:grid}
-.modal-box{background:var(--card);border:2px solid var(--line);max-width:540px;width:100%;padding:24px;box-shadow:0 12px 36px #0008}
-.modal-box h2{margin:0 0 8px;font-size:18px;color:var(--fg)}
-.modal-box .badge{display:inline-block;padding:2px 8px;font-size:11px;text-transform:uppercase;border:1px solid var(--line);margin-bottom:14px}
-.modal-box p{color:var(--mute);font-size:13px;line-height:1.6}
-.modal-box .notes{background:var(--bg);border:1px dashed var(--line);padding:12px 14px;margin:14px 0;font-size:12px;color:var(--fg)}
-.modal-box button{background:var(--acc);color:var(--bg);border:0;padding:6px 14px;font:700 12px var(--mono);cursor:pointer}
-footer{margin-top:48px;border-top:1px solid var(--line);background:var(--bg);padding:22px 0 36px;color:var(--mute);font-size:12px}footer a{color:var(--acc)}
-</style></head><body>
-<header><div class="wrap"><div class="logo">mentaya<b>.</b>sandbox</div><div class="v">lab / v0.2</div></div></header>
-<main class="wrap"><section class="hero"><small>// ruang eksperimen terbuka</small><br><h1>Tempat mencoba hal-hal yang belum tentu jadi.</h1><br>
-<p class="lead">Eksperimen kode, desain antarmuka, dan riset computer vision: setengah jadi, catatan belajar, atau sedang dikembangkan. Karya final terdokumentasi di portofolio.</p></section>
-<div class="bar" id="bar"></div><div class="cols" id="cols"></div></main>
-<div id="modal" onclick="if(event.target===this)this.classList.remove('on')">
-  <div class="modal-box">
-    <div id="mTag" class="badge"></div>
-    <h2 id="mTitle"></h2>
-    <p id="mDesc"></p>
-    <div id="mNotes" class="notes"></div>
-    <button onclick="$('#modal').classList.remove('on')">[tutup / esc]</button>
-  </div>
-</div>
-<footer><div class="wrap">eksperimen &amp; coretan · karya matang → <a href="https://cahyadies.github.io">cahyadies ↗</a></div></footer>
-<script>
-const $=s=>document.querySelector(s);let f='semua';
-const X=[
-  {n:'Estimasi Kontur & Refleksi Botol',t:'cv',s:'jalan',d:'Mengurangi noise pantulan cahaya pada air saat mengukur volume botol.',notes:'Riset awal menunjukkan polarizing filter fisik di lensa kamera jauh lebih efektif daripada mitigasi komputasi murni.',link:''},
-  {n:'Sistem Palet Warna dalam.dapur',t:'desain',s:'selesai',d:'Uji palet warna kertas hangat dan tipografi handwriting untuk produk rumahan.',notes:'Berhasil diimplementasikan pada katalog dalam.dapur dengan kontras rasio WCAG AA.',link:''},
-  {n:'Layout Katalog Ringan Tanpa Cart',t:'web',s:'selesai',d:'Katalog mobile super cepat tanpa library JS eksternal, langsung checkout WA.',notes:'Load time di bawah 400ms di jaringan seluler 3G.',link:''},
-  {n:'Dashboard Driver Shuttle Mahasiswa',t:'web',s:'jalan',d:'Wireframe antarmuka rute dan jadwal untuk driver shuttle kampus.',notes:'Tantangan utama ada di keterbacaan teks saat driver mengemudi di bawah terik matahari.',link:''},
-  {n:'Kalkulator Otomatis Nutrisi AB Mix',t:'web',s:'ide',d:'Alat bantu takar ppm dan EC air tandon untuk kebun hidroponik Omah Ijo.',notes:'Akan dihubungkan ke sensor mikrokontroler jika eksperimen fase 2 berhasil.',link:''}
-];
-function draw(){
-  $('#bar').innerHTML=['semua','web','desain','cv'].map(k=>`<button class="${f===k?'on':''}" data-k="${k}">${k}</button>`).join('');
-  $('#cols').innerHTML=['ide','jalan','selesai'].map(s=>{
-    const L=X.filter(x=>x.s===s&&(f==='semua'||x.t===f));
-    return `<div class="col" style="--k:var(--${s})">
-      <h2><span style="color:var(--${s})">● ${s}</span><i>${L.length}</i></h2>
-      ${L.map((x,idx)=>`
-        <div class="c" data-idx="${X.indexOf(x)}">
-          ${x.img?`<div class="im" style="background-image:url('${x.img}')"></div>`:''}
-          <div class="in">
-            <h3>${x.n}</h3>
-            <p>${x.d}</p>
-            <div class="meta-row">
-              <span class="t">${x.t}</span>
-              <span class="notes-link">detail ↗</span>
+<!doctype html>
+<html lang="id" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>MentayaSandbox: Studio Keilmuan IT, Riset Terapan &amp; Kolaborasi</title>
+    <meta
+      name="description"
+      content="MentayaSandbox adalah wadah ekspresi, keilmuan teknologi informasi berkelanjutan, riset computer vision, dan kolaborasi sistem terapan oleh Adies."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bp-backdrop" aria-hidden="true">
+      <div class="bp-grid-layer"></div>
+      <div class="bp-vignette-layer"></div>
+    </div>
+
+    <header class="bp-header-wrap">
+      <div class="bp-navbar">
+        <a class="bp-wordmark" href="#hero">MentayaSandbox<span>.</span></a>
+
+        <nav class="bp-nav-links" id="primaryNav" aria-label="Navigasi Utama">
+          <a href="#karya" data-i18n="navWork">Riset &amp; Karya</a>
+          <a href="#proses" data-i18n="navProcess">Proses</a>
+          <a href="#catatan" data-i18n="navNotes">Catatan</a>
+          <a href="#studio" data-i18n="navStudio">Studio</a>
+          <a href="../index.html" class="bp-parent-link">cahyadies.</a>
+        </nav>
+
+        <div class="bp-nav-actions">
+          <button
+            type="button"
+            class="bp-lang-btn"
+            id="langToggle"
+            onclick="toggleLang()"
+            aria-label="Ganti bahasa"
+          >
+            ID
+          </button>
+          <a href="#kolaborasi" class="bp-cta-pill bp-nav-cta" data-i18n="navCta">
+            Mulai Kolaborasi
+          </a>
+          <button
+            type="button"
+            class="bp-hamburger"
+            id="mobileMenuBtn"
+            onclick="toggleMobileNav()"
+            aria-label="Buka menu navigasi"
+            aria-expanded="false"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <line x1="4" y1="7" x2="20" y2="7"></line>
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="17" x2="20" y2="17"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="bp-main">
+      <section class="bp-section bp-hero-section" id="hero">
+        <div class="bp-container bp-hero-stage" id="heroStage">
+          <button
+            type="button"
+            class="bp-float-thumb thumb-tl"
+            onclick="openProjectModal('cv-hydroponic', this)"
+            aria-label="Lihat proyek Deteksi Panen Selada dengan Computer Vision"
+          >
+            <div class="thumb-screen screen-cv">
+              <div class="thumb-topbar">
+                <span class="dot"></span><span class="dot"></span>
+                <small>cv_canopy_hst.py</small>
+              </div>
+              <div class="thumb-metric-box">
+                <span>Canopy Area</span>
+                <strong>94.2% Ready</strong>
+                <div class="thumb-bar"><i style="width:92%"></i></div>
+              </div>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            class="bp-float-thumb thumb-tr"
+            onclick="openProjectModal('naraicoder-sys', this)"
+            aria-label="Lihat proyek Arsitektur Visual NaraiCoder"
+          >
+            <img src="../assets/works/naraicoder-preview.png" alt="Geometri Telawang NaraiCoder" loading="eager" />
+          </button>
+
+          <div class="bp-hero-copy">
+            <h1 data-i18n="heroTitle">Dari Gagasan Keilmuan Menjadi Sistem Terapan</h1>
+            <p data-i18n="heroSubtitle">
+              MentayaSandbox merancang eksperimen computer vision, produk web hemat sumber daya, dan sistem terapan untuk riset akademik maupun inisiatif nyata. Diskusikan ide Anda, mari wujudkan bersama.
+            </p>
+            <div class="bp-hero-cta-row">
+              <a href="#kolaborasi" class="bp-cta-pill bp-cta-lg" data-i18n="heroCta">
+                Mulai Kolaborasi
+              </a>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="bp-float-thumb thumb-bl"
+            onclick="openProjectModal('cv-bottle', this)"
+            aria-label="Lihat proyek Estimasi Volume Objek Mengapung"
+          >
+            <div class="thumb-screen screen-vol">
+              <div class="thumb-topbar">
+                <span class="dot"></span><span class="dot"></span>
+                <small>volume_ratio_cv</small>
+              </div>
+              <div class="thumb-grid-viz">
+                <div class="viz-wave"></div>
+                <strong>V = 340.5 mL</strong>
+                <span>Contour Calibration</span>
+              </div>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            class="bp-float-thumb thumb-br"
+            onclick="openProjectModal('dapur-catalog', this)"
+            aria-label="Lihat proyek Sistem Katalog Digital dalam.dapur"
+          >
+            <img src="../dalamdapur/images/samosa.jpg" alt="Katalog Digital dalam.dapur" loading="eager" />
+          </button>
+        </div>
+      </section>
+
+      <section class="bp-section" id="studio">
+        <div class="bp-container">
+          <div class="bp-overview-card">
+            <div class="bp-grid-12">
+              <div class="bp-col-5">
+                <h2 data-i18n="overviewTitle">
+                  Studio riset dan rekayasa untuk proyek yang butuh lebih dari sekadar template.
+                </h2>
+              </div>
+              <div class="bp-col-7 bp-overview-right">
+                <div class="bp-overview-paragraphs">
+                  <p data-i18n="overviewP1">
+                    Berangkat dari latar belakang Teknologi Informasi, MentayaSandbox dibangun oleh Adies sebagai wadah ekspresi, kolaborasi terbuka, dan berbagi keilmuan yang berkelanjutan di bawah ekosistem induk cahyadies.
+                  </p>
+                  <p data-i18n="overviewP2">
+                    Kami menggabungkan eksperimen kecerdasan buatan terapan (seperti computer vision untuk agrikultur dan pengukuran objek) dengan arsitektur web murni yang cepat, mudah dipelihara, dan langsung memecahkan persoalan di lapangan.
+                  </p>
+                </div>
+                <div>
+                  <a href="#karya" class="bp-cta-pill" data-i18n="overviewCta">
+                    Jelajahi Eksperimen MentayaSandbox
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      `).join('')||'<div class="empty">// belum ada item</div>'}
-    </div>`;
-  }).join('');
-  
-  document.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{f=b.dataset.k;draw()});
-  document.querySelectorAll('.c').forEach(card=>{
-    card.onclick=()=>{
-      const item=X[card.dataset.idx];
-      $('#mTag').textContent=`[ ${item.t} · status: ${item.s} ]`;
-      $('#mTitle').textContent=item.n;
-      $('#mDesc').textContent=item.d;
-      $('#mNotes').innerHTML=`<strong>// Catatan Lab:</strong><br>${item.notes}`;
-      $('#modal').classList.add('on');
-    };
-  });
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#modal').classList.remove('on')});
-draw();
-</script></body></html>
+      </section>
+
+      <section class="bp-section" id="layanan">
+        <div class="bp-container">
+          <div class="bp-section-head">
+            <h2 data-i18n="servicesTitle">Fokus Keilmuan &amp; Layanan</h2>
+            <p data-i18n="servicesSub">
+              Empat ranah utama tempat kami bereksperimen, membangun sistem, dan berbagi dokumentasi teknis.
+            </p>
+          </div>
+
+          <div class="bp-services-grid">
+            <article class="bp-service-card">
+              <div class="bp-icon-box" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 data-i18n="srv1Title">Produk &amp; Sistem Web</h3>
+                <p data-i18n="srv1Desc">
+                  Aplikasi web informasi, katalog digital interaktif, dan dashboard operasional yang ringan, responsif, serta tahan lama tanpa beban ketergantungan berlebih.
+                </p>
+              </div>
+            </article>
+
+            <article class="bp-service-card">
+              <div class="bp-icon-box" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                  <rect x="9" y="9" width="6" height="6"></rect>
+                  <line x1="9" y1="1" x2="9" y2="4"></line>
+                  <line x1="15" y1="1" x2="15" y2="4"></line>
+                  <line x1="9" y1="20" x2="9" y2="23"></line>
+                  <line x1="15" y1="20" x2="15" y2="23"></line>
+                  <line x1="20" y1="9" x2="23" y2="9"></line>
+                  <line x1="20" y1="14" x2="23" y2="14"></line>
+                  <line x1="1" y1="9" x2="4" y2="9"></line>
+                  <line x1="1" y1="14" x2="4" y2="14"></line>
+                </svg>
+              </div>
+              <div>
+                <h3 data-i18n="srv2Title">Computer Vision &amp; AI Terapan</h3>
+                <p data-i18n="srv2Desc">
+                  Pengolahan citra dan model machine learning ringan untuk estimasi volume objek, deteksi kesiapan panen hidroponik, serta otomasi pengamatan lapangan.
+                </p>
+              </div>
+            </article>
+
+            <article class="bp-service-card">
+              <div class="bp-icon-box" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <h3 data-i18n="srv3Title">Desain Sistem &amp; Identitas</h3>
+                <p data-i18n="srv3Desc">
+                  Perancangan antarmuka berbasis fungsi, arsitektur informasi produk, serta sistem identitas visual modular yang berakar pada konteks lokal.
+                </p>
+              </div>
+            </article>
+
+            <article class="bp-service-card">
+              <div class="bp-icon-box" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 data-i18n="srv4Title">Riset Kolaboratif &amp; Arsip Spasial</h3>
+                <p data-i18n="srv4Desc">
+                  Pendampingan teknis riset mahasiswa/komunitas, pemetaan geospasial kawasan Sungai Mentaya, serta dokumentasi pengetahuan terbuka.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="bp-section" id="proses">
+        <div class="bp-container">
+          <div class="bp-grid-12 bp-items-start">
+            <div class="bp-col-5 bp-sticky-col">
+              <h2 class="bp-process-heading" data-i18n="processTitle">Bagaimana kami bekerja.</h2>
+              <p class="bp-muted-lead" data-i18n="processSub">
+                Tahapan terstruktur dari perumusan masalah hingga sistem berjalan dan terdokumentasi secara berkelanjutan.
+              </p>
+            </div>
+
+            <div class="bp-col-7 bp-process-stack">
+              <article class="bp-process-step">
+                <h3 data-i18n="step1Title">Observasi &amp; Pemetaan Masalah</h3>
+                <p data-i18n="step1Desc">
+                  Kami memulai dengan memahami konteks nyata di lapangan: apa kendala pengguna, bagaimana data dikumpulkan, serta perangkat apa yang benar-benar mereka gunakan sehari-hari.
+                </p>
+              </article>
+
+              <article class="bp-process-step">
+                <h3 data-i18n="step2Title">Arah Produk &amp; Arsitektur</h3>
+                <p data-i18n="step2Desc">
+                  Menentukan arsitektur paling tepat guna tanpa kerumitan yang tidak perlu, baik berupa aplikasi web statis berkinerja tinggi maupun pipeline pengolahan citra Python/OpenCV.
+                </p>
+              </article>
+
+              <article class="bp-process-step">
+                <h3 data-i18n="step3Title">Prototipe &amp; Evaluasi Terukur</h3>
+                <p data-i18n="step3Desc">
+                  Membangun sistem secara bertahap dan mengujinya langsung menggunakan data nyata: mulai dari citra daun di meja hidroponik Bapak hingga alur nota pesanan dapur Ibu.
+                </p>
+              </article>
+
+              <article class="bp-process-step">
+                <h3 data-i18n="step4Title">Rilis &amp; Dokumentasi Berkelanjutan</h3>
+                <p data-i18n="step4Desc">
+                  Setiap proyek dilengkapi catatan teknis yang jernih agar sistem mudah dirawat, dikembangkan ulang, dan memberi nilai belajar bagi kolaborator berikutnya.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bp-section" id="karya">
+        <div class="bp-container">
+          <div class="bp-work-header-row">
+            <div class="bp-work-intro">
+              <h2 data-i18n="workTitle">Karya &amp; riset kami, untuk Anda jelajahi.</h2>
+              <p data-i18n="workSub">
+                Geser atau filter proyek riset terapan, eksperimen AI, dan sistem web yang dibangun di MentayaSandbox.
+              </p>
+            </div>
+            <div class="bp-filter-pills" id="filterBar" role="tablist"></div>
+          </div>
+
+          <div class="bp-work-track-wrap">
+            <div class="bp-work-track" id="projectGrid"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bp-section" id="model-kolaborasi">
+        <div class="bp-container">
+          <div class="bp-section-head">
+            <h2 data-i18n="engageTitle">Mulai dari Nol atau Kembangkan yang Sudah Ada</h2>
+            <p data-i18n="engageSub">
+              Dua jalur kolaborasi utama sesuai tahap gagasan atau sistem yang sedang Anda kerjakan.
+            </p>
+          </div>
+
+          <div class="bp-engage-grid">
+            <article class="bp-engage-card">
+              <div>
+                <h3 data-i18n="eng1Title">Bangun Produk atau Prototipe Riset dari Nol</h3>
+                <p data-i18n="eng1Desc">
+                  Cocok ketika Anda memiliki hipotesis penelitian, ide produk digital, atau kebutuhan katalog usaha yang belum memiliki fondasi teknis.
+                </p>
+              </div>
+              <ul class="bp-engage-list">
+                <li>
+                  <span class="bp-dot" aria-hidden="true"></span>
+                  <span data-i18n="eng1B1">Perumusan spesifikasi teknis, dataset, dan arsitektur antarmuka dari awal.</span>
+                </li>
+                <li>
+                  <span class="bp-dot" aria-hidden="true"></span>
+                  <span data-i18n="eng1B2">Pembuatan prototipe web atau model computer vision yang siap diuji coba.</span>
+                </li>
+                <li>
+                  <span class="bp-dot" aria-hidden="true"></span>
+                  <span data-i18n="eng1B3">Dokumentasi kode dan panduan penggunaan yang rapi untuk tim maupun publikasi.</span>
+                </li>
+              </ul>
+            </article>
+
+            <article class="bp-engage-card">
+              <div>
+                <h3 data-i18n="eng2Title">Lanjutkan atau Tingkatkan Sistem yang Berjalan</h3>
+                <p data-i18n="eng2Desc">
+                  Cocok untuk merombak antarmuka yang terasa kaku, meningkatkan performa halaman, atau menambahkan modul analitik dan otomasi baru.
+                </p>
+              </div>
+              <ul class="bp-engage-list">
+                <li>
+                  <span class="bp-dot" aria-hidden="true"></span>
+                  <span data-i18n="eng2B1">Audit desain antarmuka, aksesibilitas, dan penyederhanaan kode sumber.</span>
+                </li>
+                <li>
+                  <span class="bp-dot" aria-hidden="true"></span>
+                  <span data-i18n="eng2B2">Integrasi fitur baru seperti kalkulator estimasi, pelacak metrik, atau otomasi WA.</span>
+                </li>
+                <li>
+                  <span class="bp-dot" aria-hidden="true"></span>
+                  <span data-i18n="eng2B3">Pendampingan teknis dan diskusi arsitektur agar sistem berkelanjutan.</span>
+                </li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="bp-section" id="cakupan">
+        <div class="bp-container">
+          <div class="bp-section-head">
+            <h2 data-i18n="scopeTitle">Cukup ringkas untuk mulai. Skema sesuai kebutuhan Anda.</h2>
+            <p data-i18n="scopeSub">
+              MentayaSandbox mendukung baik kolaborasi riset terbuka (non-komersial/keilmuan) maupun pengembangan sistem kustom untuk komunitas dan usaha.
+            </p>
+          </div>
+
+          <div class="bp-table" role="table" aria-label="Skema Cakupan Proyek dan Kolaborasi">
+            <div class="bp-table-row bp-table-head" role="row">
+              <div class="bp-tcol-6" role="columnheader" data-i18n="thProject">Lingkup Proyek / Riset</div>
+              <div class="bp-tcol-3" role="columnheader" data-i18n="thStandard">Skema Riset Terbuka</div>
+              <div class="bp-tcol-3" role="columnheader" data-i18n="thCustom">Implementasi Kustom</div>
+            </div>
+
+            <div class="bp-table-row" role="row">
+              <div class="bp-tcol-6" role="cell" data-i18n="tr1Name">Landing Page &amp; Arsip Portofolio Digital</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">Open Source / Collab</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">1 - 2 Minggu</div>
+            </div>
+
+            <div class="bp-table-row" role="row">
+              <div class="bp-tcol-6" role="cell" data-i18n="tr2Name">Katalog Produk Usaha &amp; Nota Pesanan WA</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">Template Keluarga</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">2 - 3 Minggu</div>
+            </div>
+
+            <div class="bp-table-row" role="row">
+              <div class="bp-tcol-6" role="cell" data-i18n="tr3Name">Eksperimen Computer Vision &amp; Pengolahan Citra</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">Riset Bersama</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">3 - 5 Minggu</div>
+            </div>
+
+            <div class="bp-table-row" role="row">
+              <div class="bp-tcol-6" role="cell" data-i18n="tr4Name">Sistem Pantau Agrikultur / Kalkulator Nutrisi</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">Uji Lapangan</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">2 - 4 Minggu</div>
+            </div>
+
+            <div class="bp-table-row" role="row">
+              <div class="bp-tcol-6" role="cell" data-i18n="tr5Name">Identitas Visual &amp; Sistem Desain Komunitas</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">Diskusi Komunitas</div>
+              <div class="bp-tcol-3 bp-tval" role="cell">2 - 3 Minggu</div>
+            </div>
+
+            <div class="bp-table-row" role="row">
+              <div class="bp-tcol-6" role="cell" data-i18n="tr6Name">Riset Spasial / Web GIS &amp; Sistem Kustom Lainnya</div>
+              <div class="bp-tcol-3 bp-tval" role="cell" data-i18n="tr6Free">Diskusi Terbuka</div>
+              <div class="bp-tcol-3 bp-tval" role="cell" data-i18n="tr6Consult">Konsultasi Gratis</div>
+            </div>
+          </div>
+
+          <div class="bp-table-actions">
+            <a href="#kolaborasi" class="bp-cta-pill" data-i18n="scopeCtaPrimary">
+              Diskusikan Rencana Proyek
+            </a>
+            <a href="#catatan" class="bp-text-link" data-i18n="scopeCtaSecondary">
+              Baca Catatan Keilmuan
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="bp-section" id="catatan">
+        <div class="bp-container">
+          <div class="bp-section-head">
+            <h2 data-i18n="notesTitle">Catatan Keilmuan &amp; Dokumentasi Lab</h2>
+            <p data-i18n="notesSub">
+              Ringkasan tertulis dari eksperimen, arsitektur perangkat lunak, dan pengamatan teknis di MentayaSandbox.
+            </p>
+          </div>
+
+          <div class="bp-notes-grid" id="notesGrid"></div>
+        </div>
+      </section>
+
+      <section class="bp-section" id="faq">
+        <div class="bp-container">
+          <div class="bp-grid-12 bp-items-start">
+            <div class="bp-col-5 bp-sticky-col">
+              <h2 class="bp-faq-heading" data-i18n="faqTitle">Pertanyaan yang Sering Diajukan</h2>
+              <a href="#kolaborasi" class="bp-accent-link" data-i18n="faqAskLink">
+                Ajukan pertanyaan lain
+              </a>
+            </div>
+
+            <div class="bp-col-7">
+              <div class="bp-faq-list" id="faqList">
+                <div class="bp-faq-item open">
+                  <button type="button" class="bp-faq-btn" aria-expanded="true" onclick="toggleFaq(this)">
+                    <span data-i18n="faqQ1">Apa hubungan MentayaSandbox dengan website induk cahyadies?</span>
+                    <span class="bp-faq-icon" aria-hidden="true">−</span>
+                  </button>
+                  <div class="bp-faq-panel">
+                    <p data-i18n="faqA1">
+                      cahyadies adalah arsip utama milik Adies, sedangkan MentayaSandbox adalah unit khusus yang berfokus pada ekspresi keilmuan IT berkelanjutan, riset computer vision, dan kolaborasi teknis. Dua saudara lainnya adalah dalam.dapur (kuliner Ibu) dan Omah Ijo (hidroponik Bapak).
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bp-faq-item">
+                  <button type="button" class="bp-faq-btn" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span data-i18n="faqQ2">Apakah mahasiswa atau pegiat komunitas bisa mengajak riset bersama?</span>
+                    <span class="bp-faq-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="bp-faq-panel" hidden>
+                    <p data-i18n="faqA2">
+                      Sangat terbuka. MentayaSandbox memang diniatkan sebagai ruang bertukar pikiran, eksperimen bersama, dan berbagi dokumentasi di bidang pengolahan citra, rekayasa web, serta pemetaan spasial.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bp-faq-item">
+                  <button type="button" class="bp-faq-btn" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span data-i18n="faqQ3">Mengapa MentayaSandbox menekankan prinsip keilmuan IT yang berkelanjutan?</span>
+                    <span class="bp-faq-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="bp-faq-panel" hidden>
+                    <p data-i18n="faqA3">
+                      Banyak proyek perangkat lunak berhenti berfungsi setelah beberapa bulan karena arsitektur yang terlalu rumit. Kami mengutamakan kode yang bersih, hemat sumber daya, dan terdokumentasi sehingga tetap bermanfaat jangka panjang.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="bp-faq-item">
+                  <button type="button" class="bp-faq-btn" aria-expanded="false" onclick="toggleFaq(this)">
+                    <span data-i18n="faqQ4">Bagaimana cara memulai diskusi proyek atau eksperimen baru?</span>
+                    <span class="bp-faq-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="bp-faq-panel" hidden>
+                    <p data-i18n="faqA4">
+                      Anda cukup mengisi formulir singkat di bagian bawah halaman ini untuk mengirim rincian gagasan melalui WhatsApp atau Email. Kami akan meninjau konteks masalah dan menyusun langkah awalnya bersama.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bp-section bp-final-cta-section" id="kolaborasi">
+        <div class="bp-container">
+          <div class="bp-final-cta-card">
+            <div class="bp-final-cta-head">
+              <h2 data-i18n="ctaBannerTitle">Siap Mendiskusikan Ide atau Riset Anda?</h2>
+              <p data-i18n="ctaBannerSub">
+                Sampaikan gagasan produk web, eksperimen computer vision, atau topik keilmuan yang ingin Anda kerjakan bersama MentayaSandbox.
+              </p>
+            </div>
+
+            <div class="bp-collab-split">
+              <div class="bp-topics-col">
+                <h3 class="bp-sub-label" data-i18n="openTopicsHeading">Topik Kolaborasi Terbuka Saat Ini</h3>
+                <div class="bp-topics-list" id="collabList"></div>
+              </div>
+
+              <form class="bp-collab-form" id="collabForm" onsubmit="submitCollabForm(event)">
+                <div class="bp-form-grid">
+                  <div class="bp-field">
+                    <label for="collabName" data-i18n="labelName">Nama Anda</label>
+                    <input id="collabName" name="name" type="text" required placeholder="Nama lengkap / panggilan" />
+                  </div>
+
+                  <div class="bp-field">
+                    <label for="collabTopic" data-i18n="labelTopic">Fokus Diskusi</label>
+                    <select id="collabTopic" name="topic">
+                      <option value="Computer Vision & AI" data-i18n="optTopic1">Computer Vision &amp; Model AI</option>
+                      <option value="Pengembangan Produk Web" data-i18n="optTopic2">Pengembangan Produk &amp; Sistem Web</option>
+                      <option value="Arsip Spasial & Web GIS" data-i18n="optTopic3">Arsip Spasial &amp; Pemetaan Mentaya</option>
+                      <option value="Riset & Keilmuan Terbuka" data-i18n="optTopic4">Riset &amp; Berbagi Keilmuan</option>
+                    </select>
+                  </div>
+
+                  <div class="bp-field bp-field-full">
+                    <label for="collabNote" data-i18n="labelNote">Ringkasan Gagasan / Masalah</label>
+                    <textarea
+                      id="collabNote"
+                      name="note"
+                      rows="3"
+                      required
+                      placeholder="Ceritakan singkat ide, hipotesis riset, atau sistem yang ingin dibangun..."
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="bp-form-actions">
+                  <button type="submit" class="bp-cta-pill" data-channel="wa" data-i18n="btnSendWa">
+                    Diskusi via WhatsApp
+                  </button>
+                  <button type="submit" class="bp-ghost-pill" data-channel="mail" data-i18n="btnSendMail">
+                    Kirim via Email
+                  </button>
+                </div>
+                <p id="collabFeedback" class="bp-form-feedback" role="status" aria-live="polite" hidden></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bp-footer">
+      <div class="bp-container">
+        <div class="bp-footer-top bp-grid-12">
+          <div class="bp-col-5">
+            <a class="bp-wordmark" href="#hero">MentayaSandbox<span>.</span></a>
+            <p class="bp-footer-bio" data-i18n="footerBio">
+              Studio eksplorasi keilmuan IT berkelanjutan, riset computer vision terapan, dan rekayasa produk web di bawah ekosistem cahyadies.
+            </p>
+            <p class="bp-footer-loc">Sampit &amp; Surabaya, Indonesia (UTC+7)</p>
+          </div>
+
+          <div class="bp-col-3">
+            <h4 class="bp-footer-label" data-i18n="footerNavLabel">Navigasi</h4>
+            <ul class="bp-footer-links">
+              <li><a href="#karya" data-i18n="navWork">Riset &amp; Karya</a></li>
+              <li><a href="#layanan" data-i18n="footerServices">Fokus Keilmuan</a></li>
+              <li><a href="#proses" data-i18n="navProcess">Proses Kerja</a></li>
+              <li><a href="#catatan" data-i18n="navNotes">Catatan Lab</a></li>
+              <li><a href="#kolaborasi" data-i18n="navCta">Mulai Kolaborasi</a></li>
+            </ul>
+          </div>
+
+          <div class="bp-col-4">
+            <h4 class="bp-footer-label" data-i18n="footerEcoLabel">Ekosistem &amp; Jejaring</h4>
+            <ul class="bp-footer-links">
+              <li><a href="../index.html">cahyadies. (Arsip Utama)</a></li>
+              <li><a href="../dalamdapur/index.html">dalam.dapur (Katalog Kuliner Ibu)</a></li>
+              <li><a href="../omahijo/index.html">Omah Ijo (Kebun Hidroponik Bapak)</a></li>
+              <li><a href="https://github.com/cahyadies" target="_blank" rel="noopener noreferrer">GitHub (@cahyadies)</a></li>
+              <li><a href="mailto:halo@cahyadies.my.id">halo@cahyadies.my.id</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bp-footer-bottom">
+          <span>© 2026 MentayaSandbox · Bagian dari ekosistem cahyadies.</span>
+          <div class="bp-footer-utils">
+            <button type="button" class="bp-footer-theme-pill" onclick="toggleTheme()" aria-label="Ganti tema warna">
+              <span id="footerThemeLabel">Dark Mode</span>
+            </button>
+            <a href="../index.html">cahyadies.</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <button
+      type="button"
+      class="bp-floating-theme"
+      id="floatingThemeBtn"
+      onclick="toggleTheme()"
+      aria-label="Ganti tema terang atau gelap"
+    >
+      <svg id="themeIconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2"></path>
+        <path d="M12 20v2"></path>
+        <path d="m4.93 4.93 1.41 1.41"></path>
+        <path d="m17.66 17.66 1.41 1.41"></path>
+        <path d="M2 12h2"></path>
+        <path d="M20 12h2"></path>
+        <path d="m6.34 17.66-1.41 1.41"></path>
+        <path d="m19.07 4.93-1.41 1.41"></path>
+      </svg>
+    </button>
+
+    <div
+      class="bp-modal"
+      id="modalOverlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="mTitle"
+      aria-hidden="true"
+      onclick="handleOverlayClick(event)"
+    >
+      <div class="bp-modal-box">
+        <button
+          type="button"
+          class="bp-modal-close"
+          id="modalCloseBtn"
+          onclick="closeModal()"
+          aria-label="Tutup detail"
+        >
+          ✕
+        </button>
+        <div class="bp-modal-kicker" id="mType"></div>
+        <h2 class="bp-modal-title" id="mTitle"></h2>
+        <p class="bp-modal-desc" id="mDesc"></p>
+        <p class="bp-modal-partner" id="mCollab"></p>
+        <div class="bp-modal-notes" id="mNotes"></div>
+      </div>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

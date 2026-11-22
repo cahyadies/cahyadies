@@ -1,406 +1,1644 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>Omah Ijo — harga kebun hidroponik</title>
+    <title>Omah Ijo: Kebun Hidroponik Keluarga, Masa Tunggu Panen &amp; Pasar Segar</title>
     <meta
       name="description"
-      content="Daftar harga hasil kebun hidroponik Omah Ijo."
+      content="Katalog kebun hidroponik Bapak & keluarga di Sampit bergaya Farmino Organic Farm: cek sayur siap panen, estimasi hari tunggu (HST), dan permintaan pasar."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;700&family=Inter:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg: #eef2ea;
-        --fg: #10241a;
-        --mute: #5d6f62;
-        --card: #fffef8;
-        --dk: #0f2a1b;
-        --dkf: #e8f5e0;
-        --up: #d4452a;
-        --down: #1f7a3d;
-        --acc: #1f7a3d;
+        --bg: #faf8f2;
+        --surface: #ffffff;
+        --surface-sage: #eef5ec;
+        --surface-warm: #fef7e6;
+        --forest: #1b4324;
+        --forest-deep: #122e18;
+        --leaf: #2e7d32;
+        --leaf-soft: rgba(46, 125, 50, 0.12);
+        --harvest: #e68a00;
+        --harvest-bright: #f59e0b;
+        --harvest-soft: #fef3c7;
+        --fg: #182b1c;
+        --mute: #526656;
+        --line: rgba(24, 43, 28, 0.08);
+        --line-strong: rgba(24, 43, 28, 0.14);
+        --seed: #1d4ed8;
+        --seed-soft: #dbeafe;
+        --display: "Fraunces", Georgia, serif;
+        --sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
         --mono: "IBM Plex Mono", ui-monospace, monospace;
-        --sans: "Inter", system-ui, sans-serif;
-        box-sizing: border-box;
-        padding-top: env(safe-area-inset-top, 0);
-        padding-bottom: env(safe-area-inset-bottom, 0);
-      }
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #0b1710;
-          --fg: #e8f5e0;
-          --mute: #8fb59a;
-          --card: #12281b;
-          --dk: #1b4a2f;
-          --up: #ff7a59;
-          --down: #5be38a;
-          --acc: #5be38a;
-        }
-      }
-      * {
+        --r-pill: 999px;
+        --r-sm: 16px;
+        --r-md: 24px;
+        --r-lg: 30px;
+        --r-leaf: 32px 12px 32px 12px;
+        --shadow-soft: 0 12px 32px rgba(24, 43, 28, 0.06);
+        --shadow-hover: 0 18px 40px rgba(46, 125, 50, 0.13);
         box-sizing: border-box;
       }
+
+      :root[data-theme="dark"] {
+        --bg: #0d1710;
+        --surface: #142419;
+        --surface-sage: #1b3022;
+        --surface-warm: #292214;
+        --forest: #091f10;
+        --forest-deep: #06140a;
+        --leaf: #4ade80;
+        --leaf-soft: rgba(74, 222, 128, 0.14);
+        --harvest: #fbbf24;
+        --harvest-bright: #f59e0b;
+        --harvest-soft: rgba(251, 191, 36, 0.16);
+        --fg: #ecf6ee;
+        --mute: #94b59c;
+        --line: rgba(255, 255, 255, 0.08);
+        --line-strong: rgba(255, 255, 255, 0.15);
+        --seed: #93c5fd;
+        --seed-soft: rgba(147, 197, 253, 0.16);
+        --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.35);
+        --shadow-hover: 0 18px 40px rgba(74, 222, 128, 0.18);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 76px;
+      }
+
       body {
         margin: 0;
         background: var(--bg);
         color: var(--fg);
-        font: 16px/1.5 var(--sans);
+        font: 15px/1.6 var(--sans);
+        -webkit-font-smoothing: antialiased;
       }
+
+      a[href],
+      button:not(:disabled),
+      summary,
+      select,
+      label[for],
+      [role="button"] {
+        cursor: pointer;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--leaf);
+        outline-offset: 2px;
+      }
+
       .wrap {
-        max-width: 900px;
+        max-width: 1160px;
         margin: 0 auto;
-        padding: 0 18px;
+        padding: 0 24px;
       }
-      header {
-        border-bottom: 3px solid var(--fg);
+
+      .farmino-topbar {
+        background: var(--forest-deep);
+        color: #e2f2e5;
+        font-size: 12.5px;
       }
-      header .wrap {
+
+      .topbar-inner {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 54px;
+        min-height: 38px;
+        gap: 12px;
+        flex-wrap: wrap;
       }
-      .logo {
-        font: 700 18px var(--mono);
+
+      .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .topbar-badge {
+        background: var(--harvest-bright);
+        color: #182b1c;
+        font-weight: 700;
+        font-size: 11px;
+        padding: 3px 12px;
+        border-radius: var(--r-pill);
         text-transform: uppercase;
-        letter-spacing: 0.08em;
       }
-      .logo b {
-        color: var(--acc);
+
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
       }
-      .upd {
-        font: 500 12px var(--mono);
-        color: var(--mute);
-        text-transform: uppercase;
+
+      .topbar-right a {
+        color: #e2f2e5;
+        text-decoration: none;
+        font-weight: 500;
       }
-      h1 {
-        font: 700 clamp(28px, 6vw, 44px)/1.1 var(--sans);
-        margin: 36px 0 8px;
+
+      .topbar-right a:hover {
+        color: var(--harvest-bright);
+      }
+
+      .farmino-header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        background: color-mix(in srgb, var(--surface) 92%, transparent);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 76px;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .brand-emblem {
+        width: 44px;
+        height: 44px;
+        border-radius: 16px 6px 16px 6px;
+        background: var(--forest);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--harvest-bright);
+        flex-shrink: 0;
+      }
+
+      .brand-text strong {
+        display: block;
+        font: 700 23px/1 var(--display);
+        color: var(--fg);
         letter-spacing: -0.02em;
       }
-      .lead {
-        color: var(--mute);
-        margin: 0 0 20px;
-        max-width: 36em;
+
+      .brand-text strong b {
+        color: var(--leaf);
       }
-      .stats {
+
+      .brand-text span {
+        font-size: 11.5px;
+        color: var(--mute);
+        font-weight: 500;
+      }
+
+      .main-nav {
         display: flex;
-        gap: 10px;
-        margin-bottom: 22px;
+        align-items: center;
+        gap: 6px;
         flex-wrap: wrap;
       }
-      .stats button {
-        font: 600 12px var(--mono);
-        border: 2px solid var(--fg);
-        background: var(--bg);
+
+      .main-nav a {
+        text-decoration: none;
+        color: var(--mute);
+        font-size: 13.5px;
+        font-weight: 600;
+        padding: 0 16px;
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+        border-radius: var(--r-pill);
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .main-nav a:hover {
         color: var(--fg);
-        padding: 5px 12px;
+        background: var(--surface-sage);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .btn-harvest-cta {
+        background: var(--harvest-bright);
+        color: #182b1c;
+        font: 700 13.5px var(--sans);
+        padding: 0 22px;
+        min-height: 44px;
+        border-radius: var(--r-pill);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border: none;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .btn-harvest-cta:hover {
+        filter: brightness(1.04);
+      }
+
+      .theme-btn {
+        border: 1px solid var(--line-strong);
+        background: var(--surface);
+        color: var(--fg);
+        min-width: 44px;
+        min-height: 44px;
+        border-radius: 50%;
+      }
+
+      .farmino-hero {
+        padding: 44px 0 52px;
+        background:
+          radial-gradient(circle at 88% 18%, var(--surface-warm) 0%, transparent 42%),
+          linear-gradient(180deg, var(--surface-sage) 0%, var(--bg) 100%);
+      }
+
+      .hero-12col {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 32px;
+        align-items: center;
+      }
+
+      .hero-left-7 {
+        grid-column: span 7;
+      }
+
+      .hero-right-5 {
+        grid-column: span 5;
+      }
+
+      .organic-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--surface);
+        box-shadow: var(--shadow-soft);
+        padding: 7px 16px;
+        border-radius: var(--r-pill);
+        font: 700 11.5px var(--sans);
         text-transform: uppercase;
-        cursor: pointer;
-        transition: all 0.15s ease;
+        letter-spacing: 0.06em;
+        color: var(--leaf);
+        margin-bottom: 18px;
       }
-      .stats button.on {
-        background: var(--fg);
-        color: var(--bg);
+
+      .organic-pill b {
+        color: var(--harvest);
       }
-      .garden-banner {
-        border: 2px dashed var(--fg);
-        background: var(--card);
-        padding: 16px 20px;
-        margin-bottom: 26px;
+
+      .hero-left-7 h1 {
+        font: 700 clamp(32px, 4.3vw, 48px)/1.12 var(--display);
+        margin: 0 0 16px;
+        color: var(--fg);
+        letter-spacing: -0.02em;
+      }
+
+      .hero-left-7 h1 span {
+        color: var(--leaf);
+      }
+
+      .hero-lead {
+        font-size: 15.5px;
+        line-height: 1.68;
+        color: var(--mute);
+        margin: 0 0 26px;
+        max-width: 58ch;
+      }
+
+      .hero-cta-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+
+      .btn-green-lg {
+        background: var(--forest);
+        color: #ffffff;
+        font: 700 14px var(--sans);
+        padding: 0 26px;
+        min-height: 48px;
+        border-radius: var(--r-pill);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .btn-warm-lg {
+        background: var(--harvest-bright);
+        color: #182b1c;
+        border: none;
+        font: 700 14px var(--sans);
+        padding: 0 26px;
+        min-height: 48px;
+        border-radius: var(--r-pill);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .hero-counters {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line-strong);
+      }
+
+      .h-counter strong {
+        display: block;
+        font: 700 22px/1.1 var(--display);
+        color: var(--fg);
+      }
+
+      .h-counter span {
+        font-size: 12.5px;
+        color: var(--mute);
+      }
+
+      .farmino-showcase-card {
+        background: var(--surface);
+        border: none;
+        border-radius: var(--r-leaf);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+      }
+
+      .showcase-banner-top {
+        background: var(--forest);
+        color: #ffffff;
+        padding: 22px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .showcase-banner-top strong {
+        font: 700 17px var(--display);
+        display: block;
+      }
+
+      .showcase-banner-top span {
+        font: 500 11.5px var(--mono);
+        color: #a7f3d0;
+      }
+
+      .harvest-stamp {
+        background: var(--harvest-bright);
+        color: #182b1c;
+        font: 700 11px var(--mono);
+        padding: 5px 12px;
+        border-radius: var(--r-pill);
+        text-transform: uppercase;
+      }
+
+      .showcase-body {
+        padding: 20px 24px;
+      }
+
+      .live-batch-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .live-batch-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        border-radius: var(--r-sm);
+        background: var(--bg);
+      }
+
+      .live-batch-item strong {
+        display: block;
+        font-size: 13.5px;
+        color: var(--fg);
+      }
+
+      .live-batch-item small {
+        font-size: 12px;
+        color: var(--mute);
+      }
+
+      .batch-pill {
+        font: 700 11px var(--mono);
+        padding: 4px 12px;
+        border-radius: var(--r-pill);
+      }
+
+      .batch-pill.ready {
+        background: var(--leaf-soft);
+        color: var(--leaf);
+      }
+
+      .batch-pill.wait {
+        background: var(--harvest-soft);
+        color: var(--harvest);
+      }
+
+      .batch-pill.seed {
+        background: var(--seed-soft);
+        color: var(--seed);
+      }
+
+      .service-ribbon {
+        padding: 16px 0 32px;
+      }
+
+      .service-4col {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        background: var(--surface);
+        padding: 22px 26px;
+        border-radius: var(--r-lg);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .srv-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 6px 10px;
+      }
+
+      .srv-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--surface-sage);
+        color: var(--leaf);
+        font: 700 13px var(--mono);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .srv-item strong {
+        display: block;
+        font-size: 14px;
+        color: var(--fg);
+        margin-bottom: 2px;
+      }
+
+      .srv-item span {
+        font-size: 12.5px;
+        color: var(--mute);
+        line-height: 1.45;
+        display: block;
+      }
+
+      .farmino-section {
+        padding: 44px 0;
+      }
+
+      .sec-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .sec-eyebrow {
+        font: 700 11.5px var(--mono);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--leaf);
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .sec-header-row h2 {
+        font: 700 clamp(24px, 3vw, 34px)/1.18 var(--display);
+        margin: 0;
+        color: var(--fg);
+      }
+
+      .search-filter-wrap {
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 14px;
+        gap: 12px;
+        margin-bottom: 28px;
+        background: var(--surface);
+        padding: 10px 16px;
+        border-radius: var(--r-pill);
+        box-shadow: var(--shadow-soft);
       }
-      .garden-banner strong {
-        display: block;
-        font: 700 14px var(--mono);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+
+      .filter-tabs {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
       }
-      .garden-banner p {
-        margin: 4px 0 0;
-        font-size: 14px;
+
+      .filter-tabs button {
+        font: 600 13px var(--sans);
+        background: transparent;
+        color: var(--mute);
+        border: none;
+        padding: 0 18px;
+        min-height: 40px;
+        border-radius: var(--r-pill);
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.2s ease;
+      }
+
+      .filter-tabs button.on {
+        background: var(--forest);
+        color: #ffffff;
+      }
+
+      .search-field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .search-field label {
+        font-size: 12px;
+        font-weight: 600;
         color: var(--mute);
       }
-      .btn-wa-garden {
-        font: 700 12px var(--mono);
-        text-transform: uppercase;
-        background: var(--acc);
-        color: #fff;
-        padding: 8px 16px;
-        text-decoration: none;
-        border: 2px solid var(--fg);
-        box-shadow: 3px 3px 0 var(--fg);
-        white-space: nowrap;
+
+      .search-field input {
+        min-height: 40px;
+        padding: 0 16px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--r-pill);
+        background: var(--bg);
+        color: var(--fg);
+        font: 13.5px var(--sans);
+        min-width: 220px;
       }
-      .btn-wa-garden:hover {
-        transform: translate(-1px, -1px);
-        box-shadow: 4px 4px 0 var(--fg);
-      }
-      .btn-card-order {
-        margin-top: 8px;
-        padding: 6px 10px;
-        font: 700 11px var(--mono);
-        text-transform: uppercase;
-        text-align: center;
-        background: var(--dkf);
-        color: var(--dk);
-        border: 1px solid var(--fg);
-        text-decoration: none;
-        display: block;
-      }
-      .btn-card-order:hover {
-        background: var(--acc);
-        color: #fff;
-      }
-      .grid {
+
+      .farmino-shop-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-        gap: 22px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
       }
-      .tag {
-        position: relative;
-        background: var(--card);
-        border: 3px solid var(--fg);
-        box-shadow: 5px 5px 0 var(--fg);
+
+      .shop-card {
+        background: var(--surface);
+        border: none;
+        border-radius: var(--r-md);
+        padding: 14px;
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
-      .tag:before {
-        content: "";
-        position: absolute;
-        top: 10px;
-        right: 12px;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: var(--bg);
-        border: 3px solid var(--fg);
+
+      .shop-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .shop-stage {
+        background: var(--surface-sage);
+        padding: 18px;
+        border-radius: 18px;
+        position: relative;
+        min-height: 152px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .stage-top-badges {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
         z-index: 2;
       }
-      .pic {
-        height: 104px;
-        border-bottom: 3px solid var(--fg);
-        background-color: var(--dk);
-        background-image: repeating-linear-gradient(
-          135deg,
-          #ffffff12 0 8px,
-          transparent 8px 16px
-        );
-        background-size: cover;
-        background-position: center;
-        display: grid;
-        place-items: end start;
-        padding: 10px 14px;
-        color: var(--dkf);
-        font: 700 12px var(--mono);
+
+      .st-tag {
+        font: 700 11px var(--sans);
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        padding: 5px 12px;
+        border-radius: var(--r-pill);
       }
-      .bd {
-        padding: 14px 16px 16px;
+
+      .st-tag.ready {
+        background: var(--leaf);
+        color: #ffffff;
+      }
+
+      .st-tag.segera {
+        background: var(--harvest-bright);
+        color: #182b1c;
+      }
+
+      .st-tag.semai {
+        background: var(--seed-soft);
+        color: var(--seed);
+      }
+
+      .hst-tag {
+        font: 600 11.5px var(--mono);
+        background: var(--surface);
+        color: var(--fg);
+        padding: 4px 12px;
+        border-radius: var(--r-pill);
+      }
+
+      .stage-illustration {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 14px;
+      }
+
+      .stage-botanical-svg {
+        width: 58px;
+        height: 58px;
+        color: var(--leaf);
+        flex-shrink: 0;
+      }
+
+      .stage-method-info {
+        text-align: right;
+      }
+
+      .stage-method-info strong {
+        display: block;
+        font: 700 13px var(--sans);
+        color: var(--fg);
+      }
+
+      .stage-method-info span {
+        font-size: 11.5px;
+        color: var(--mute);
+      }
+
+      .shop-body {
+        padding: 18px 8px 6px;
         display: flex;
         flex-direction: column;
-        gap: 6px;
-        flex: 1;
+        flex-grow: 1;
       }
-      .bd h3 {
-        margin: 0;
-        font: 700 20px var(--sans);
+
+      .shop-body h3 {
+        font: 700 19px/1.25 var(--display);
+        margin: 0 0 8px;
+        color: var(--fg);
       }
-      .st {
-        font: 500 12px var(--mono);
+
+      .shop-body p {
+        font-size: 13.5px;
+        color: var(--mute);
+        line-height: 1.55;
+        margin: 0 0 16px;
+        flex-grow: 1;
+      }
+
+      .growth-meter {
+        background: var(--bg);
+        border-radius: 14px;
+        padding: 12px 14px;
+        margin-bottom: 14px;
+      }
+
+      .gm-head {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+
+      .gm-head strong {
+        color: var(--fg);
+      }
+
+      .gm-head span {
+        font: 600 11px var(--mono);
         color: var(--mute);
       }
-      .st i {
-        display: inline-block;
-        width: 8px;
+
+      .gm-track {
+        width: 100%;
         height: 8px;
-        border-radius: 50%;
-        margin-right: 6px;
-        background: var(--down);
+        background: var(--line-strong);
+        border-radius: var(--r-pill);
+        overflow: hidden;
       }
-      .st.segera i {
-        background: #e0a800;
+
+      .gm-fill {
+        height: 100%;
+        background: var(--leaf);
+        border-radius: var(--r-pill);
       }
-      .st.habis i {
-        background: #888;
+
+      .gm-fill.wait {
+        background: var(--harvest-bright);
       }
-      .pr {
-        font: 700 clamp(28px, 6vw, 34px) var(--mono);
-        margin-top: 4px;
-        white-space: nowrap;
+
+      .shop-price-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding-top: 12px;
+        margin-bottom: 14px;
+        border-top: 1px solid var(--line);
       }
-      .pr small {
-        font: 500 13px var(--mono);
+
+      .price-val {
+        font: 700 20px/1 var(--mono);
+        color: var(--fg);
+      }
+
+      .price-val small {
+        font: 500 12px var(--sans);
         color: var(--mute);
       }
-      .d {
-        align-self: flex-start;
-        font: 700 12px var(--mono);
-        border: 2px solid currentColor;
-        padding: 1px 8px;
+
+      .stock-badge {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--leaf);
       }
-      .up {
-        color: var(--up);
+
+      .shop-actions-row {
+        display: grid;
+        grid-template-columns: 106px 1fr;
+        gap: 8px;
       }
-      .dn {
-        color: var(--down);
+
+      .qty-control {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--r-pill);
+        background: var(--bg);
+        padding: 0 6px;
       }
-      .fl {
+
+      .qty-btn {
+        background: transparent;
+        border: none;
+        color: var(--fg);
+        font: 700 15px var(--mono);
+        min-width: 28px;
+        min-height: 42px;
+      }
+
+      .qty-input {
+        width: 32px;
+        text-align: center;
+        border: none;
+        background: transparent;
+        font: 700 13.5px var(--mono);
+        color: var(--fg);
+      }
+
+      .btn-shop-order {
+        min-height: 44px;
+        border-radius: var(--r-pill);
+        font: 700 13px var(--sans);
+        border: none;
+        background: var(--forest);
+        color: #ffffff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+      }
+
+      .btn-shop-order.booking {
+        background: var(--harvest-bright);
+        color: #182b1c;
+      }
+
+      .about-farm-split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .farmer-profile-card {
+        background: var(--forest);
+        color: #ffffff;
+        border-radius: var(--r-leaf);
+        padding: 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .farmer-profile-card h3 {
+        font: 700 26px/1.2 var(--display);
+        margin: 10px 0 14px;
+      }
+
+      .farmer-profile-card p {
+        color: #d1fae5;
+        font-size: 14.5px;
+        line-height: 1.68;
+        margin: 0 0 20px;
+      }
+
+      .farm-specs-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(255, 255, 255, 0.18);
+        font-size: 13px;
+      }
+
+      .farm-specs-grid strong {
+        display: block;
+        color: var(--harvest-bright);
+      }
+
+      .faq-column {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .faq-item {
+        background: var(--surface);
+        border: none;
+        border-radius: var(--r-md);
+        padding: 18px 22px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .faq-item summary {
+        font: 700 15.5px var(--sans);
+        color: var(--fg);
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 28px;
+      }
+
+      .faq-item p {
+        margin: 10px 0 0;
+        font-size: 13.5px;
         color: var(--mute);
+        line-height: 1.6;
+        padding-top: 10px;
+        border-top: 1px solid var(--line);
       }
-      .tag.no {
-        filter: grayscale(1);
-        opacity: 0.6;
+
+      .market-form-box {
+        background: var(--surface);
+        border: none;
+        border-radius: var(--r-lg);
+        padding: 36px;
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 32px;
+        box-shadow: var(--shadow-soft);
       }
-      .tag.no:after {
-        content: "HABIS";
-        position: absolute;
-        right: -6px;
-        bottom: 48px;
-        transform: rotate(-8deg);
-        font: 700 22px var(--mono);
-        border: 3px solid var(--up);
-        color: var(--up);
-        padding: 0 10px;
-        background: var(--card);
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
       }
-      footer {
-        margin: 48px 0 0;
-        padding: 22px 0 36px;
-        font: 500 12px var(--mono);
-        color: var(--mute);
+
+      .field-full {
+        grid-column: 1 / -1;
+      }
+
+      .field label {
+        display: block;
+        font-size: 12.5px;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        min-height: 46px;
+        padding: 10px 16px;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--r-sm);
+        background: var(--bg);
+        color: var(--fg);
+        font: 14px var(--sans);
+      }
+
+      .field textarea {
+        min-height: 76px;
+      }
+
+      .btn-submit-market {
+        background: var(--harvest-bright);
+        color: #182b1c;
+        border: none;
+        min-height: 48px;
+        padding: 0 24px;
+        border-radius: var(--r-pill);
+        font: 700 14px var(--sans);
+        width: 100%;
+      }
+
+      .market-feedback {
+        margin: 10px 0 0;
+        padding: 12px 16px;
+        background: var(--leaf-soft);
+        color: var(--leaf);
+        border-radius: var(--r-sm);
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .farmino-footer {
+        background: var(--forest-deep);
+        color: #d1fae5;
+        padding: 40px 0 36px;
+        font-size: 13.5px;
+        border-top: 4px solid var(--harvest-bright);
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+        gap: 28px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .footer-grid h4 {
+        color: var(--harvest-bright);
+        font: 700 13px var(--mono);
         text-transform: uppercase;
-        border-top: 3px solid var(--fg);
+        margin: 0 0 10px;
       }
-      footer a {
-        color: var(--acc);
+
+      .footer-grid a {
+        color: #e2f2e5;
+        text-decoration: none;
+      }
+
+      .footer-grid a:hover {
+        color: var(--harvest-bright);
+      }
+
+      @media (max-width: 960px) {
+        .hero-left-7,
+        .hero-right-5 {
+          grid-column: span 12;
+        }
+
+        .service-4col,
+        .farmino-shop-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .about-farm-split,
+        .market-form-box,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .service-4col,
+        .farmino-shop-grid,
+        .hero-counters,
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .srv-item {
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+        }
       }
     </style>
   </head>
   <body>
-    <header>
-      <div class="wrap">
-        <div class="logo">omah<b>.</b>ijo</div>
-        <div class="upd" id="u"></div>
+    <div class="farmino-topbar">
+      <div class="wrap topbar-inner">
+        <div class="topbar-left">
+          <span class="topbar-badge">Kebun Hidroponik Keluarga Bapak</span>
+          <span>Sampit, Kalimantan Tengah · Bebas Pestisida &amp; Dipetik Beserta Akar</span>
+        </div>
+        <div class="topbar-right">
+          <a href="../dalamdapur/index.html">dalam.dapur (Kuliner Ibu)</a>
+          <span>·</span>
+          <a href="../mentayasandbox/index.html">MentayaSandbox</a>
+          <span>·</span>
+          <a href="../index.html">Induk cahyadies.</a>
+        </div>
+      </div>
+    </div>
+
+    <header class="farmino-header">
+      <div class="wrap header-inner">
+        <a class="brand-lockup" href="#">
+          <div class="brand-emblem" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"></path>
+              <path d="M2 21c0-3 1.8-5.4 5.1-6C9.5 14.5 12 13 13 12"></path>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <strong>omah<b>.</b>ijo</strong>
+            <span>Organic &amp; Hydroponic Family Farm</span>
+          </div>
+        </a>
+
+        <nav class="main-nav" aria-label="Navigasi Utama">
+          <a href="#katalog-kebun">Toko Sayur &amp; HST</a>
+          <a href="#tentang-kebun">Tentang Kebun Bapak</a>
+          <a href="#faq-kebun">Tanya Jawab</a>
+          <a href="#permintaan-pasar">Permintaan Pasar</a>
+        </nav>
+
+        <div class="header-actions">
+          <a href="#permintaan-pasar" class="btn-harvest-cta">Booking / Pesan WA</a>
+          <button type="button" class="theme-btn" onclick="toggleTheme()" aria-label="Ganti tema tampilan">◐</button>
+        </div>
       </div>
     </header>
-    <main class="wrap">
-      <h1>Harga kebun hari ini.</h1>
-      <p class="lead">
-        Harga langsung dari kebun hidroponik Omah Ijo, sebagai acuan harga pasar
-        bagi siapa saja.
-      </p>
 
-      <div class="garden-banner">
-        <div>
-          <strong>Panen Segar Petik Langsung</strong>
-          <p>Tanpa pestisida kimia. Menerima pesanan langsung & pasokan sayur hidroponik.</p>
+    <main>
+      <section class="farmino-hero">
+        <div class="wrap hero-12col">
+          <div class="hero-left-7">
+            <div class="organic-pill">
+              <span>100% Hidroponik Tanpa Pestisida</span>
+              <b>·</b>
+              <span id="updateDateBadge">Data Kebun Terkini</span>
+            </div>
+            <h1>Sayur Segar dari <span>Kebun Bapak</span>, Transparan dari Semai hingga Siap Jual.</h1>
+            <p class="hero-lead">
+              Dikelola langsung oleh keluarga di Sampit dengan aliran nutrisi bersih dan pencahayaan matahari penuh. Cek sayuran yang sedang <strong>Ready Siap Petik</strong> hari ini, pantau <strong>berapa hari masa tunggu (HST)</strong> untuk batch berikutnya, atau ajukan permintaan pasar.
+            </p>
+            <div class="hero-cta-group">
+              <a href="#katalog-kebun" class="btn-warm-lg">Belanja Sayur &amp; Cek Masa Tunggu</a>
+              <a href="#permintaan-pasar" class="btn-green-lg">Booking Pasokan Pasar</a>
+            </div>
+
+            <div class="hero-counters">
+              <div class="h-counter">
+                <strong id="cntReadyHero">2 Varietas</strong>
+                <span>Siap Petik Hari Ini</span>
+              </div>
+              <div class="h-counter">
+                <strong id="cntWaitHero">4 Varietas</strong>
+                <span>Dalam Masa Tunggu &amp; Remaja</span>
+              </div>
+              <div class="h-counter">
+                <strong>0% Kimia</strong>
+                <span>Bebas Semprotan Pestisida</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-right-5" aria-label="Jadwal Meja Instalasi Hari Ini">
+            <div class="farmino-showcase-card">
+              <div class="showcase-banner-top">
+                <div>
+                  <strong>Papan Meja Instalasi Kebun</strong>
+                  <span>Status Siklus Tanam Real-Time</span>
+                </div>
+                <span class="harvest-stamp">Langsung Kebun</span>
+              </div>
+              <div class="showcase-body">
+                <div class="live-batch-list">
+                  <div class="live-batch-item">
+                    <div>
+                      <strong>Selada Hijau &amp; Pakcoy</strong>
+                      <small>Meja Panen Utama · Usia 26-28 HST</small>
+                    </div>
+                    <span class="batch-pill ready">Ready Siap Jual</span>
+                  </div>
+                  <div class="live-batch-item">
+                    <div>
+                      <strong>Kangkung Hidroponik</strong>
+                      <small>Meja Rakit Apung · Usia 17/20 HST</small>
+                    </div>
+                    <span class="batch-pill wait">Panen ± 3 Hari</span>
+                  </div>
+                  <div class="live-batch-item">
+                    <div>
+                      <strong>Sawi Caisim Manis</strong>
+                      <small>Meja NFT Timur · Usia 20/25 HST</small>
+                    </div>
+                    <span class="batch-pill wait">Panen ± 5 Hari</span>
+                  </div>
+                  <div class="live-batch-item">
+                    <div>
+                      <strong>Samhong King &amp; Daun Mint</strong>
+                      <small>Meja Peremajaan · Usia 12-14 HST</small>
+                    </div>
+                    <span class="batch-pill seed">Tunggu 11-14 Hari</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
         </div>
-        <a href="#" id="waOmah" class="btn-wa-garden" target="_blank" rel="noopener">Pesan Sayur via WA ↗</a>
-      </div>
+      </section>
 
-      <div class="stats" id="st"></div>
-      <div class="grid" id="g"></div>
+      <section class="service-ribbon" aria-label="Layanan Utama Omah Ijo">
+        <div class="wrap service-4col">
+          <div class="srv-item">
+            <div class="srv-icon">01</div>
+            <div>
+              <strong>Panen Beserta Akar</strong>
+              <span>Sayur tahan segar lebih lama meski disimpan di suhu ruang.</span>
+            </div>
+          </div>
+          <div class="srv-item">
+            <div class="srv-icon">02</div>
+            <div>
+              <strong>Hitung Mundur HST</strong>
+              <span>Informasi jujur berapa hari lagi tanaman siap dipetik &amp; dijual.</span>
+            </div>
+          </div>
+          <div class="srv-item">
+            <div class="srv-icon">03</div>
+            <div>
+              <strong>Pre-Booking Batch</strong>
+              <span>Amankan jatah panen sebelum tanggal siap jual tiba.</span>
+            </div>
+          </div>
+          <div class="srv-item">
+            <div class="srv-icon">04</div>
+            <div>
+              <strong>Mitra Pasar &amp; Kuliner</strong>
+              <span>Melayani pasokan rutin untuk warung, katering, dan keluarga.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="farmino-section" id="katalog-kebun">
+        <div class="wrap">
+          <div class="sec-header-row">
+            <div>
+              <span class="sec-eyebrow">ETALASE TOKO KEBUN HIDROPONIK</span>
+              <h2>Katalog Hasil Panen &amp; Estimasi Masa Tunggu</h2>
+            </div>
+          </div>
+
+          <div class="search-filter-wrap">
+            <div class="filter-tabs" id="st" role="group" aria-label="Filter status panen"></div>
+            <div class="search-field">
+              <label for="searchCrop">Cari sayuran:</label>
+              <input id="searchCrop" type="search" placeholder="Ketik: selada, pakcoy, sawi..." oninput="handleSearch(this.value)" />
+            </div>
+          </div>
+
+          <div class="farmino-shop-grid" id="g"></div>
+        </div>
+      </section>
+
+      <section class="farmino-section" id="tentang-kebun">
+        <div class="wrap about-farm-split">
+          <div class="farmer-profile-card">
+            <div>
+              <span class="harvest-stamp">PROFIL KEBUN KELUARGA</span>
+              <h3>Dikelola oleh Bapak &amp; Keluarga dengan Standar Air Bersih Terukur</h3>
+              <p>
+                Omah Ijo bermula dari kecintaan Bapak merawat tanaman hidroponik di halaman rumah di Sampit. Setiap meja instalasi dipantau kepekatan nutrisinya (PPM/EC) setiap pagi agar menghasilkan daun yang renyah, hijau segar, dan aman dikonsumsi keluarga setiap hari.
+              </p>
+            </div>
+            <div class="farm-specs-grid">
+              <div>
+                <strong>Sistem Instalasi</strong>
+                <span>Talang NFT &amp; Rakit Apung</span>
+              </div>
+              <div>
+                <strong>Media Semai</strong>
+                <span>Rockwool Higienis Bebas Tanah</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-column" id="faq-kebun">
+            <span class="sec-eyebrow">INFORMASI PEMBELI &amp; MITRA PASAR</span>
+            <h2 style="font:700 24px/1.2 var(--display); margin:0 0 10px;">Pertanyaan Seputar Panen &amp; Booking</h2>
+
+            <details class="faq-item" open>
+              <summary>Bagaimana jika sayur yang saya inginkan masih dalam masa tunggu?</summary>
+              <p>Anda dapat menekan tombol <strong>Booking Batch Ini</strong> pada kartu sayur untuk memesan kuota lebih awal. Begitu usia tanam (HST) mencapai siap jual, Bapak akan memetik dan mengabari Anda.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Mengapa sayur Omah Ijo disertakan dengan akarnya?</summary>
+              <p>Akar hidroponik kami bersih dari tanah/lumpur. Menyertakan akar yang sedikit lembap membuat daun tetap hidup dan segar jauh lebih lama dibandingkan sayur potong biasa.</p>
+            </details>
+
+            <details class="faq-item">
+              <summary>Apakah bisa melakukan permintaan pasar untuk jenis sayur tertentu?</summary>
+              <p>Sangat bisa. Pedagang pasar, usaha kebab/burger, mie ayam, maupun katering dapat mengisi formulir permintaan pasar di bawah untuk menjadwalkan penanaman rutin.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="farmino-section" id="permintaan-pasar" style="border-bottom: none;">
+        <div class="wrap">
+          <div class="market-form-box">
+            <div>
+              <span class="sec-eyebrow">LAYANAN PERMINTAAN PASAR &amp; BOOKING</span>
+              <h2 style="font:700 26px/1.2 var(--display); margin:0 0 10px;">Ajukan Permintaan Pasar atau Booking Panen</h2>
+              <p style="color:var(--mute); font-size:14px; line-height:1.6; margin:0 0 14px;">
+                Isi rincian kebutuhan sayuran Anda untuk rumah tangga, stok warung/pasar, atau suplai rutin usaha kuliner. Pesan akan diformat otomatis ke WhatsApp kebun Omah Ijo.
+              </p>
+              <ul style="padding-left:18px; font-size:13.5px; line-height:1.65; margin:0;">
+                <li>Harga langsung dari kebun Bapak di Sampit.</li>
+                <li>Bisa booking kuota sebelum tanggal panen tiba.</li>
+                <li>Terbuka untuk kerja sama jadwal tanam mingguan.</li>
+              </ul>
+            </div>
+
+            <form id="marketForm" onsubmit="submitMarketRequest(event)">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="mName">Nama Pemesan / Usaha</label>
+                  <input id="mName" type="text" required placeholder="Contoh: Pak Hendra / RM Segar" />
+                </div>
+
+                <div class="field">
+                  <label for="mType">Jenis Permintaan</label>
+                  <select id="mType">
+                    <option value="Pesan Sayur Ready Hari Ini">Pesan Sayur Ready Hari Ini</option>
+                    <option value="Booking Batch Masa Tunggu">Booking Batch Masa Tunggu</option>
+                    <option value="Pasokan Rutin Pasar / Usaha Kuliner">Pasokan Rutin Pasar / Usaha Kuliner</option>
+                    <option value="Request Tanam Komoditas Pasar">Request Tanam Komoditas Pasar</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="mCrop">Sayuran yang Dibutuhkan</label>
+                  <input id="mCrop" type="text" required placeholder="Contoh: Selada Hijau & Pakcoy" />
+                </div>
+
+                <div class="field">
+                  <label for="mVol">Jumlah Kebutuhan (kg / ikat)</label>
+                  <input id="mVol" type="text" required placeholder="Contoh: 5 kg per minggu" />
+                </div>
+
+                <div class="field field-full">
+                  <label for="mNote">Catatan Waktu Ambil / Permintaan Khusus</label>
+                  <textarea id="mNote" required placeholder="Tuliskan jadwal pengambilan atau rincian permintaan pasar..."></textarea>
+                </div>
+
+                <div class="field field-full">
+                  <button type="submit" class="btn-submit-market">Kirim Permintaan ke WhatsApp Omah Ijo</button>
+                  <p id="marketFeedback" class="market-feedback" role="status" aria-live="polite" hidden></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
     </main>
-    <footer>
-      <div class="wrap" style="padding: 0">
-        Omah Ijo · hidroponik · harga mengikuti panen ·
-        <a href="https://cahyadies.github.io">cahyadies ↗</a>
+
+    <footer class="farmino-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <strong style="font:700 22px var(--display); color:#ffffff; display:block; margin-bottom:8px;">omah.ijo</strong>
+            <p style="margin:0; line-height:1.55;">Katalog hasil perkebunan hidroponik Bapak &amp; keluarga di Sampit, Kalimantan Tengah. Menyediakan sayuran bebas pestisida dengan informasi masa tunggu panen yang transparan.</p>
+          </div>
+          <div>
+            <h4>Navigasi Kebun</h4>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <a href="#katalog-kebun">Toko Sayur &amp; Masa Tunggu</a>
+              <a href="#tentang-kebun">Profil Kebun Bapak</a>
+              <a href="#permintaan-pasar">Form Permintaan Pasar</a>
+            </div>
+          </div>
+          <div>
+            <h4>Ekosistem Keluarga</h4>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <a href="../index.html">cahyadies. (Portal Induk)</a>
+              <a href="../dalamdapur/index.html">dalam.dapur (Katalog Masakan Ibu)</a>
+              <a href="../mentayasandbox/index.html">MentayaSandbox (Wadah Keilmuan IT)</a>
+            </div>
+          </div>
+        </div>
+        <div style="padding-top:18px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:12.5px;">
+          <span>© 2026 Omah Ijo Hydroponic Family Farm · Sampit</span>
+          <span>Bagian dari Ekosistem Digital cahyadies</span>
+        </div>
       </div>
     </footer>
+
     <script>
-      const UPDATED = "2026-10-16"; // GANTI tiap harga diperbarui
-      
-      // KONFIGURASI WHATSAPP: Ganti dengan nomor WhatsApp kebun (kode negara tanpa +, misal 628123456789)
-      const WA_NUMBER = "6281234567890";
-      
-      const getWaLink = (item = "") => {
-        const text = item
-          ? `Halo Omah Ijo, saya ingin pesan sayur panen: *${item}*. Apakah stoknya tersedia hari ini?`
-          : `Halo Omah Ijo, saya mau tanya ketersediaan stok panen dan pemesanan sayur.`;
-        return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`;
+      const UPDATED = "2026-11-16";
+      const WA_NUMBER = "6282157058512";
+      let activeFilter = "semua";
+      let searchQuery = "";
+      const quantities = {};
+
+      const savedTheme = localStorage.getItem("omah_theme") || "light";
+      document.documentElement.dataset.theme = savedTheme;
+
+      window.toggleTheme = () => {
+        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem("omah_theme", next);
       };
 
-      const waBtn = document.getElementById("waOmah");
-      if (waBtn) waBtn.href = getWaLink();
-
-      let activeFilter = "semua";
+      const ICONS = {
+        lettuce: `<svg class="stage-botanical-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 42V20"/><path d="M24 34c-8 0-14-5-14-13 0-4 3-7 6-8 1-5 5-7 8-7s7 2 8 7c3 1 6 4 6 8 0 8-6 13-14 13Z"/><path d="M18 26l6 5 6-5"/></svg>`,
+        pakcoy: `<svg class="stage-botanical-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 40c-3-4-4-10-2-16 2-5 4-14 8-14s6 9 8 14c2 6 1 12-2 16H18Z"/><path d="M24 14v26"/><path d="M14 24c-4-2-6 3-3 8 2 4 5 8 7 8"/><path d="M34 24c4-2 6 3 3 8-2 4-5 8-7 8"/></svg>`,
+        kangkung: `<svg class="stage-botanical-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 42V14"/><path d="M28 42V18"/><path d="M20 14c-6 0-10-4-10-8 6 0 10 4 10 8Z"/><path d="M28 18c6 0 10-4 10-8-6 0-10 4-10 8Z"/><path d="M20 26c-6 0-9-3-9-7 5 0 9 3 9 7Z"/></svg>`,
+        herb: `<svg class="stage-botanical-svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 38L34 14"/><path d="M24 26c-7-1-10-6-8-12 6 1 9 6 8 12Z"/><path d="M28 22c6 1 10-2 11-8-6-1-10 2-11 8Z"/><path d="M19 32c6 1 10-2 11-8-6-1-10 2-11 8Z"/></svg>`
+      };
 
       const P = [
-        // CONTOH data. h=harga, prev=harga sebelumnya, s: ready/segera/habis, img='foto/nama.jpg' (opsional)
         {
-          n: "Selada hijau",
+          id: "selada",
+          icon: "lettuce",
+          n: "Selada Hijau Keriting (Grand Rapids)",
+          method: "Instalasi NFT Utama",
+          subMethod: "Dipetik beserta akar segar",
           u: "kg",
           h: 35000,
-          prev: 32000,
           s: "ready",
-          img: "",
+          d: "Daun renyah segar untuk lalapan keluarga, salad, burger, dan kebab. Tahan segar lebih lama karena akar tetap utuh.",
+          waitText: "Siap jual hari ini (Langsung petik)",
+          hstCurrent: 28,
+          hstTarget: 28,
+          batchCap: "Stok Ready ± 8 kg"
         },
-        { n: "Pakcoy", u: "kg", h: 25000, prev: 25000, s: "ready", img: "" },
-        { n: "Kangkung", u: "ikat", h: 5000, prev: 6000, s: "segera", img: "" },
-        { n: "Sawi", u: "kg", h: 22000, prev: 22000, s: "habis", img: "" },
+        {
+          id: "pakcoy",
+          icon: "pakcoy",
+          n: "Pakcoy Hijau Hidroponik",
+          method: "Instalasi NFT Utama",
+          subMethod: "Daun tebal bebas ulat",
+          u: "kg",
+          h: 25000,
+          s: "ready",
+          d: "Batang renyah dan daun hijau pekat mulus tanpa gigitan hama, sangat pas untuk tumisan bawang putih atau mie ayam.",
+          waitText: "Siap jual hari ini (Langsung petik)",
+          hstCurrent: 26,
+          hstTarget: 26,
+          batchCap: "Stok Ready ± 6 kg"
+        },
+        {
+          id: "kangkung",
+          icon: "kangkung",
+          n: "Kangkung Hidroponik Akar Bersih",
+          method: "Sistem Rakit Apung",
+          subMethod: "Bebas lumpur & tanah",
+          u: "ikat",
+          h: 5000,
+          s: "segera",
+          d: "Batang muda empuk dan bersih karena tumbuh di atas air nutrisi mengalir, tidak berbau tanah saat ditumis.",
+          waitText: "Siap jual ± 3 hari lagi",
+          hstCurrent: 17,
+          hstTarget: 20,
+          batchCap: "Kuota panen 40 ikat"
+        },
+        {
+          id: "caisim",
+          icon: "pakcoy",
+          n: "Sawi Caisim Manis",
+          method: "Instalasi NFT Timur",
+          subMethod: "Serat lembut tidak pahit",
+          u: "kg",
+          h: 22000,
+          s: "segera",
+          d: "Sawi hijau segar dengan batang renyah yang manis alami, cocok untuk campuran kuah bakso, mie, dan capcay.",
+          waitText: "Siap jual ± 5 hari lagi",
+          hstCurrent: 20,
+          hstTarget: 25,
+          batchCap: "Kuota panen 10 kg"
+        },
+        {
+          id: "samhong",
+          icon: "lettuce",
+          n: "Samhong King / Sawi Daun Lebar",
+          method: "Meja Remaja NFT",
+          subMethod: "Terbuka pre-booking",
+          u: "kg",
+          h: 28000,
+          s: "semai",
+          d: "Varietas sawi berdaun lebar keriting dengan tekstur sangat renyah untuk hidangan tumis cepat.",
+          waitText: "Masa tunggu ± 11 hari lagi",
+          hstCurrent: 14,
+          hstTarget: 25,
+          batchCap: "Batch 120 lubang tanam"
+        },
+        {
+          id: "mint",
+          icon: "herb",
+          n: "Daun Mint & Seledri Hidroponik",
+          method: "Meja Herbal Khusus",
+          subMethod: "Aroma daun pekat",
+          u: "ikat",
+          h: 8000,
+          s: "semai",
+          d: "Daun herbal segar beraroma kuat untuk seduhan teh, minuman dingin, maupun taburan sup keluarga.",
+          waitText: "Masa tunggu ± 14 hari lagi",
+          hstCurrent: 12,
+          hstTarget: 26,
+          batchCap: "Terbuka booking pasar"
+        }
       ];
-      const L = { ready: "Tersedia", segera: "Segera panen", habis: "Habis" };
-      const rp = (n) => "Rp" + n.toLocaleString("id-ID");
-      const dl = (x) => {
-        const d = x.h - x.prev;
-        return d > 0
-          ? `<span class="d up">▲ ${rp(d)}</span>`
-          : d < 0
-            ? `<span class="d dn">▼ ${rp(-d)}</span>`
-            : `<span class="d fl">— tetap</span>`;
+
+      P.forEach((item) => {
+        quantities[item.id] = 1;
+      });
+
+      const STATUS_LABELS = {
+        ready: "Ready Siap Jual",
+        segera: "Panen 3-5 Hari Lagi",
+        semai: "Fase Remaja 10+ Hari"
       };
-      const $ = (s) => document.querySelector(s);
-      $("#u").textContent =
-        "Update " +
-        new Date(UPDATED).toLocaleDateString("id-ID", {
-          day: "numeric",
-          month: "short",
-          year: "numeric",
-        });
+
+      const rp = (n) => "Rp" + n.toLocaleString("id-ID");
+
+      const formattedDate = new Date(UPDATED).toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+      });
+      document.getElementById("updateDateBadge").textContent = "Update Kebun: " + formattedDate;
+
+      window.adjustQty = (id, delta) => {
+        quantities[id] = Math.max(1, (quantities[id] || 1) + delta);
+        const inputEl = document.getElementById("qty-" + id);
+        if (inputEl) inputEl.value = quantities[id];
+      };
+
+      window.orderCrop = (id) => {
+        const crop = P.find((x) => x.id === id);
+        if (!crop) return;
+        const qty = quantities[id] || 1;
+        const total = rp(crop.h * qty);
+        const msg =
+          crop.s === "ready"
+            ? `Halo Omah Ijo, saya ingin memesan sayur yang sedang Ready:\n- Komoditas: *${crop.n}*\n- Jumlah: *${qty} ${crop.u}* (Estimasi ${total})\n\nApakah stoknya masih tersedia di meja panen hari ini?`
+            : `Halo Omah Ijo, saya ingin melakukan *Pre-Booking Panen* untuk:\n- Komoditas: *${crop.n}*\n- Jumlah Booking: *${qty} ${crop.u}*\n- Jadwal Kebun: ${crop.waitText}\n\nMohon dicatat untuk kuota panen berikutnya.`;
+        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+      };
+
+      window.handleSearch = (val) => {
+        searchQuery = val.trim().toLowerCase();
+        render();
+      };
+
+      window.submitMarketRequest = (e) => {
+        e.preventDefault();
+        const name = document.getElementById("mName").value.trim();
+        const type = document.getElementById("mType").value;
+        const crop = document.getElementById("mCrop").value.trim();
+        const vol = document.getElementById("mVol").value.trim();
+        const note = document.getElementById("mNote").value.trim();
+
+        const fb = document.getElementById("marketFeedback");
+        if (fb) {
+          fb.hidden = false;
+          fb.textContent = "Membuka WhatsApp untuk mengirim permintaan pasar ke kebun Omah Ijo...";
+        }
+
+        const msg = `Halo Omah Ijo, saya *${name}* mengajukan *${type}*:\n\n- Sayuran: ${crop}\n- Kebutuhan: ${vol}\n- Catatan: ${note}`;
+        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+      };
 
       function render() {
         const readyCount = P.filter((x) => x.s === "ready").length;
         const segeraCount = P.filter((x) => x.s === "segera").length;
-        const habisCount = P.filter((x) => x.s === "habis").length;
+        const semaiCount = P.filter((x) => x.s === "semai").length;
 
-        $("#st").innerHTML = `
-          <button class="${activeFilter === 'semua' ? 'on' : ''}" data-f="semua">Semua (${P.length})</button>
-          <button class="${activeFilter === 'ready' ? 'on' : ''}" data-f="ready">● Tersedia (${readyCount})</button>
-          <button class="${activeFilter === 'segera' ? 'on' : ''}" data-f="segera">◐ Segera Panen (${segeraCount})</button>
-          <button class="${activeFilter === 'habis' ? 'on' : ''}" data-f="habis">○ Habis (${habisCount})</button>
+        document.getElementById("cntReadyHero").textContent = `${readyCount} Varietas`;
+        document.getElementById("cntWaitHero").textContent = `${segeraCount + semaiCount} Varietas`;
+
+        document.getElementById("st").innerHTML = `
+          <button type="button" class="${activeFilter === "semua" ? "on" : ""}" data-f="semua">Semua Hasil Kebun (${P.length})</button>
+          <button type="button" class="${activeFilter === "ready" ? "on" : ""}" data-f="ready">Siap Jual Hari Ini (${readyCount})</button>
+          <button type="button" class="${activeFilter === "segera" ? "on" : ""}" data-f="segera">Masa Tunggu 3-5 Hari (${segeraCount})</button>
+          <button type="button" class="${activeFilter === "semai" ? "on" : ""}" data-f="semai">Fase Remaja 10+ Hari (${semaiCount})</button>
         `;
 
-        const filtered = activeFilter === "semua" ? P : P.filter((x) => x.s === activeFilter);
+        const filtered = P.filter((x) => {
+          const matchTab = activeFilter === "semua" || x.s === activeFilter;
+          const matchSearch =
+            !searchQuery ||
+            x.n.toLowerCase().includes(searchQuery) ||
+            x.d.toLowerCase().includes(searchQuery) ||
+            x.method.toLowerCase().includes(searchQuery);
+          return matchTab && matchSearch;
+        });
 
-        $("#g").innerHTML = filtered.map(
-          (x) =>
-            `<div class="tag ${x.s === "habis" ? "no" : ""}">
-              <div class="pic" ${x.img ? `style="background-image:url('${x.img}')"` : ""}>
-                ${x.img ? "" : "/" + x.u}
-              </div>
-              <div class="bd">
-                <h3>${x.n}</h3>
-                <div class="st ${x.s}"><i></i>${L[x.s]}</div>
-                <div class="pr">${rp(x.h)}<small> /${x.u}</small></div>
-                ${dl(x)}
-                ${x.s === "ready" ? `<a class="btn-card-order" href="${getWaLink(x.n)}" target="_blank" rel="noopener">Pesan Sayur Ini ↗</a>` : ""}
-              </div>
-            </div>`,
-        ).join("");
+        const gridEl = document.getElementById("g");
+        if (filtered.length === 0) {
+          gridEl.innerHTML = `
+            <div style="grid-column: 1 / -1; background:var(--surface); border:1px solid var(--line-strong); border-radius:var(--r-md); padding:28px; text-align:center;">
+              <p style="margin:0 0 12px; color:var(--mute);">Sayuran tidak ditemukan pada filter ini. Anda dapat mengajukan request tanam di Formulir Permintaan Pasar di bawah.</p>
+              <button type="button" class="btn-green-lg" onclick="activeFilter='semua'; searchQuery=''; document.getElementById('searchCrop').value=''; render();">Tampilkan Semua Komoditas</button>
+            </div>
+          `;
+        } else {
+          gridEl.innerHTML = filtered
+            .map((x) => {
+              const pct = Math.min(100, Math.round((x.hstCurrent / x.hstTarget) * 100));
+              const isReady = x.s === "ready";
+              const btnLabel = isReady ? "Pesan Ready WA" : "Booking Batch Ini";
+              const qtyVal = quantities[x.id] || 1;
+
+              return `
+                <article class="shop-card">
+                  <div class="shop-stage">
+                    <div class="stage-top-badges">
+                      <span class="st-tag ${x.s}">${STATUS_LABELS[x.s]}</span>
+                      <span class="hst-tag">Usia ${x.hstCurrent}/${x.hstTarget} HST</span>
+                    </div>
+                    <div class="stage-illustration">
+                      <div aria-hidden="true">${ICONS[x.icon] || ICONS.lettuce}</div>
+                      <div class="stage-method-info">
+                        <strong>${x.method}</strong>
+                        <span>${x.subMethod}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="shop-body">
+                    <h3>${x.n}</h3>
+                    <p>${x.d}</p>
+
+                    <div class="growth-meter">
+                      <div class="gm-head">
+                        <strong>${x.waitText}</strong>
+                        <span>${pct}% Siap Panen</span>
+                      </div>
+                      <div class="gm-track" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="Progres panen ${x.n}">
+                        <div class="gm-fill ${isReady ? "" : "wait"}" style="width:${pct}%"></div>
+                      </div>
+                    </div>
+
+                    <div class="shop-price-bar">
+                      <div class="price-val">${rp(x.h)}<small> /${x.u}</small></div>
+                      <span class="stock-badge">${x.batchCap}</span>
+                    </div>
+
+                    <div class="shop-actions-row">
+                      <div class="qty-control" aria-label="Pilih jumlah ${x.u}">
+                        <button type="button" class="qty-btn" onclick="adjustQty('${x.id}', -1)" aria-label="Kurangi jumlah">-</button>
+                        <input id="qty-${x.id}" class="qty-input" type="text" value="${qtyVal}" readonly aria-label="Jumlah ${x.n}" />
+                        <button type="button" class="qty-btn" onclick="adjustQty('${x.id}', 1)" aria-label="Tambah jumlah">+</button>
+                      </div>
+                      <button type="button" class="btn-shop-order ${isReady ? "" : "booking"}" onclick="orderCrop('${x.id}')">
+                        ${btnLabel}
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              `;
+            })
+            .join("");
+        }
 
         document.querySelectorAll("#st button").forEach((b) => {
           b.onclick = () => {

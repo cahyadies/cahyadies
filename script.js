@@ -1,430 +1,998 @@
-/* =========================================
-   DATA DAN PENGATURAN UTAMA (PERSONA: ARSIP)
-========================================= */
-const SITE = {
-    name: 'Eko Sugeng Cahyadi',
-    tagline: 'Arsip dari hal-hal yang saya buat, eksplorasi, dan pelajari.',
-    intro: 'Sebuah arsip personal dari karya, eksperimen, dan proses belajar saya di bidang desain visual, web development, dan computer vision. Bukan sekadar hasil akhir, tapi juga tentang ide dan proses di baliknya.',
-    email: 'halo@contoh.com',
-    socials: [
-        { n: 'Instagram', u: '#' },
-        { n: 'LinkedIn', u: '#' },
-        { n: 'GitHub', u: '#' }
-    ]
+const state = {
+  lang: localStorage.getItem('cahyadies_lang') || 'id',
+  theme: localStorage.getItem('cahyadies_theme') || 'dark',
+  workFilter: 'all'
 };
 
-/* =========================================
-   KATEGORI & PROJECT SPACES (FILTER 2 DIMENSI)
-========================================= */
-const CATS = [
-    ['semua', 'all'],
-    // Dimensi 1: Skill / Bidang
-    ['design', 'catDesign'],
-    ['web', 'catWeb'],
-    ['cv', 'catCV'],
-    // Dimensi 2: Project Spaces
-    ['mentaya', 'catMentaya'],
-    ['omahijo', 'catOmahIjo'],
-    ['dapur', 'catDapur']
-];
-
-/* =========================================
-   KARYA (DENGAN SISTEM MULTI-TAG)
-========================================= */
-const WORKS = [
+const DATA = {
+  ecosystem: [
     {
-        id: 'gerigi',
-        tags: ['design', 'mentaya'],
-        t: 'Identitas Shuttle GERIGI ITS',
-        d: 'Logo dan identitas visual layanan shuttle mahasiswa baru.',
-        hue: 18, year: '2025', role: 'Logo, warna, aset sosmed', img: '',
-        body: 'Logo dirancang agar mudah dikenali di seragam, bus, dan media sosial.'
+      code: '01 / KEILMUAN IT & RISET TERAPAN',
+      name: 'MentayaSandbox',
+      desc: {
+        id: 'Wadah ekspresi, kolaborasi terbuka, dan dokumentasi keilmuan teknologi informasi berkelanjutan: mencakup eksperimen computer vision, arsitektur web hemat sumber daya, serta catatan teknis.',
+        en: 'A space for expression, open collaboration, and sustainable IT research documentation covering computer vision experiments, low-overhead web architecture, and technical notes.'
+      },
+      href: 'mentayasandbox/index.html',
+      cta: { id: 'Buka MentayaSandbox', en: 'Open MentayaSandbox' }
     },
     {
-        id: 'label',
-        tags: ['design', 'dapur'],
-        t: 'Label Produk dalam.dapur',
-        d: 'Desain label untuk sayur hidroponik dan kue rumahan.',
-        hue: 140, year: '2025', role: 'Desain label & kemasan', img: '',
-        body: 'Label dibuat hangat dan jujur, sesuai karakter usaha rumahan.'
+      code: '02 / KATALOG OLAHAN DAPUR IBU',
+      name: 'dalam.dapur',
+      desc: {
+        id: 'Katalog digital yang menghimpun seluruh hasil olahan masakan Ibu di Sampit: mulai dari makanan berat seperti nasi bakar dan mie ayam, aneka roti lembut, kue basah, kue kering, hingga frozen food.',
+        en: 'Digital catalog gathering Mother’s homemade culinary creations in Sampit: grilled rice, chicken noodles, soft bakery items, traditional cakes, dry pastries, and frozen food.'
+      },
+      href: 'dalamdapur/index.html',
+      cta: { id: 'Buka Katalog dalam.dapur', en: 'Open dalam.dapur Catalog' }
     },
     {
-        id: 'dd-web',
-        tags: ['web', 'dapur'],
-        t: 'Landing Page dalam.dapur',
-        d: 'Halaman penjualan sederhana untuk produk rumahan.',
-        hue: 95, year: '2025', role: 'Desain & pengembangan web', img: '', link: '#',
-        body: 'Landing page cepat, ringan, dan mudah dibuka dari HP.'
-    },
-    {
-        id: 'cv-botol',
-        tags: ['cv'],
-        t: 'Estimasi Volume Botol dengan CV',
-        d: 'Menghitung volume botol yang mengapung dari gambar kamera.',
-        hue: 185, year: '2026', role: 'Computer vision', img: '', link: '#',
-        body: 'Penjelasan pendekatan teknis, tantangan pemantulan cahaya pada air, sudut kamera, dan akurasi model.'
-    },
-    {
-        id: 'omahijo-sistem',
-        tags: ['omahijo'],
-        t: 'Instalasi & Katalog Omah Ijo',
-        d: 'Dokumentasi sistem tanam dan log hidroponik.',
-        hue: 65, year: '2025', role: 'Urban Farming', img: '',
-        body: 'Mencatat perkembangan tanaman, proses penyemaian di rockwool, hingga manajemen sirkulasi nutrisi.'
+      code: '03 / KEBUN HIDROPONIK KELUARGA BAPAK',
+      name: 'Omah Ijo',
+      desc: {
+        id: 'Katalog hasil perkebunan hidroponik punya Bapak yang dikelola keluarga: memantau sayur yang sedang ready siap petik, berapa lama masa tunggu hingga siap jual, serta layanan permintaan pasar.',
+        en: 'Catalog for Father’s family-run hydroponic garden: tracking ready-to-harvest greens, countdown days until ready to sell, and custom market supply requests.'
+      },
+      href: 'omahijo/index.html',
+      cta: { id: 'Buka Katalog Omah Ijo', en: 'Open Omah Ijo Catalog' }
     }
-];
-
-/* =========================================
-   POSTS / BLOG
-========================================= */
-const POSTS = [
-    { id: 'mulai-dari-brief', t: 'Dari Brief Singkat ke Logo yang Dipakai Bertahun-tahun', date: '2026-09-20', tag: 'Desain', ex: 'Cara aku mengubah permintaan "yang penting bagus" menjadi arah visual yang jelas.', body: `<p>Hampir semua proyek logo dimulai dari kalimat yang sama: "yang penting bagus." Tugas pertama bukan menggambar, melainkan menggali apa arti bagus bagi klien.</p><h2>1. Tanyakan hal yang tidak berhubungan dengan visual</h2><p>Siapa pelanggannya? Di mana logo akan paling sering terlihat? Jawabannya menentukan ukuran, kontras, dan tingkat detail.</p><blockquote>Logo yang baik bisa dikenali saat kecil, hitam putih, dan dilihat sekilas.</blockquote><h2>2. Sketsa kasar dulu</h2><p>Sebelum membuka software, buat puluhan sketsa jelek.</p>` },
-    { id: 'belajar-cv', t: 'Catatan Belajar Computer Vision untuk Pemula Nekat', d: '', date: '2026-08-02', tag: 'Teknologi', ex: 'Hal-hal yang kuharap kuketahui sebelum mencoba mengukur benda dari kamera.', body: `<p>Computer vision terlihat seperti sihir sampai kamu mencoba mengukur sesuatu dengan benar. Tulisan ini contoh tampilan artikel panjang.</p><h2>Cahaya adalah segalanya</h2><p>Pantulan dan bayangan bisa merusak hasil lebih parah daripada algoritma yang salah. Mulai dari kondisi pencahayaan yang terkontrol.</p>` }
-];
-
-/* =========================================
-   TERJEMAHAN (TRANSLATIONS)
-========================================= */
-const EN = {
-    site: {
-        tagline: 'An archive of things I\'ve made, explored, and learned.',
-        intro: 'A personal archive of my work, experiments, and learning process across visual design, web development, and computer vision. Not just the outcomes, but also the ideas and processes behind them.'
+  ],
+  works: [
+    {
+      id: 'naraicoder',
+      cat: 'design',
+      catLabel: { id: 'Desain & Identitas', en: 'Design & Identity' },
+      client: 'NaraiCoder Kalimantan Tengah',
+      year: '2026',
+      specCode: 'SPEC-ID / 01',
+      deliverables: ['Telawang Grid', 'Responsive Logo', 'Brand Guideline'],
+      thumb: 'assets/works/naraicoder-preview.png',
+      title: {
+        id: 'Redesign Logo & Sistem Identitas Visual NaraiCoder (PARDI)',
+        en: 'NaraiCoder Logo Redesign & Visual Identity System (PARDI)'
+      },
+      summary: {
+        id: 'Peremajaan identitas visual komunitas teknologi Kalimantan Tengah yang memadukan struktur perisai Dayak Telawang dengan notasi biner dan arsitektur logo responsif.',
+        en: 'Visual identity refresh for Central Kalimantan’s tech community combining Dayak Telawang shield geometry with binary notation and responsive logo architecture.'
+      },
+      detail: {
+        id: [
+          'Proyek redesign identitas NaraiCoder berangkat dari kebutuhan menyatukan akar budaya lokal Kalimantan Tengah dengan presisi rekayasa perangkat lunak modern.',
+          'Bentuk dasar menggunakan geometri perisai Telawang bersudut heksagonal yang dikombinasikan dengan simbol kurung kode serta logika biner 1 dan 0.',
+          'Sistem logo dirancang dalam tiga skala responsif (Full Lockup, Compact Badge, dan Micro Favicon) agar tetap tajam mulai dari spanduk kegiatan hingga ukuran 16px pada antarmuka web.'
+        ],
+        en: [
+          'The NaraiCoder identity redesign bridges Central Kalimantan cultural roots with modern software engineering precision.',
+          'Its foundational geometry draws from the hexagonal Dayak Telawang shield combined with code brackets and binary 1/0 notation.',
+          'The logo system scales across three responsive tiers (Full Lockup, Compact Badge, and Micro Favicon) for crisp legibility from event banners down to 16px web icons.'
+        ]
+      },
+      gallery: [
+        { src: 'assets/works/naraicoder-preview.png', cap: 'Konsep geometri Telawang dan struktur huruf utama NaraiCoder' },
+        { src: 'assets/works/naraicoder-mockup-objects.jpg', cap: 'Penerapan identitas visual pada berbagai media dan merchandise komunitas' },
+        { src: 'assets/works/naraicoder-logo.svg', cap: 'Eksplorasi simbol dan proporsi grid modular' },
+        { src: 'assets/works/naraicoder-responsive-system.jpg', cap: 'Sistem arsitektur logo responsif lintas ukuran layar' }
+      ]
     },
-    works: {
-        gerigi: { t: 'Shuttle GERIGI ITS Identity', d: 'Logo and visual identity for a shuttle service for new university students.', role: 'Logo, colors, social assets', body: 'The logo was designed to be recognizable on uniforms, buses, and social media.' },
-        label: { t: 'dalam.dapur Product Labels', d: 'Label design for hydroponic vegetables and home-baked goods.', role: 'Label & packaging design', body: 'The labels feel warm and honest, matching the character of a home business.' },
-        'dd-web': { t: 'dalam.dapur Landing Page', d: 'A simple sales page for home-made products.', role: 'Web design & development', body: 'A fast, lightweight landing page that opens well on phones.' },
-        'cv-botol': { t: 'Bottle Volume Estimation with CV', d: 'Estimating the volume of a floating bottle from camera images.', role: 'Computer vision', body: 'Explain the approach, the challenges (water reflections, camera angle), and the accuracy achieved.' },
-        'omahijo-sistem': { t: 'Omah Ijo Installation & Catalog', d: 'Documentation of the planting system and hydroponic logs.', role: 'Urban Farming', body: 'Logging plant development, rockwool seeding process, and nutrient circulation management.' }
+    {
+      id: 'cv-bottle-volume',
+      cat: 'ai',
+      catLabel: { id: 'Model AI & Riset', en: 'AI Models & Research' },
+      client: 'MentayaSandbox R&D',
+      year: '2026',
+      specCode: 'CV-MOD / 02',
+      deliverables: ['OpenCV Contour', 'Perspective Calibration', 'Python Pipeline'],
+      thumb: '',
+      title: {
+        id: 'Estimasi Volume Objek Mengapung dengan Computer Vision',
+        en: 'Floating Object Volume Estimation via Computer Vision'
+      },
+      summary: {
+        id: 'Eksperimen visi komputer terapan untuk mengestimasi rasio volume botol dan objek mengapung dari citra kamera tunggal menggunakan deteksi kontur dan kalibrasi perspektif.',
+        en: 'Applied computer vision experiment estimating submerged and floating object volume ratios from single-camera frames using contour detection and perspective calibration.'
+      },
+      detail: {
+        id: [
+          'Riset ini menguji bagaimana kamera standar dapat digunakan untuk memperkirakan volume cairan dan proporsi bagian benda yang terendam di permukaan air tanpa sensor kedalaman khusus.',
+          'Pipeline pengolahan citra melakukan segmentasi batas air, ekstraksi siluet objek, lalu menghitung integral penampang silinder berdasarkan faktor kalibrasi jarak kamera.'
+        ],
+        en: [
+          'This study explores how a standard camera can estimate liquid volume and submerged object ratios on water surfaces without specialized depth sensors.',
+          'The image pipeline segments the waterline, extracts object silhouettes, and computes cylindrical cross-section integrals calibrated against camera distance.'
+        ]
+      },
+      gallery: []
     },
-    posts: {
-        'mulai-dari-brief': { t: 'From a Short Brief to a Logo That Lasts for Years', tag: 'Design', ex: 'How I turn "just make it look good" into a clear visual direction.', body: '<p>Almost every logo project starts with the same sentence: "just make it look good."</p>' },
-        'belajar-cv': { t: 'Notes from a Reckless Beginner in Computer Vision', tag: 'Tech', ex: 'Things I wish I knew before trying to measure objects with a camera.', body: '<p>Computer vision looks like magic until you try to measure something correctly.</p>' }
+    {
+      id: 'dalamdapur-web',
+      cat: 'web',
+      catLabel: { id: 'Sistem Web', en: 'Web Systems' },
+      client: 'dalam.dapur (Keluarga Ibu)',
+      year: '2026',
+      specCode: 'WEB-CAT / 03',
+      deliverables: ['6 Culinary Categories', 'Live Order Drawer', 'WhatsApp Checkout'],
+      thumb: 'dalamdapur/images/samosa.jpg',
+      title: {
+        id: 'Katalog Digital & Nota Pesanan Interaktif dalam.dapur',
+        en: 'dalam.dapur Digital Catalog & Interactive Order Slip'
+      },
+      summary: {
+        id: 'Perancangan katalog web bergaya toko bahan pangan segar untuk menghimpun masakan berat, roti, kue basah, kue kering, minuman, dan frozen food olahan Ibu.',
+        en: 'Fresh-market inspired web catalog organizing Mother’s heavy meals, bakery items, wet cakes, dry pastries, drinks, and frozen food.'
+      },
+      detail: {
+        id: [
+          'Katalog dalam.dapur dirancang agar pelanggan keluarga dapat melihat ketersediaan menu harian, memilih jumlah porsi atau toples, dan langsung mengirim rekap nota pesanan ke WhatsApp Ibu.',
+          'Tata letak mengadopsi struktur grocery store yang bersih dan terang sehingga foto samosa dan sajian dapur tampil menggugah selera.'
+        ],
+        en: [
+          'The dalam.dapur catalog lets family customers browse daily availability, adjust portion quantities, and send structured order slips directly to Mother’s WhatsApp.',
+          'Its bright grocery-store layout highlights homemade food photography clearly and appetizingly.'
+        ]
+      },
+      gallery: [
+        { src: 'dalamdapur/images/samosa.jpg', cap: 'Samosa rempah buatan Ibu yang tersedia dalam varian siap santap maupun frozen pack' },
+        { src: 'dalamdapur/images/roti manis.jpg', cap: 'Roti manis panggang segar dari dapur Ibu' }
+      ]
+    },
+    {
+      id: 'omahijo-board',
+      cat: 'web',
+      catLabel: { id: 'Sistem Web', en: 'Web Systems' },
+      client: 'Omah Ijo (Kebun Hidroponik Bapak)',
+      year: '2026',
+      specCode: 'AGR-SYS / 04',
+      deliverables: ['HST Progress Tracker', 'Harvest Booking', 'Farmino UI'],
+      thumb: '',
+      title: {
+        id: 'Katalog Kebun Hidroponik & Estimasi Masa Tunggu Omah Ijo',
+        en: 'Omah Ijo Hydroponic Garden Catalog & Harvest Countdown'
+      },
+      summary: {
+        id: 'Aplikasi katalog kebun hidroponik Bapak yang menampilkan indikator Hari Setelah Tanam (HST), status sayur siap jual, serta pemesanan pasokan pasar.',
+        en: 'Catalog web app for Father’s hydroponic garden displaying Days After Planting (HST) progress, ready-to-sell greens, and market supply booking.'
+      },
+      detail: {
+        id: [
+          'Omah Ijo memecahkan masalah komunikasi stok panen antara kebun rumahan Bapak dengan pelanggan rumah tangga maupun warung makan di Sampit.',
+          'Setiap komoditas menampilkan usia tanam aktual dan estimasi hari tunggu hingga siap dipetik beserta akarnya.'
+        ],
+        en: [
+          'Omah Ijo solves harvest stock communication between Father’s home hydroponic tables and household or culinary buyers in Sampit.',
+          'Each crop displays its exact planting age and estimated countdown days until ready to harvest with fresh roots.'
+        ]
+      },
+      gallery: []
+    },
+    {
+      id: 'shuttle-gerigi-its',
+      cat: 'design',
+      catLabel: { id: 'Desain & Identitas', en: 'Design & Identity' },
+      client: 'GERIGI ITS Surabaya',
+      year: '2025',
+      specCode: 'WAY-ID / 05',
+      deliverables: ['Route Signage', 'Vehicle Identification', 'Event Wayfinding'],
+      thumb: '',
+      title: {
+        id: 'Identitas Visual & Sistem Wayfinding Shuttle GERIGI ITS',
+        en: 'Shuttle GERIGI ITS Visual Identity & Wayfinding System'
+      },
+      summary: {
+        id: 'Perancangan penanda rute, kode warna koridor transportasi, dan identitas armada shuttle mahasiswa baru di lingkungan kampus ITS Surabaya.',
+        en: 'Route signage, corridor color coding, and shuttle fleet identification designed for new-student orientation across the ITS Surabaya campus.'
+      },
+      detail: {
+        id: [
+          'Membantu ribuan mahasiswa baru mengenali titik henti dan jalur armada shuttle kampus secara cepat melalui kontras tipografi tinggi dan kode ikonografi rute.'
+        ],
+        en: [
+          'Helped thousands of incoming students identify campus shuttle stops and fleet routes quickly through high-contrast typography and route iconography.'
+        ]
+      },
+      gallery: []
+    },
+    {
+      id: 'dalamdapur-packaging',
+      cat: 'design',
+      catLabel: { id: 'Desain & Identitas', en: 'Design & Identity' },
+      client: 'dalam.dapur',
+      year: '2025',
+      specCode: 'PKG-SYS / 06',
+      deliverables: ['Jar Seal Labels', 'Frozen Pack Instructions', 'Typography System'],
+      thumb: 'dalamdapur/images/rotisisir.jpg',
+      title: {
+        id: 'Sistem Label Kemasan & Segel Toples dalam.dapur',
+        en: 'dalam.dapur Packaging Labels & Jar Seal System'
+      },
+      summary: {
+        id: 'Desain label modular untuk kemasan frozen food, segel toples kue kering, dan kartu panduan pemanasan kembali agar produk dapur Ibu tampil rapi dan informatif.',
+        en: 'Modular label design for frozen food packs, pastry jar seals, and reheating instruction cards for Mother’s kitchen products.'
+      },
+      detail: {
+        id: [
+          'Setiap label memuat informasi tanggal produksi, komposisi bahan utama, batas penyimpanan freezer, serta instruksi menggoreng atau memanggang ulang tanpa mengurangi kerenyahan.'
+        ],
+        en: [
+          'Each label clearly lists production date, core ingredients, freezer shelf life, and reheating instructions.'
+        ]
+      },
+      gallery: [
+        { src: 'dalamdapur/images/rotisisir.jpg', cap: 'Tampilan produk olahan dapur Ibu yang siap dikemas untuk pelanggan' }
+      ]
     }
-};
-
-const UI = {
-    id: {
-        home: 'Beranda', works: 'Karya', blog: 'Blog', contact: 'Kontak',
-        all: 'Semua',
-        catDesign: 'Design', catWeb: 'Web Development', catCV: 'Computer Vision & Research',
-        catMentaya: 'MentayaSandbox', catOmahIjo: 'Omah Ijo', catDapur: 'dalam.dapur',
-        spacesTitle: 'Ruang Proyek & Inisiatif',
-        folio: 'Arsip Digital', seeWorks: 'Lihat karya', readPosts: 'Baca tulisan', featured: 'Karya pilihan', latest: 'Tulisan terbaru', more: 'Semua →', connect: 'Terhubung', year: 'Tahun', role: 'Peran', visit: 'Kunjungi proyek ↗', allWorks: '← Semua karya', allPosts: '← Semua tulisan', min: 'menit baca', like: 'Suka tulisan ini?', cTitle: 'Ada proyek? Ayo ngobrol.', cText: 'Hubungi lewat email atau sosial media.', nf: 'Halaman tidak ditemukan', toHome: 'Ke beranda', theme: 'Ganti tema', loc: 'id-ID', prev: '← Sebelumnya', next: 'Selanjutnya →'
+  ],
+  posts: [
+    {
+      id: 'arsitektur-ekosistem-keluarga',
+      date: '14 Nov 2026',
+      readTime: '4 mnt baca',
+      cat: { id: 'Arsitektur Web', en: 'Web Architecture' },
+      title: {
+        id: 'Merancang Ekosistem Web Keluarga Tanpa Ketergantungan Berlebih',
+        en: 'Designing a Family Web Ecosystem with Zero Heavy Dependencies'
+      },
+      excerpt: {
+        id: 'Mengapa cahyadies, MentayaSandbox, dalam.dapur, dan Omah Ijo dibangun menggunakan HTML, CSS, dan JavaScript murni agar ringan dirawat bertahun-tahun.',
+        en: 'Why cahyadies, MentayaSandbox, dalam.dapur, and Omah Ijo are built with vanilla HTML, CSS, and JavaScript for long-term maintainability.'
+      },
+      body: {
+        id: [
+          'Ketika membangun sistem informasi untuk usaha keluarga seperti katalog masakan Ibu (dalam.dapur) dan kebun hidroponik Bapak (Omah Ijo), kecepatan buka halaman di perangkat seluler dan kemudahan pembaruan data jauh lebih penting daripada kerumitan kerangka kerja modern.',
+          'Dengan memisahkan setiap unit ke dalam struktur direktori mandiri yang dihubungkan oleh cahyadies sebagai rumah induk, setiap website dapat memiliki karakter tata letak yang sesuai dengan fungsinya masing-masing tanpa saling membebani.'
+        ],
+        en: [
+          'When building information systems for family initiatives like Mother’s kitchen catalog (dalam.dapur) and Father’s hydroponic garden (Omah Ijo), mobile speed and effortless maintenance matter far more than framework complexity.',
+          'By separating each unit into self-contained directories linked from cahyadies as the parent hub, each site adopts a layout tailored to its exact domain.'
+        ]
+      }
     },
-    en: {
-        home: 'Home', works: 'Works', blog: 'Blog', contact: 'Contact',
-        all: 'All',
-        catDesign: 'Design', catWeb: 'Web Development', catCV: 'Computer Vision & Research',
-        catMentaya: 'MentayaSandbox', catOmahIjo: 'Omah Ijo', catDapur: 'dalam.dapur',
-        spacesTitle: 'Project Spaces & Initiatives',
-        folio: 'Digital Archive', seeWorks: 'See my work', readPosts: 'Read my writing', featured: 'Featured work', latest: 'Latest posts', more: 'View all →', connect: 'Connect', year: 'Year', role: 'Role', visit: 'Visit project ↗', allWorks: '← All works', allPosts: '← All posts', min: 'min read', like: 'Enjoyed this post?', cTitle: 'Got a project? Let\'s talk.', cText: 'Reach out by email or social media.', nf: 'Page not found', toHome: 'Back home', theme: 'Toggle theme', loc: 'en-US', prev: '← Prev', next: 'Next →'
+    {
+      id: 'filosofi-telawang-naraicoder',
+      date: '02 Nov 2026',
+      readTime: '5 mnt baca',
+      cat: { id: 'Desain Identitas', en: 'Identity Design' },
+      title: {
+        id: 'Menyatukan Geometri Perisai Telawang dan Logika Biner pada Logo NaraiCoder',
+        en: 'Uniting Dayak Telawang Shield Geometry and Binary Logic in NaraiCoder'
+      },
+      excerpt: {
+        id: 'Catatan di balik layar proses peremajaan identitas visual komunitas programmer Kalimantan Tengah agar tetap berakar pada budaya lokal.',
+        en: 'Behind-the-scenes notes on refreshing Central Kalimantan’s developer community identity while staying rooted in local heritage.'
+      },
+      body: {
+        id: [
+          'Identitas visual komunitas teknologi daerah sering kali terjebak pada simbol generik seperti bola dunia atau ikon petir. Pada NaraiCoder, kami mengambil siluet perisai Telawang khas Dayak sebagai pelindung sekaligus wadah kolaborasi.',
+          'Proporsi garis diatur mengikuti grid geometris sehingga bentuk perisai sekaligus membentuk kurung siku kode pemrograman dan angka biner 1-0.'
+        ],
+        en: [
+          'Regional tech community identities often fall into generic tropes. For NaraiCoder, we drew from the traditional Dayak Telawang shield as a symbol of protection and shared growth.',
+          'Line proportions follow a strict geometric grid so the shield simultaneously forms code brackets and binary 1-0 notation.'
+        ]
+      }
+    },
+    {
+      id: 'visi-komputer-kebun-hidroponik',
+      date: '19 Okt 2026',
+      readTime: '6 mnt baca',
+      cat: { id: 'AI & Riset Terapan', en: 'AI & Applied Research' },
+      title: {
+        id: 'Penerapan Computer Vision Sederhana untuk Pemantauan Usia Panen Hidroponik',
+        en: 'Applying Lightweight Computer Vision for Hydroponic Harvest Monitoring'
+      },
+      excerpt: {
+        id: 'Eksperimen menghubungkan disiplin ilmu IT di MentayaSandbox dengan kebutuhan praktis meja tanam hidroponik Bapak di Omah Ijo.',
+        en: 'Connecting applied IT research in MentayaSandbox with practical harvest tracking on Father’s hydroponic tables at Omah Ijo.'
+      },
+      body: {
+        id: [
+          'Di Omah Ijo, pelanggan sering menanyakan kapan batch selada atau pakcoy berikutnya siap dipetik. Selain mencatat Hari Setelah Tanam (HST) secara manual, kami menguji segmentasi area tajuk daun dari foto kamera ponsel untuk memprediksi kesiapan panen.',
+          'Pendekatan ini membuktikan bahwa eksperimen AI tidak harus selalu berskala industri besar, tetapi bisa langsung memberi manfaat nyata di halaman rumah sendiri.'
+        ],
+        en: [
+          'At Omah Ijo, buyers frequently ask when the next batch of lettuce or bok choy will be ready. Alongside manual Days After Planting (HST) logs, we tested leaf-canopy segmentation from phone photos to estimate harvest readiness.',
+          'This shows applied AI does not need massive industrial scale to deliver real value right in a family backyard.'
+        ]
+      }
     }
+  ]
 };
 
-/* =========================================
-   STATE & UTILITIES
-========================================= */
-let lang = 'id';
-let filter = 'semua';
-let currentWorkPage = 1;
-let currentBlogPage = 1;
-const WORKS_PER_PAGE = 6;
-const POSTS_PER_PAGE = 4;
-
-try {
-    const savedLang = localStorage.getItem('lang');
-    lang = savedLang || ((navigator.language || 'id').toLowerCase().startsWith('id') ? 'id' : 'en');
-} catch (e) { }
-
-const $ = selector => document.querySelector(selector);
-const tr = key => UI[lang][key];
-const G = (kind, obj, key) => (lang === 'en' && EN[kind][obj.id] && EN[kind][obj.id][key] != null) ? EN[kind][obj.id][key] : obj[key];
-const site = key => lang === 'en' ? EN.site[key] : SITE[key];
-
-const catName = category => tr((CATS.find(x => x[0] === category) || [0, 'all'])[1]);
-const fmt = dateStr => new Date(dateStr).toLocaleDateString(tr('loc'), { day: 'numeric', month: 'long', year: 'numeric' });
-const mins = htmlString => Math.max(1, Math.round(htmlString.replace(/<[^>]+>/g, ' ').split(/\s+/).length / 200));
-
-/* =========================================
-   UI COMPONENTS GENERATOR
-========================================= */
-const cover = work => {
-    const title = G('works', work, 't');
-    if (work.img) return `<div class="cover" style="background-image:url('${work.img}')"></div>`;
-    return `<div class="cover" style="background-image:linear-gradient(135deg, hsl(${work.hue} 60% 55%), hsl(${(work.hue + 40) % 360} 55% 32%))">${title[0]}</div>`;
-};
-
-const wCard = work => {
-    const tagHtml = work.tags.map(t => {
-        const found = CATS.find(x => x[0] === t);
-        return found ? tr(found[1]) : t;
-    }).join(' · ');
-
-    return `
-  <a class="card" href="#/karya/${work.id}">
-    ${cover(work)}
-    <div class="in">
-      <span class="tag" style="white-space:normal; line-height:1.4">${tagHtml}</span>
-      <h3 style="margin-top:8px">${G('works', work, 't')}</h3>
-      <p>${G('works', work, 'd')}</p>
-    </div>
-  </a>`;
-};
-
-const pRow = post => {
-    const bodyText = G('posts', post, 'body');
-    return `
-  <a class="post-row" href="#/blog/${post.id}">
-    <span class="tag">${G('posts', post, 'tag')}</span>
-    <h3>${G('posts', post, 't')}</h3>
-    <p>${G('posts', post, 'ex')}</p>
-    <span class="meta">${fmt(post.date)} · ${mins(bodyText)} ${tr('min')}</span>
-  </a>`;
-};
-
-const socials = () => `
-  <div class="socials">
-    ${SITE.socials.map(s => `<a href="${s.u}" target="_blank" rel="noopener">${s.n}</a>`).join('')}
-    <a href="mailto:${SITE.email}">Email</a>
-  </div>`;
-
-const buildPagination = (currentPage, totalItems, itemsPerPage, type) => {
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-    if (totalPages <= 1) return '';
-    return `
-    <div class="pagination">
-      <button onclick="changePage('${type}', -1)" ${currentPage === 1 ? 'disabled' : ''}>${tr('prev')}</button>
-      <span style="display:flex; align-items:center; font-size:14px; font-weight:600;">${currentPage} / ${totalPages}</span>
-      <button onclick="changePage('${type}', 1)" ${currentPage === totalPages ? 'disabled' : ''}>${tr('next')}</button>
-    </div>
-  `;
-};
-
-window.changePage = (type, direction) => {
-    if (type === 'works') currentWorkPage += direction;
-    else if (type === 'blog') currentBlogPage += direction;
-    render(true);
-};
-
-/* =========================================
-   PAGES
-========================================= */
-function nav(currentRoute) {
-    const links = [['/', 'home'], ['/karya', 'works'], ['/blog', 'blog'], ['/kontak', 'contact']];
-    let navHtml = links.map(([href, key]) => {
-        const isActive = currentRoute === href || (href !== '/' && currentRoute.startsWith(href));
-        return `<a href="#${href}" class="${isActive ? 'on' : ''}">${tr(key)}</a>`;
-    }).join('');
-
-    navHtml += `
-    <div class="nav-actions">
-      <button id="lg" aria-label="Language">${lang === 'id' ? 'EN' : 'ID'}</button>
-      <button id="th" aria-label="${tr('theme')}">◐</button>
-    </div>
-  `;
-
-    $('#nav').innerHTML = navHtml;
-
-    $('#th').onclick = () => {
-        const doc = document.documentElement;
-        const isDark = getComputedStyle(doc).getPropertyValue('--bg').trim() === '#161412';
-        doc.dataset.theme = isDark ? 'light' : 'dark';
-    };
-
-    $('#lg').onclick = () => {
-        lang = lang === 'id' ? 'en' : 'id';
-        try { localStorage.setItem('lang', lang); } catch (e) { }
-        render(true);
-    };
+function t(obj) {
+  if (!obj) return '';
+  if (typeof obj === 'string') return obj;
+  return obj[state.lang] || obj.id || '';
 }
 
-function home() {
-    return `
-    <section class="hero">
-      <h1>${site('tagline')}</h1>
-      <p>${site('intro')}</p>
-      <a class="btn" href="#/karya">${tr('seeWorks')}</a>
-      <a class="btn alt" href="#/blog">${tr('readPosts')}</a>
-    </section>
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', state.theme);
+  localStorage.setItem('cahyadies_theme', state.theme);
+}
 
-    <h2 class="sec" style="margin-top: 0;">${tr('spacesTitle')}</h2>
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 56px;">
-      
-      <a class="card" href="https://mentayasandbox.vercel.app" target="_blank" rel="noopener noreferrer" style="padding: 20px 18px; text-decoration: none; border: 1px solid var(--line); border-left: 4px solid #4da3ff; background: var(--card); box-shadow: 0 2px 8px #0001;">
-        <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #4da3ff; letter-spacing: .05em;">// Lab Eksperimen</span>
-        <h3 style="margin: 6px 0 4px; font-size: 18px;">MentayaSandbox ↗</h3>
-        <p style="font-size: 13px; margin: 0; color: var(--mute); line-height: 1.5;">Catatan riset kode, eksperimen desain, dan computer vision.</p>
-      </a>
-      
-      <a class="card" href="https://dalamdapur.vercel.app" target="_blank" rel="noopener noreferrer" style="padding: 20px 18px; text-decoration: none; border: 1px solid var(--line); border-left: 4px solid #b4441a; background: var(--card); box-shadow: 0 2px 8px #0001;">
-        <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #b4441a; letter-spacing: .05em;">✦ Katalog Kuliner</span>
-        <h3 style="margin: 6px 0 4px; font-size: 18px;">dalam.dapur ↗</h3>
-        <p style="font-size: 13px; margin: 0; color: var(--mute); line-height: 1.5;">Koleksi olahan dapur rumahan & pemesanan PO segar.</p>
-      </a>
-      
-      <a class="card" href="https://omahijo.vercel.app" target="_blank" rel="noopener noreferrer" style="padding: 20px 18px; text-decoration: none; border: 1px solid var(--line); border-left: 4px solid #1f7a3d; background: var(--card); box-shadow: 0 2px 8px #0001;">
-        <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: #1f7a3d; letter-spacing: .05em;">● Hidroponik Live</span>
-        <h3 style="margin: 6px 0 4px; font-size: 18px;">Omah Ijo ↗</h3>
-        <p style="font-size: 13px; margin: 0; color: var(--mute); line-height: 1.5;">Papan harga kebun harian & log urban farming.</p>
-      </a>
+function toggleTheme() {
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  applyTheme();
+  renderNav();
+}
 
+function toggleLang() {
+  state.lang = state.lang === 'id' ? 'en' : 'id';
+  document.documentElement.lang = state.lang;
+  localStorage.setItem('cahyadies_lang', state.lang);
+  render();
+}
+
+function renderNav() {
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const hash = location.hash.slice(1) || '/';
+  const [page = ''] = hash.split('/').filter(Boolean);
+
+  const labels = state.lang === 'id'
+    ? { home: 'Beranda', eco: 'Ekosistem', works: 'Karya', blog: 'Catatan', contact: 'Kontak', follow: 'Terhubung' }
+    : { home: 'Home', eco: 'Ecosystem', works: 'Works', blog: 'Journal', contact: 'Contact', follow: 'Follow' };
+
+  const followEl = document.getElementById('railFollowLabel');
+  if (followEl) followEl.textContent = labels.follow;
+
+  const isHome = page === '' || page.startsWith('sec-');
+
+  nav.innerHTML = `
+    <div class="nav-links">
+      <a class="nav-link ${isHome ? 'active' : ''}" href="#/">${labels.home}</a>
+      <a class="nav-link" href="#sec-01">${labels.eco}</a>
+      <a class="nav-link ${page === 'karya' ? 'active' : ''}" href="#/karya">${labels.works}</a>
+      <a class="nav-link ${page === 'blog' ? 'active' : ''}" href="#/blog">${labels.blog}</a>
+      <a class="nav-link ${page === 'kontak' ? 'active' : ''}" href="#/kontak">${labels.contact}</a>
     </div>
-
-    <h2 class="sec">${tr('featured')} <a href="#/karya">${tr('more')}</a></h2>
-    <div class="grid">${WORKS.slice(0, 3).map(wCard).join('')}</div>
-    
-    <h2 class="sec">${tr('latest')} <a href="#/blog">${tr('more')}</a></h2>
-    ${POSTS.slice(0, 2).map(pRow).join('')}
-    
-    <h2 class="sec">${tr('connect')}</h2>
-    ${socials()}`;
-}
-
-function works() {
-    const filteredWorks = WORKS.filter(w => filter === 'semua' || w.tags.includes(filter));
-    const startIndex = (currentWorkPage - 1) * WORKS_PER_PAGE;
-    const paginatedWorks = filteredWorks.slice(startIndex, startIndex + WORKS_PER_PAGE);
-
-    const chipsHtml = CATS.map(([key, name]) =>
-        `<button class="chip ${filter === key ? 'on' : ''}" data-f="${key}">${tr(name)}</button>`
-    ).join('');
-
-    return `
-    <h2 class="sec" style="margin-top:40px">${tr('works')}</h2>
-    <div class="chips">${chipsHtml}</div>
-    <div class="grid">${paginatedWorks.map(wCard).join('')}</div>
-    ${buildPagination(currentWorkPage, filteredWorks.length, WORKS_PER_PAGE, 'works')}
+    <div class="nav-controls">
+      <button type="button" class="ctrl-btn" id="langBtn" aria-label="Ganti bahasa">${state.lang.toUpperCase()}</button>
+      <button type="button" class="ctrl-btn" id="themeBtn" aria-label="Ganti tema warna">${state.theme === 'dark' ? 'LIGHT' : 'DARK'}</button>
+    </div>
   `;
+
+  document.getElementById('langBtn')?.addEventListener('click', toggleLang);
+  document.getElementById('themeBtn')?.addEventListener('click', toggleTheme);
 }
 
-function work(id) {
-    const w = WORKS.find(x => x.id === id);
-    if (!w) return notFound();
+function renderFooter() {
+  const foot = document.getElementById('foot');
+  if (!foot) return;
 
-    const tagHtml = w.tags.map(t => {
-        const found = CATS.find(x => x[0] === t);
-        return found ? tr(found[1]) : t;
-    }).join(' · ');
-
-    return `
-    <div class="detail">
-      ${cover(w)}
-      <div>
-        <span class="tag">${tagHtml}</span>
-        <h1 style="margin-top:8px">${G('works', w, 't')}</h1>
-        <p>${G('works', w, 'd')}</p>
-        <ul class="facts">
-          <li><b>${tr('year')}:</b> ${w.year}</li>
-          <li><b>${tr('role')}:</b> ${G('works', w, 'role')}</li>
-        </ul>
-        <p>${G('works', w, 'body')}</p>
-        ${w.link ? `<a class="btn" href="${w.link}" target="_blank" rel="noopener">${tr('visit')}</a>` : ''}
-        <br><a class="back" href="#/karya">${tr('allWorks')}</a>
+  foot.innerHTML = `
+    <div class="mntn-footer-grid">
+      <div class="mntn-footer-brand">
+        <div>
+          <a class="logo" href="#/">cahyadies<b>.</b></a>
+          <p>${
+            state.lang === 'id'
+              ? 'Arsip galeri karya desain, rekayasa sistem web, eksperimen model AI, dan catatan pikiran yang menaungi ekosistem MentayaSandbox, dalam.dapur, serta Omah Ijo.'
+              : 'Portfolio archive of design works, web systems, AI model experiments, and written thoughts anchoring MentayaSandbox, dalam.dapur, and Omah Ijo.'
+          }</p>
+        </div>
+        <div class="mntn-footer-copy">Copyright 2026 cahyadies. Sampit &amp; Surabaya.</div>
       </div>
-    </div>`;
-}
 
-function blog() {
-    const startIndex = (currentBlogPage - 1) * POSTS_PER_PAGE;
-    const paginatedPosts = POSTS.slice(startIndex, startIndex + POSTS_PER_PAGE);
-    return `
-    <h2 class="sec" style="margin-top:40px">${tr('blog')}</h2>
-    ${paginatedPosts.map(pRow).join('')}
-    ${buildPagination(currentBlogPage, POSTS.length, POSTS_PER_PAGE, 'blog')}
+      <div class="mntn-footer-col">
+        <h4>${state.lang === 'id' ? 'Lebih Lanjut di Ekosistem' : 'More on Ecosystem'}</h4>
+        <ul>
+          <li><a href="mentayasandbox/index.html">MentayaSandbox</a></li>
+          <li><a href="dalamdapur/index.html">dalam.dapur</a></li>
+          <li><a href="omahijo/index.html">Omah Ijo</a></li>
+        </ul>
+      </div>
+
+      <div class="mntn-footer-col">
+        <h4>${state.lang === 'id' ? 'Lebih Lanjut di cahyadies' : 'More on cahyadies'}</h4>
+        <ul>
+          <li><a href="#/karya">${state.lang === 'id' ? 'Arsip Karya & Proyek' : 'Works & Project Archive'}</a></li>
+          <li><a href="#/blog">${state.lang === 'id' ? 'Catatan Pikiran (Blog)' : 'Thought Journal (Blog)'}</a></li>
+          <li><a href="#/kontak">${state.lang === 'id' ? 'Diskusi & Kolaborasi' : 'Contact & Collaboration'}</a></li>
+          <li><a href="https://github.com/cahyadies" target="_blank" rel="noopener noreferrer">GitHub (@cahyadies)</a></li>
+        </ul>
+      </div>
+    </div>
   `;
 }
 
-function post(id) {
-    const p = POSTS.find(x => x.id === id);
-    if (!p) return notFound();
-    const bodyText = G('posts', p, 'body');
-    return `
-    <article>
-      <span class="tag">${G('posts', p, 'tag')}</span>
-      <h1>${G('posts', p, 't')}</h1>
-      <div class="meta">${fmt(p.date)} · ${mins(bodyText)} ${tr('min')}</div>
-      <div class="body" style="margin-top:28px">${bodyText}</div>
-      <hr style="border:0; border-top:1px solid var(--line); margin:40px 0 24px">
-      <p class="meta">${tr('like')}</p>
-      ${socials()}
-      <a class="back" href="#/blog">${tr('allPosts')}</a>
-    </article>`;
-}
+function homeView() {
+  const flagship = DATA.works[0];
+  const otherWorks = DATA.works.slice(1);
 
-function contact() {
-    return `
-    <section class="hero">
-      <small>${tr('contact')}</small>
-      <h1>${tr('cTitle')}</h1>
-      <p>${tr('cText')}</p>
-      <a class="btn" href="mailto:${SITE.email}">${SITE.email}</a>
-      <div style="margin-top:20px">${socials()}</div>
-    </section>`;
-}
-
-const notFound = () => `<section class="hero"><h1>${tr('nf')}</h1><a class="btn" href="#/">${tr('toHome')}</a></section>`;
-
-/* =========================================
-   APP ROUTER & RENDERER
-========================================= */
-function render(keepScrollPosition = false) {
-    const currentScrollY = window.scrollY;
-    const route = location.hash.slice(1) || '/';
-    const pathSegments = route.split('/');
-    let htmlContent;
-
-    if (route === '/') htmlContent = home();
-    else if (route === '/karya') htmlContent = works();
-    else if (pathSegments[1] === 'karya') htmlContent = work(pathSegments[2]);
-    else if (route === '/blog') htmlContent = blog();
-    else if (pathSegments[1] === 'blog') htmlContent = post(pathSegments[2]);
-    else if (route === '/kontak') htmlContent = contact();
-    else htmlContent = notFound();
-
-    document.documentElement.lang = lang;
-    $('#app').innerHTML = htmlContent;
-    nav(route);
-
-    $('#nav').classList.remove('open');
-    const btnHamburger = $('#hamburger');
-    if (btnHamburger) btnHamburger.innerHTML = '☰';
-
-    $('#foot').innerHTML = `
-    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap: 20px; align-items:flex-end;">
-      <div>
-        <b style="color:var(--fg); font-size:18px;">${SITE.name}</b>
-        <p style="margin: 4px 0 16px; max-width: 320px; color:var(--mute);">${site('tagline')}</p>
-        <div style="font-size: 13px; color:var(--mute);">
-          <b>Ecosystem:</b> MentayaSandbox · dalam.dapur · Omah Ijo
+  return `
+    <section class="mntn-hero" id="sec-start">
+      <div class="wrap">
+        <div class="mntn-hero-inner">
+          <div class="mntn-kicker-line">${
+            state.lang === 'id'
+              ? 'Arsip Karya, Model AI & Catatan Pikiran'
+              : 'Works Archive, AI Models & Thought Journal'
+          }</div>
+          <h1 class="mntn-hero-title">${
+            state.lang === 'id'
+              ? 'Merangkai arsip pemikiran, rekayasa sistem, dan inisiatif keluarga.'
+              : 'Connecting thought archives, software engineering, and family initiatives.'
+          }</h1>
+          <p class="mntn-hero-lead">${
+            state.lang === 'id'
+              ? 'Sebagai rumah induk, cahyadies mendokumentasikan pekerjaan desain identitas, pengembangan web, dan eksperimen model AI, sekaligus menaungi tiga website mandiri: MentayaSandbox, dalam.dapur milik Ibu, dan Omah Ijo milik Bapak.'
+              : 'As the parent hub, cahyadies documents visual identity design, web development, and AI model experiments while anchoring three independent sites: MentayaSandbox, Mother’s dalam.dapur, and Father’s Omah Ijo.'
+          }</p>
+          <a class="mntn-scroll-down" href="#sec-01">
+            <span>${state.lang === 'id' ? 'gulir ke bawah' : 'scroll down'}</span>
+            <span aria-hidden="true">↓</span>
+          </a>
         </div>
       </div>
-      <div style="text-align: right;">
-        ${socials()}
-        <div style="margin-top: 16px; font-size: 13px; color:var(--mute);">© ${new Date().getFullYear()}</div>
+    </section>
+
+    <section class="mntn-story-section" id="sec-01">
+      <div class="wrap mntn-story-grid">
+        <div class="mntn-story-text">
+          <div class="mntn-watermark-num" aria-hidden="true">01</div>
+          <div class="mntn-kicker-line">${
+            state.lang === 'id' ? 'Tiga Website Anakan' : 'Three Sub-Websites'
+          }</div>
+          <h2 class="mntn-story-title">${
+            state.lang === 'id'
+              ? 'Satu rumah induk yang menaungi keilmuan IT, dapur Ibu, dan kebun Bapak.'
+              : 'One parent archive anchoring IT research, Mother’s kitchen, and Father’s garden.'
+          }</h2>
+          <p class="mntn-story-desc">${
+            state.lang === 'id'
+              ? 'Di bawah payung cahyadies, tiga inisiatif berjalan beriringan sesuai perannya masing-masing: MentayaSandbox sebagai ruang ekspresi dan keilmuan IT berkelanjutan, dalam.dapur sebagai katalog olahan masakan serta kue buatan Ibu, dan Omah Ijo sebagai katalog panen kebun hidroponik yang dikelola Bapak bersama keluarga.'
+              : 'Under the cahyadies umbrella, three initiatives run side by side: MentayaSandbox as a space for sustainable IT knowledge and collaboration, dalam.dapur as Mother’s homemade culinary catalog, and Omah Ijo as Father’s family-run hydroponic harvest catalog.'
+          }</p>
+          <a class="mntn-read-more" href="mentayasandbox/index.html">${
+            state.lang === 'id' ? 'jelajahi ekosistem' : 'explore ecosystem'
+          }</a>
+        </div>
+
+        <div class="mntn-story-visual">
+          <div class="mntn-portrait-frame">
+            <div class="mntn-eco-list">
+              ${DATA.ecosystem
+                .map(
+                  (unit) => `
+                <a class="mntn-eco-item" href="${unit.href}">
+                  <span class="mntn-eco-kicker">${unit.code}</span>
+                  <h3>${unit.name}</h3>
+                  <p>${t(unit.desc)}</p>
+                  <span class="mntn-eco-cta">${t(unit.cta)}</span>
+                </a>
+              `
+                )
+                .join('')}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section class="mntn-story-section reverse" id="sec-02">
+      <div class="wrap mntn-story-grid">
+        <div class="mntn-story-text">
+          <div class="mntn-watermark-num" aria-hidden="true">02</div>
+          <div class="mntn-kicker-line">${
+            state.lang === 'id' ? 'Arsip Karya & Eksperimen' : 'Works & Applied Experiments'
+          }</div>
+          <h2 class="mntn-story-title">${
+            state.lang === 'id'
+              ? 'Dokumentasi desain identitas, sistem web, dan model AI terapan.'
+              : 'Documenting visual identity design, web systems, and applied AI models.'
+          }</h2>
+          <p class="mntn-story-desc">${
+            state.lang === 'id'
+              ? 'Kumpulan pekerjaan yang pernah digarap: mulai dari peremajaan identitas visual komunitas teknologi NaraiCoder berbasis perisai Dayak Telawang, eksperimen visi komputer penakar volume objek, hingga perancangan katalog digital usaha keluarga.'
+              : 'Selected works spanning the NaraiCoder visual identity refresh rooted in Dayak Telawang shield geometry, computer vision volume estimation, and family catalog systems.'
+          }</p>
+          <a class="mntn-read-more" href="#/karya">${
+            state.lang === 'id' ? 'lihat seluruh karya' : 'view all works'
+          }</a>
+        </div>
+
+        <div class="mntn-story-visual">
+          <div class="mntn-work-stage">
+            <a href="#/karya/${flagship.id}">
+              <img class="mntn-work-stage-img" src="assets/works/naraicoder-preview.png" alt="Konsep geometri logo NaraiCoder PARDI" loading="lazy" />
+            </a>
+            <div class="mntn-work-stage-caption">
+              <span class="mntn-eco-kicker">${t(flagship.catLabel)} · ${flagship.year}</span>
+              <h3><a href="#/karya/${flagship.id}">${t(flagship.title)}</a></h3>
+              <p>${t(flagship.summary)}</p>
+            </div>
+            <div class="mntn-work-rows">
+              ${otherWorks
+                .map(
+                  (w, idx) => `
+                <a class="mntn-work-row" href="#/karya/${w.id}">
+                  <span class="mntn-work-idx">0${idx + 2}</span>
+                  <div class="mntn-work-info">
+                    <strong>${t(w.title)}</strong>
+                    <span>${w.client}</span>
+                  </div>
+                  <span class="mntn-work-year">${w.year}</span>
+                </a>
+              `
+                )
+                .join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mntn-story-section" id="sec-03">
+      <div class="wrap mntn-story-grid">
+        <div class="mntn-story-text">
+          <div class="mntn-watermark-num" aria-hidden="true">03</div>
+          <div class="mntn-kicker-line">${
+            state.lang === 'id' ? 'Catatan Pikiran & Blog' : 'Thought Journal & Blog'
+          }</div>
+          <h2 class="mntn-story-title">${
+            state.lang === 'id'
+              ? 'Ruang mencatat gagasan rekayasa sistem, desain, dan teknologi membumi.'
+              : 'Writing on systems engineering, visual design, and grounded technology.'
+          }</h2>
+          <p class="mntn-story-desc">${
+            state.lang === 'id'
+              ? 'Berisi esai singkat dan dokumentasi proses berpikir di balik pembuatan sistem katalog keluarga, eksplorasi tipografi dan simbol lokal Kalimantan Tengah, hingga penerapan visi komputer di kebun rumahan.'
+              : 'Short essays and process notes behind building family catalog systems, exploring Central Kalimantan visual symbols, and testing computer vision in a home garden.'
+          }</p>
+          <a class="mntn-read-more" href="#/blog">${
+            state.lang === 'id' ? 'baca semua tulisan' : 'read all entries'
+          }</a>
+        </div>
+
+        <div class="mntn-story-visual">
+          <div class="mntn-journal-list">
+            ${DATA.posts
+              .map(
+                (p) => `
+              <a class="mntn-journal-item" href="#/blog/${p.id}">
+                <div class="mntn-journal-meta">
+                  <span>${t(p.cat)}</span>
+                  <span>/</span>
+                  <span>${p.date}</span>
+                  <span>/</span>
+                  <span>${p.readTime}</span>
+                </div>
+                <h3>${t(p.title)}</h3>
+                <p>${t(p.excerpt)}</p>
+              </a>
+            `
+              )
+              .join('')}
+          </div>
+        </div>
+      </div>
+    </section>
   `;
-
-    window.scrollTo(0, keepScrollPosition ? currentScrollY : 0);
-
-    document.querySelectorAll('[data-f]').forEach(button => {
-        button.onclick = () => {
-            filter = button.dataset.f;
-            currentWorkPage = 1;
-            render(true);
-        };
-    });
 }
 
-window.addEventListener('hashchange', () => render(false));
-render();
+function worksView() {
+  const filters = [
+    { key: 'all', label: { id: 'Semua Karya (6)', en: 'All Works (6)' } },
+    { key: 'design', label: { id: 'Desain & Logo', en: 'Design & Logo' } },
+    { key: 'web', label: { id: 'Sistem Web', en: 'Web Systems' } },
+    { key: 'ai', label: { id: 'Model AI & Riset', en: 'AI Models & Research' } }
+  ];
 
-const hamburgerBtn = $('#hamburger');
-if (hamburgerBtn) {
-    hamburgerBtn.addEventListener('click', () => {
-        const navMenu = $('#nav');
-        navMenu.classList.toggle('open');
-        hamburgerBtn.innerHTML = navMenu.classList.contains('open') ? '✕' : '☰';
-    });
+  const list =
+    state.workFilter === 'all'
+      ? DATA.works
+      : DATA.works.filter((w) => w.cat === state.workFilter);
+
+  return `
+    <section class="page-section">
+      <div class="wrap">
+        <div class="page-head">
+          <div class="mntn-kicker-line">${
+            state.lang === 'id' ? 'Indeks Portofolio' : 'Portfolio Index'
+          }</div>
+          <h1>${state.lang === 'id' ? 'Arsip Karya & Studi Kasus' : 'Works & Case Study Archive'}</h1>
+          <p>${
+            state.lang === 'id'
+              ? 'Dokumentasi pekerjaan desain identitas visual, pengembangan aplikasi web katalog keluarga, serta eksperimen model kecerdasan buatan.'
+              : 'Documentation of visual identity systems, family catalog web applications, and applied artificial intelligence experiments.'
+          }</p>
+        </div>
+
+        <div class="filter-bar" role="tablist">
+          ${filters
+            .map(
+              (f) => `
+            <button type="button" class="filter-btn ${state.workFilter === f.key ? 'active' : ''}" data-filter="${f.key}">
+              ${t(f.label)}
+            </button>
+          `
+            )
+            .join('')}
+        </div>
+
+        <div class="works-archive-grid">
+          ${list
+            .map(
+              (w) => `
+            <article class="work-arch-card">
+              <div class="work-arch-thumb">
+                ${
+                  w.thumb
+                    ? `<img src="${w.thumb}" alt="${t(w.title)}" loading="lazy" />`
+                    : `
+                  <div class="work-arch-spec">
+                    <div class="work-arch-spec-top">
+                      <span>${w.specCode}</span>
+                      <span>${w.year}</span>
+                    </div>
+                    <div class="work-arch-spec-mid">${w.client}</div>
+                    <div class="work-arch-spec-bot">
+                      ${w.deliverables.map((d) => `<span>${d}</span>`).join(' · ')}
+                    </div>
+                  </div>
+                `
+                }
+              </div>
+              <div class="work-arch-body">
+                <div class="work-arch-meta">${t(w.catLabel)} · ${w.client} · ${w.year}</div>
+                <h3><a href="#/karya/${w.id}">${t(w.title)}</a></h3>
+                <p>${t(w.summary)}</p>
+                <div class="work-arch-foot">
+                  <span>${w.specCode}</span>
+                  <a href="#/karya/${w.id}">${
+                    state.lang === 'id' ? 'Buka Studi Kasus' : 'Open Case Study'
+                  }</a>
+                </div>
+              </div>
+            </article>
+          `
+            )
+            .join('')}
+        </div>
+      </div>
+    </section>
+  `;
 }
+
+function workDetailView(id) {
+  const item = DATA.works.find((w) => w.id === id);
+  if (!item) return notFoundView();
+
+  const paragraphs = t(item.detail) || [];
+
+  return `
+    <section class="page-section">
+      <div class="wrap">
+        <div class="detail-card">
+          <a class="detail-back" href="#/karya">${
+            state.lang === 'id' ? 'Kembali ke Arsip Karya' : 'Back to Works Archive'
+          }</a>
+          <div class="mntn-kicker-line">${t(item.catLabel)}</div>
+          <h1 class="mntn-story-title">${t(item.title)}</h1>
+
+          <div class="detail-meta-grid">
+            <div>
+              <span>${state.lang === 'id' ? 'Mitra / Unit' : 'Client / Unit'}</span>
+              <strong>${item.client}</strong>
+            </div>
+            <div>
+              <span>${state.lang === 'id' ? 'Tahun' : 'Year'}</span>
+              <strong>${item.year}</strong>
+            </div>
+            <div>
+              <span>${state.lang === 'id' ? 'Kode Arsip' : 'Archive Code'}</span>
+              <strong>${item.specCode}</strong>
+            </div>
+            <div>
+              <span>${state.lang === 'id' ? 'Keluaran Utama' : 'Deliverables'}</span>
+              <strong>${item.deliverables.join(', ')}</strong>
+            </div>
+          </div>
+
+          <div class="article-prose">
+            ${paragraphs.map((p) => `<p>${p}</p>`).join('')}
+          </div>
+
+          ${
+            item.gallery && item.gallery.length
+              ? `
+            <div class="detail-gallery">
+              ${item.gallery
+                .map(
+                  (g) => `
+                <figure>
+                  <img src="${g.src}" alt="${g.cap}" loading="lazy" />
+                  <figcaption>${g.cap}</figcaption>
+                </figure>
+              `
+                )
+                .join('')}
+            </div>
+          `
+              : ''
+          }
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function blogView() {
+  return `
+    <section class="page-section">
+      <div class="wrap">
+        <div class="page-head">
+          <div class="mntn-kicker-line">${
+            state.lang === 'id' ? 'Jurnal & Dokumentasi' : 'Journal & Documentation'
+          }</div>
+          <h1>${state.lang === 'id' ? 'Catatan Pikiran' : 'Thought Journal'}</h1>
+          <p>${
+            state.lang === 'id'
+              ? 'Tulisan seputar arsitektur web minimalis, perancangan identitas visual lokal, serta eksperimen teknologi terapan.'
+              : 'Essays on minimalist web architecture, local visual identity design, and applied technology experiments.'
+          }</p>
+        </div>
+
+        <div class="mntn-journal-list">
+          ${DATA.posts
+            .map(
+              (p) => `
+            <a class="mntn-journal-item" href="#/blog/${p.id}">
+              <div class="mntn-journal-meta">
+                <span>${t(p.cat)}</span>
+                <span>/</span>
+                <span>${p.date}</span>
+                <span>/</span>
+                <span>${p.readTime}</span>
+              </div>
+              <h3>${t(p.title)}</h3>
+              <p>${t(p.excerpt)}</p>
+            </a>
+          `
+            )
+            .join('')}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function postDetailView(id) {
+  const post = DATA.posts.find((p) => p.id === id);
+  if (!post) return notFoundView();
+  const paragraphs = t(post.body) || [];
+
+  return `
+    <section class="page-section">
+      <div class="wrap">
+        <div class="detail-card">
+          <a class="detail-back" href="#/blog">${
+            state.lang === 'id' ? 'Kembali ke Daftar Catatan' : 'Back to Journal List'
+          }</a>
+          <div class="mntn-journal-meta" style="margin-bottom:14px">
+            <span>${t(post.cat)}</span>
+            <span>/</span>
+            <span>${post.date}</span>
+            <span>/</span>
+            <span>${post.readTime}</span>
+          </div>
+          <h1 class="mntn-story-title">${t(post.title)}</h1>
+          <div class="article-prose" style="margin-top:24px">
+            ${paragraphs.map((p) => `<p>${p}</p>`).join('')}
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function contactView() {
+  return `
+    <section class="page-section">
+      <div class="wrap">
+        <div class="page-head">
+          <div class="mntn-kicker-line">${
+            state.lang === 'id' ? 'Saluran Komunikasi' : 'Communication Channel'
+          }</div>
+          <h1>${state.lang === 'id' ? 'Terhubung & Berkolaborasi' : 'Connect & Collaborate'}</h1>
+          <p>${
+            state.lang === 'id'
+              ? 'Terbuka untuk diskusi proyek pengembangan web, perancangan identitas visual, kolaborasi riset di MentayaSandbox, maupun pemesanan produk keluarga.'
+              : 'Open for web development projects, visual identity design, research collaboration at MentayaSandbox, or family product inquiries.'
+          }</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-panel">
+            <h2 class="mntn-story-title" style="font-size:26px">${
+              state.lang === 'id' ? 'Kontak Langsung' : 'Direct Contact'
+            }</h2>
+            <p style="color:var(--muted);font-size:15px">${
+              state.lang === 'id'
+                ? 'Pilih kanal komunikasi sesuai kebutuhan diskusi atau langsung kunjungi unit ekosistem terkait.'
+                : 'Choose a channel based on your inquiry or visit the relevant ecosystem unit directly.'
+            }</p>
+            <div class="contact-list">
+              <div class="contact-item">
+                <span>Email Utama</span>
+                <strong>halo@cahyadies.my.id</strong>
+              </div>
+              <div class="contact-item">
+                <span>GitHub &amp; Eksperimen Kode</span>
+                <strong>github.com/cahyadies</strong>
+              </div>
+              <div class="contact-item">
+                <span>Basis Domisili</span>
+                <strong>Sampit (Kalimantan Tengah) &amp; Surabaya</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-panel">
+            <form id="contactForm">
+              <div class="form-row">
+                <label for="cName">${state.lang === 'id' ? 'Nama Lengkap' : 'Full Name'}</label>
+                <input id="cName" name="name" type="text" required placeholder="${
+                  state.lang === 'id' ? 'Masukkan nama Anda' : 'Enter your name'
+                }" />
+              </div>
+              <div class="form-row">
+                <label for="cTopic">${state.lang === 'id' ? 'Topik Keperluan' : 'Inquiry Topic'}</label>
+                <select id="cTopic" name="topic">
+                  <option value="Desain & Web cahyadies">Desain &amp; Pengembangan Web (cahyadies)</option>
+                  <option value="Kolaborasi Riset MentayaSandbox">Kolaborasi Riset IT (MentayaSandbox)</option>
+                  <option value="Pesanan Masakan dalam.dapur">Pesanan Kuliner Ibu (dalam.dapur)</option>
+                  <option value="Pasokan Sayur Omah Ijo">Pasokan Hidroponik Bapak (Omah Ijo)</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="cMsg">${state.lang === 'id' ? 'Pesan / Rincian Diskusi' : 'Message Details'}</label>
+                <textarea id="cMsg" name="message" required placeholder="${
+                  state.lang === 'id'
+                    ? 'Tuliskan gambaran singkat proyek atau pertanyaan Anda...'
+                    : 'Write a brief overview of your project or question...'
+                }"></textarea>
+              </div>
+              <button type="submit" class="mntn-submit-btn">
+                ${state.lang === 'id' ? 'Kirim Pesan via Email' : 'Send Message via Email'}
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function notFoundView() {
+  return `
+    <section class="page-section">
+      <div class="wrap">
+        <div class="state-box">
+          <h2>${state.lang === 'id' ? 'Halaman tidak ditemukan' : 'Page not found'}</h2>
+          <p style="color:var(--muted);margin-bottom:20px">${
+            state.lang === 'id'
+              ? 'Tautan yang Anda tuju tidak tersedia di dalam arsip cahyadies.'
+              : 'The requested route does not exist in the cahyadies archive.'
+          }</p>
+          <a class="mntn-read-more" href="#/">${
+            state.lang === 'id' ? 'Kembali ke Beranda' : 'Return Home'
+          }</a>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
+function updateSliderVisibility(isHome) {
+  const slider = document.getElementById('mntnSlider');
+  if (!slider) return;
+  slider.style.display = isHome && window.innerWidth >= 1200 ? 'flex' : 'none';
+}
+
+function syncSliderOnScroll() {
+  const slider = document.getElementById('mntnSlider');
+  if (!slider) return;
+  const sections = ['sec-start', 'sec-01', 'sec-02', 'sec-03'];
+  let activeId = 'sec-start';
+
+  for (const id of sections) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= 240) {
+      activeId = id;
+    }
+  }
+
+  slider.querySelectorAll('a').forEach((link) => {
+    const href = link.getAttribute('href');
+    link.classList.toggle('active', href === `#${activeId}`);
+  });
+}
+
+function bindEvents() {
+  document.querySelectorAll('[data-filter]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      state.workFilter = btn.getAttribute('data-filter') || 'all';
+      render();
+    });
+  });
+
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('cName')?.value || '';
+      const topic = document.getElementById('cTopic')?.value || '';
+      const msg = document.getElementById('cMsg')?.value || '';
+      const subject = encodeURIComponent(`[cahyadies] ${topic} - ${name}`);
+      const body = encodeURIComponent(`Halo Adies,\n\nNama: ${name}\nTopik: ${topic}\n\n${msg}`);
+      window.location.href = `mailto:halo@cahyadies.my.id?subject=${subject}&body=${body}`;
+    });
+  }
+}
+
+function render() {
+  applyTheme();
+  const rawHash = location.hash.slice(1) || '/';
+  const app = document.getElementById('app');
+  if (!app) return;
+
+  if (rawHash.startsWith('sec-')) {
+    const targetEl = document.getElementById(rawHash);
+    if (!targetEl) {
+      app.innerHTML = homeView();
+      bindEvents();
+    }
+    renderNav();
+    renderFooter();
+    updateSliderVisibility(true);
+    requestAnimationFrame(() => {
+      document.getElementById(rawHash)?.scrollIntoView({ behavior: 'smooth' });
+      syncSliderOnScroll();
+    });
+    return;
+  }
+
+  const [page = '', id] = rawHash.split('/').filter(Boolean);
+  const isHome = page === '';
+
+  if (page === '') {
+    app.innerHTML = homeView();
+  } else if (page === 'karya') {
+    app.innerHTML = id ? workDetailView(id) : worksView();
+  } else if (page === 'blog') {
+    app.innerHTML = id ? postDetailView(id) : blogView();
+  } else if (page === 'kontak') {
+    app.innerHTML = contactView();
+  } else {
+    app.innerHTML = notFoundView();
+  }
+
+  renderNav();
+  renderFooter();
+  bindEvents();
+  updateSliderVisibility(isHome);
+  window.scrollTo({ top: 0, behavior: 'auto' });
+  syncSliderOnScroll();
+}
+
+window.addEventListener('hashchange', render);
+window.addEventListener('scroll', syncSliderOnScroll, { passive: true });
+window.addEventListener('resize', () => {
+  const rawHash = location.hash.slice(1) || '/';
+  const [page = ''] = rawHash.split('/').filter(Boolean);
+  updateSliderVisibility(page === '' || rawHash.startsWith('sec-'));
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  if (ham && nav) {
+    ham.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      ham.setAttribute('aria-expanded', String(open));
+    });
+  }
+  render();
+});

@@ -1,0 +1,231 @@
+{
+  "lab": {
+    "name": "mentayasandbox",
+    "location": "Surabaya, Jawa Timur",
+    "commissionStatus": "open",
+    "commissionSlots": "2 slot tersedia untuk Q4 2026",
+    "contact": {
+      "wa": "https://wa.me/6281234567890?text=Halo%20MentayaSandbox,%20saya%20tertarik%20untuk%20diskusi%20proyek.",
+      "collabWa": "https://wa.me/6281234567890?text=Halo%20Adies,%20saya%20ingin%20mengajak%20kolaborasi%20di%20MentayaSandbox."
+    }
+  },
+  "projects": [
+    {
+      "id": "omah-ijo",
+      "type": "web",
+      "category": "collab",
+      "s": "selesai",
+      "collabWith": "Omah Ijo Farm",
+      "id_content": {
+        "n": "Katalog Miniatur Hidroponik Omah Ijo",
+        "d": "Katalog mobile super cepat tanpa library JS eksternal, langsung checkout WhatsApp.",
+        "notes": "Load time di bawah 400ms di jaringan seluler 3G. Kolaborasi internal ekosistem Omah Ijo."
+      },
+      "en_content": {
+        "n": "Omah Ijo Miniature Hydroponics Catalog",
+        "d": "Ultra-fast mobile catalog without external JS libraries, direct WhatsApp checkout.",
+        "notes": "Load time under 400ms on 3G cellular network. Internal collaboration within Omah Ijo ecosystem."
+      }
+    },
+    {
+      "id": "gerigi-shuttle",
+      "type": "web",
+      "category": "commission",
+      "s": "jalan",
+      "collabWith": "GERIGI ITS",
+      "id_content": {
+        "n": "Dashboard Driver Shuttle Mahasiswa",
+        "d": "Wireframe antarmuka rute dan jadwal untuk driver shuttle kampus.",
+        "notes": "Tantangan utama pada keterbacaan teks kontras tinggi saat driver mengemudi di bawah terik matahari."
+      },
+      "en_content": {
+        "n": "Student Shuttle Driver Dashboard",
+        "d": "Interface wireframe for routes and schedules tailored for campus shuttle drivers.",
+        "notes": "Primary challenge was high-contrast text legibility while driving under direct sunlight."
+      }
+    },
+    {
+      "id": "deteksi-sayur",
+      "type": "cv",
+      "category": "solo",
+      "s": "jalan",
+      "collabWith": null,
+      "id_content": {
+        "n": "Deteksi Kematangan Sayur (Computer Vision)",
+        "d": "Model klasifikasi citra daun selada hidroponik siap panen berbasis OpenCV.",
+        "notes": "Eksplorasi computer vision lokal untuk otomasi panen sayuran hidroponik."
+      },
+      "en_content": {
+        "n": "Vegetable Harvest Readiness Detector",
+        "d": "OpenCV-based image classification model for harvest-ready hydroponic lettuce leaves.",
+        "notes": "Local computer vision experiment for automating hydroponic harvesting decisions."
+      }
+    },
+    {
+      "id": "kalkulator-abmix",
+      "type": "web",
+      "category": "solo",
+      "s": "ide",
+      "collabWith": null,
+      "id_content": {
+        "n": "Kalkulator Nutrisi Otomatis AB Mix",
+        "d": "Alat bantu takar ppm dan EC air tandon untuk kebun hidroponik presisi.",
+        "notes": "Akan dihubungkan ke sensor mikrokontroler jika eksperimen fase 2 berhasil."
+      },
+      "en_content": {
+        "n": "AB Mix Automated Nutrient Calculator",
+        "d": "Calculator utility for ppm and EC dosing in reservoir tanks for precision hydroponics.",
+        "notes": "Will interface with microcontroller sensors upon successful phase 2 experiments."
+      }
+    },
+    {
+      "id": "identitas-dapur",
+      "type": "desain",
+      "category": "commission",
+      "s": "selesai",
+      "collabWith": "dalam.dapur",
+      "id_content": {
+        "n": "Visual Identity & Packaging Kit",
+        "d": "Sistem identitas visual dan label stiker tahan air untuk produk kuliner lokal.",
+        "notes": "Desain minimalis dan hemat biaya cetak untuk skala UMKM."
+      },
+      "en_content": {
+        "n": "Visual Identity & Packaging Kit",
+        "d": "Visual identity system and waterproof sticker labels for local artisan food products.",
+        "notes": "Minimalist design crafted for cost-effective printing on an SME scale."
+      }
+    },
+    {
+      "id": "peta-mentaya",
+      "type": "web",
+      "category": "collab",
+      "s": "ide",
+      "collabWith": "Open Collab",
+      "id_content": {
+        "n": "Peta Interaktif Arsip Budaya Mentaya",
+        "d": "Eksperimen visual web GIS ringan untuk mendokumentasikan titik sejarah Sungai Mentaya.",
+        "notes": "Membuka kolaborasi dengan fotografer & sejarawan lokal."
+      },
+      "en_content": {
+        "n": "Interactive Mentaya Heritage Web Map",
+        "d": "Lightweight Web GIS visual experiment documenting historical spots along the Mentaya River.",
+        "notes": "Open for collaboration with local photographers and historians."
+      }
+    }
+  ],
+  "collab_topics": [
+    {
+      "id_content": {
+        "title": "Web GIS Arsip Budaya & Komunitas Mentaya",
+        "desc": "Memetakan spot sejarah, kuliner otentik, dan flora/fauna endemik di sekitar aliran Sungai Mentaya.",
+        "lookingFor": ["Peneliti / Penulis Lokal", "Fotografer", "Kontributor Data"]
+      },
+      "en_content": {
+        "title": "Mentaya Cultural & Community Web GIS Archive",
+        "desc": "Mapping historical spots, authentic culinary heritage, and endemic biodiversity along the Mentaya River.",
+        "lookingFor": ["Local Researcher / Writer", "Photographer", "Data Contributor"]
+      }
+    },
+    {
+      "id_content": {
+        "title": "IoT & Smart Hydroponic Monitoring",
+        "desc": "Membangun antarmuka monitoring nutrisi air hidroponik murah dengan mikrokontroler ESP32 + Web Dashboard.",
+        "lookingFor": ["Hardware Enthusiast", "Embedded Programmer"]
+      },
+      "en_content": {
+        "title": "IoT & Smart Hydroponic Monitoring",
+        "desc": "Building an affordable water nutrient monitoring dashboard with ESP32 microcontrollers + Web UI.",
+        "lookingFor": ["Hardware Enthusiast", "Embedded Programmer"]
+      }
+    },
+    {
+      "id_content": {
+        "title": "Eksperimen Creative Coding & Generative Art",
+        "desc": "Koleksi animasi interaktif berbasis canvas & WebGL dengan nuansa motif lokal Nusantara.",
+        "lookingFor": ["Illustrator", "Creative Coder"]
+      },
+      "en_content": {
+        "title": "Creative Coding & Generative Art Lab",
+        "desc": "Collection of interactive Canvas & WebGL animations celebrating indigenous geometric patterns.",
+        "lookingFor": ["Illustrator", "Creative Coder"]
+      }
+    }
+  ],
+  "services": [
+    {
+      "featured": true,
+      "id_content": {
+        "title": "Fast Web / Landing Page",
+        "desc": "Website modern, ringan (fast loading), mobile-first, dan teroptimasi SEO.",
+        "features": [
+          "Profil Bisnis, Portofolio, atau Mini Katalog",
+          "Tanpa bloatware, load time < 1 detik",
+          "Integrasi WhatsApp / Form Order",
+          "Setup domain & hosting Vercel"
+        ],
+        "ideal": "Cocok untuk UMKM, kreator, dan profesional independen."
+      },
+      "en_content": {
+        "title": "Fast Web / Landing Page",
+        "desc": "Modern, lightweight, mobile-first websites optimized for high speed and SEO.",
+        "features": [
+          "Business Profile, Portfolio, or Mini Catalog",
+          "Zero bloatware, load time < 1 second",
+          "WhatsApp / Order Form integration",
+          "Custom domain & Vercel deployment"
+        ],
+        "ideal": "Ideal for SMEs, creators, and independent professionals."
+      }
+    },
+    {
+      "featured": false,
+      "id_content": {
+        "title": "Brand Identity & Graphic Kit",
+        "desc": "Perancangan identitas visual yang punya karakter kuat dan aplikatif.",
+        "features": [
+          "Logo system & color palette",
+          "Typography guidelines",
+          "Packaging, stiker & label produk",
+          "Aset media sosial siap pakai"
+        ],
+        "ideal": "Cocok untuk produk kuliner, agrikultur, dan bisnis rintisan."
+      },
+      "en_content": {
+        "title": "Brand Identity & Graphic Kit",
+        "desc": "Crafting distinctive visual identities tailored for practical real-world usage.",
+        "features": [
+          "Logo system & color palette",
+          "Typography guidelines",
+          "Packaging, stickers & product labels",
+          "Ready-to-use social media assets"
+        ],
+        "ideal": "Ideal for culinary, agriculture, and emerging local brands."
+      }
+    },
+    {
+      "featured": false,
+      "id_content": {
+        "title": "Custom Interactive Tool / Web App",
+        "desc": "Pembuatan aplikasi web mini atau dashboard untuk menyelesaikan masalah operasional spesifik.",
+        "features": [
+          "Kalkulator kustom / simulator",
+          "Dashboard monitoring & internal tool",
+          "Sistem arsip interaktif",
+          "Desain UI/UX fungsional"
+        ],
+        "ideal": "Cocok untuk workflow internal atau riset eksperimental."
+      },
+      "en_content": {
+        "title": "Custom Interactive Tool / Web App",
+        "desc": "Building mini web applications or internal dashboards to solve specific operational problems.",
+        "features": [
+          "Custom calculators & simulators",
+          "Monitoring dashboards & internal tools",
+          "Interactive archive systems",
+          "Clean functional UI/UX design"
+        ],
+        "ideal": "Ideal for operational workflows or experimental R&D."
+      }
+    }
+  ]
+}

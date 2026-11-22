@@ -1,2 +1,6 @@
 .vercel
 .env*
+anti-slop/
+antislop/
+scratch/
+compress.py

@@ -1,0 +1,256 @@
+{
+  "site": {
+    "name": "Adies",
+    "tagline": {
+      "id": "Arsip dari hal-hal yang saya buat, eksplorasi, dan pelajari.",
+      "en": "An archive of things I've made, explored, and learned."
+    },
+    "intro": {
+      "id": "Catatan dan arsip karya seputar desain, website, dan proyek mandiri berbasis di Surabaya — dari eksperimen di MentayaSandbox hingga produk rumahan.",
+      "en": "A personal archive of design, web development, and independent projects based in Surabaya — from lab experiments at MentayaSandbox to homegrown goods."
+    },
+    "location": "Surabaya, Jawa Timur",
+    "email": "ekosugengcahyadi@gmail.com",
+    "socials": [
+      { "n": "Instagram", "u": "#" },
+      { "n": "LinkedIn", "u": "#" },
+      { "n": "GitHub", "u": "https://github.com/cahyadies" }
+    ]
+  },
+  "works": [
+    {
+      "id": "mentaya-web",
+      "category": "website",
+      "initiative": "mentayasandbox",
+      "year": "2026",
+      "hue": 210,
+      "tags": ["website", "mentayasandbox"],
+      "link": "/mentayasandbox/",
+      "id_content": {
+        "t": "Platform MentayaSandbox Lab & Studio",
+        "d": "Website tech lab interaktif dengan spotlight grid kursor, bilingual ID/EN, dan kanban riset.",
+        "role": "Frontend & UI/UX Design",
+        "body": "Dirancang cepat tanpa dependensi library eksternal, mengedepankan performa tinggi dan estetika developer studio."
+      },
+      "en_content": {
+        "t": "MentayaSandbox Lab & Studio Platform",
+        "d": "Interactive tech lab website with cursor spotlight, bilingual ID/EN, and R&D kanban.",
+        "role": "Frontend & UI/UX Design",
+        "body": "Built for ultra-fast load times with a clean developer-first aesthetic."
+      }
+    },
+    {
+      "id": "mentaya-design",
+      "category": "design",
+      "initiative": "mentayasandbox",
+      "year": "2026",
+      "hue": 195,
+      "tags": ["design", "mentayasandbox"],
+      "link": "#",
+      "id_content": {
+        "t": "Logo & Identitas Visual MentayaSandbox",
+        "d": "Sistem identitas brand, logogram modular, dan aset visual untuk studio creative tech.",
+        "role": "Brand Identity & Graphic Design",
+        "body": "Konsep identitas yang memadukan ketegasan kode terminal dengan filosofi Sungai Mentaya."
+      },
+      "en_content": {
+        "t": "MentayaSandbox Logo & Visual Identity",
+        "d": "Brand identity system, modular logogram, and visual assets for creative tech studio.",
+        "role": "Brand Identity & Graphic Design",
+        "body": "Visual identity combining terminal code precision with Mentaya River heritage."
+      }
+    },
+    {
+      "id": "dalamdapur-web",
+      "category": "website",
+      "initiative": "dalamdapur",
+      "year": "2025",
+      "hue": 95,
+      "tags": ["website", "dalamdapur"],
+      "link": "/dalamdapur/",
+      "id_content": {
+        "t": "Landing Page & Mini Katalog dalam.dapur",
+        "d": "Halaman penjualan produk kuliner dan sayuran dengan integrasi direct checkout WhatsApp.",
+        "role": "Web Design & Development",
+        "body": "Landing page mobile-first yang sangat ringan dan mudah dioperasikan pelanggan dari HP."
+      },
+      "en_content": {
+        "t": "dalam.dapur Landing Page & Catalog",
+        "d": "Mobile-first catalog and sales page with direct WhatsApp ordering.",
+        "role": "Web Design & Development",
+        "body": "Ultra-lightweight landing page optimized for quick mobile ordering."
+      }
+    },
+    {
+      "id": "dalamdapur-design",
+      "category": "design",
+      "initiative": "dalamdapur",
+      "year": "2025",
+      "hue": 140,
+      "tags": ["design", "dalamdapur"],
+      "link": "#",
+      "id_content": {
+        "t": "Label Produk & Kemasan dalam.dapur",
+        "d": "Desain stiker label tahan air dan kemasan untuk sayur hidroponik dan kue rumahan.",
+        "role": "Packaging & Label Design",
+        "body": "Label dibuat hangat, jujur, dan efisien biaya cetak untuk skala usaha rumahan."
+      },
+      "en_content": {
+        "t": "dalam.dapur Product Labels & Packaging",
+        "d": "Waterproof label sticker design and packaging for fresh produce and baked goods.",
+        "role": "Packaging & Label Design",
+        "body": "Warm, honest packaging design crafted for cost-effective local production."
+      }
+    },
+    {
+      "id": "omahijo-web",
+      "category": "website",
+      "initiative": "omahijo",
+      "year": "2025",
+      "hue": 65,
+      "tags": ["website", "omahijo"],
+      "link": "/omahijo/",
+      "id_content": {
+        "t": "Sistem Informasi & Log Kebun Omah Ijo",
+        "d": "Dokumentasi digital sistem tanam, sirkulasi nutrisi, dan katalog instalasi hidroponik rumahan.",
+        "role": "Web Development",
+        "body": "Mencatat perkembangan tanaman, proses semai rockwool, hingga manajemen sirkulasi tandon nutrisi."
+      },
+      "en_content": {
+        "t": "Omah Ijo Farm Log & Interface",
+        "d": "Digital documentation for hydroponic planting cycles and urban farming installations.",
+        "role": "Web Development",
+        "body": "Logging plant growth cycles from rockwool seeding to nutrient reservoir monitoring."
+      }
+    },
+    {
+      "id": "omahijo-design",
+      "category": "design",
+      "initiative": "omahijo",
+      "year": "2025",
+      "hue": 120,
+      "tags": ["design", "omahijo"],
+      "link": "#",
+      "id_content": {
+        "t": "Identitas Visual & Signage Kebun Omah Ijo",
+        "d": "Papan informasi instalasi hidroponik, stiker botol nutrisi AB Mix, dan diagram alur tanam.",
+        "role": "Graphic & Information Design",
+        "body": "Infografis tata kelola nutrisi yang informatif dan mudah dipahami di area kebun."
+      },
+      "en_content": {
+        "t": "Omah Ijo Visual Identity & Farm Signage",
+        "d": "Hydroponic garden signage, nutrient bottle labels, and system flow diagrams.",
+        "role": "Graphic & Information Design",
+        "body": "Clear informative infographics for nutrient tracking and urban farm management."
+      }
+    },
+    {
+      "id": "naraicoder-design",
+      "category": "design",
+      "initiative": "naraicoder",
+      "year": "2026",
+      "hue": 205,
+      "tags": ["design", "naraicoder"],
+      "img": "assets/works/naraicoder-preview.png",
+      "link": "#",
+      "id_content": {
+        "t": "Redesign Logo & Identitas NaraiCoder (PARDI)",
+        "d": "Penyegaran identitas visual komunitas teknologi Kalimantan Tengah — memadukan perisai Telawang Dayak dengan notasi biner boolean dan sistem logo responsif.",
+        "role": "Brand Identity, Art Direction, & Logo System",
+        "body": "<p><strong>NaraiCoder</strong> adalah komunitas programmer dan wadah pegiat digital di Kalimantan Tengah. Proyek redesign ini menjawab kendala logo lama yang terlalu rumit dan sulit beradaptasi di berbagai media.</p><h3>Konsep & Tiga Pilar Filosofi:</h3><ul><li><strong>Telawang (Perisai Dayak):</strong> Mengambil siluet heksagonal perisai khas Dayak Kalteng sebagai lambang perlindungan, persatuan, dan ketangguhan komunitas.</li><li><strong>Regenerasi Lapis Demi Lapis:</strong> Garis kurva bertingkat di sisi kiri menyerupai kurung kurawal kode (<code>{</code>) sekaligus bayangan perisai, melambangkan estafet pembinaan talenta dari generasi ke generasi.</li><li><strong>Logika Biner 1 & 0 (I/O):</strong> Elemen titik-garis vertikal ('i'/1) dan heksagon ('O'/0) membentuk notasi biner fundamental komputer serta prinsip Input/Output dalam ekosistem belajar.</li></ul><h3>Sistem Logo Responsif:</h3><p>Dirancang adaptif dengan metodologi Responsive Logo modern (Full Lockup, Stacked Lockup, dan Compact Icon) yang siap diimplementasikan mulai dari favicon, banner webinar, hingga sablon kaos dan bordir apparel.</p>"
+      },
+      "en_content": {
+        "t": "NaraiCoder Logo Redesign & Visual Identity (PARDI)",
+        "d": "Visual identity redesign for Central Kalimantan's tech community — blending traditional Dayak Telawang shields with binary boolean notation and responsive logo architecture.",
+        "role": "Brand Identity, Art Direction, & Logo System",
+        "body": "<p><strong>NaraiCoder</strong> is the premier developer and tech community in Central Kalimantan. This redesign addresses the complexity and scalability issues of the original emblem, modernizing it into an iconic, flexible visual system.</p><h3>Core Design Pillars:</h3><ul><li><strong>The Dayak Telawang Shield:</strong> Adopting the hexagonal silhouette of traditional Borneo shields as a symbol of unity, resilience, and cultural pride on the global stage.</li><li><strong>Generational Layering:</strong> Stepped brackets on the flank resemble both code braces (<code>{</code>) and shadow facets, representing knowledge transfer and tech talent regeneration.</li><li><strong>Binary 1 & 0 (I/O Logic):</strong> Vertical line-dot ('i'/1) and hexagonal frame ('O'/0) symbolize boolean fundamentals and the Input/Output spirit of community learning.</li></ul><h3>Responsive Logo System:</h3><p>Engineered to adapt seamlessly across scales — from full horizontal banners and stacked event posters to minimal monochrome icons for app badges and apparel embroidery.</p>"
+      }
+    },
+    {
+      "id": "bakat-design",
+      "category": "design",
+      "initiative": "bakat creative hub",
+      "year": "2025",
+      "hue": 25,
+      "tags": ["design", "bakat creative hub"],
+      "link": "#",
+      "id_content": {
+        "t": "Branding & Media Kit Bakat Creative Hub",
+        "d": "Perancangan logo, warna identitas, dan template media sosial untuk creative hub.",
+        "role": "Graphic Design & Creative Direction",
+        "body": "Identitas visual dinamis yang memicu kolaborasi antar talenta kreatif dan pegiat seni."
+      },
+      "en_content": {
+        "t": "Bakat Creative Hub Branding & Media Kit",
+        "d": "Logo design, color palette system, and social templates for creative collective.",
+        "role": "Graphic Design & Creative Direction",
+        "body": "Dynamic visual identity engineered to spark creative collaboration."
+      }
+    },
+    {
+      "id": "cv-botol",
+      "category": "others",
+      "initiative": "mentayasandbox",
+      "year": "2026",
+      "hue": 185,
+      "tags": ["others", "mentayasandbox"],
+      "link": "#",
+      "id_content": {
+        "t": "Estimasi Volume Botol dengan Computer Vision",
+        "d": "Model deteksi dan kalkulasi volume objek terapung dari tangkapan kamera video.",
+        "role": "Computer Vision & Research",
+        "body": "Penjelasan pendekatan teknis, mengatasi pemantulan cahaya pada permukaan air, sudut kamera, dan akurasi model."
+      },
+      "en_content": {
+        "t": "Bottle Volume Estimation with Computer Vision",
+        "d": "Detection and volume estimation model for floating objects from video camera capture.",
+        "role": "Computer Vision & Research",
+        "body": "Technical explanation covering water reflection challenges, camera perspective, and model precision."
+      }
+    }
+  ],
+  "posts": [
+    {
+      "id": "mulai-dari-brief",
+      "date": "2026-09-20",
+      "likes": 24,
+      "id_content": {
+        "t": "Dari Brief Singkat ke Logo yang Dipakai Bertahun-tahun",
+        "tag": "Design",
+        "ex": "Cara aku mengubah permintaan 'yang penting bagus' menjadi arah visual yang jelas.",
+        "body": "<p>Hampir semua proyek logo dimulai dari kalimat yang sama: 'yang penting bagus.' Tugas pertama bukan menggambar, melainkan menggali apa arti bagus bagi klien.</p>"
+      },
+      "en_content": {
+        "t": "From a Short Brief to a Logo That Lasts for Years",
+        "tag": "Design",
+        "ex": "How I turn 'just make it look good' into a clear visual direction.",
+        "body": "<p>Almost every logo project starts with the same sentence: 'just make it look good.'</p>"
+      }
+    },
+    {
+      "id": "belajar-cv",
+      "date": "2026-08-02",
+      "likes": 12,
+      "id_content": {
+        "t": "Catatan Belajar Computer Vision untuk Pemula Nekat",
+        "tag": "Technology",
+        "ex": "Hal-hal yang kuharap kuketahui sebelum mencoba mengukur benda dari kamera.",
+        "body": "<p>Computer vision terlihat seperti sihir sampai kamu mencoba mengukur sesuatu dengan benar.</p>"
+      },
+      "en_content": {
+        "t": "Notes from a Reckless Beginner in Computer Vision",
+        "tag": "Technology",
+        "ex": "Things I wish I knew before trying to measure objects with a camera.",
+        "body": "<p>Computer vision looks like magic until you try to measure something correctly.</p>"
+      }
+    }
+  ],
+  "mentayasandbox": {
+    "commissionStatus": "open",
+    "commissionSlots": "2 slot tersedia untuk Q4 2026",
+    "contact": {
+      "wa": "https://wa.me/6281234567890?text=Halo%20MentayaSandbox,%20saya%20tertarik%20untuk%20diskusi%20proyek.",
+      "collabWa": "https://wa.me/6281234567890?text=Halo%20Adies,%20saya%20ingin%20mengajak%20kolaborasi%20di%20MentayaSandbox."
+    }
+  }
+}

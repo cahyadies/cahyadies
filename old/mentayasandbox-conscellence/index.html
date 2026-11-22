@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>MentayaSandbox: Konsultasi Keilmuan IT, Riset Terapan &amp; Kolaborasi</title>
+    <meta
+      name="description"
+      content="Wadah ekspresi, konsultasi keilmuan teknologi informasi berkelanjutan, riset model AI terapan, dan kolaborasi terbuka oleh Adies."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="conscellence-header">
+      <div class="wrap header-inner">
+        <a class="brand-logo" href="#hero">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <span>mentayasandbox<b>.</b></span>
+        </a>
+
+        <nav class="center-nav" aria-label="Navigasi Utama">
+          <a href="#layanan" data-i18n="navServices">Bidang Keilmuan</a>
+          <a href="#metodologi" data-i18n="navApproach">Metodologi</a>
+          <a href="#riset" data-i18n="navGallery">Studi Kasus</a>
+          <a href="#keilmuan" data-i18n="navNotes">Publikasi</a>
+          <a href="#faq" data-i18n="navFaq">FAQ</a>
+          <a href="../index.html" class="parent-pill">cahyadies.</a>
+        </nav>
+
+        <div class="header-cta-group">
+          <button type="button" class="ctrl-btn" id="langToggle" onclick="toggleLang()" aria-label="Ganti bahasa">ID</button>
+          <button type="button" class="ctrl-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Ganti tema tampilan">◐</button>
+          <a href="#collab" class="btn-header-call" data-i18n="navCollab">Jadwalkan Diskusi</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="conscellence-hero" id="hero">
+        <div class="wrap">
+          <div class="hero-top-split">
+            <div class="hero-headline-col">
+              <div class="eyebrow-pill" data-i18n="heroKicker">KEILMUAN IT BERKELANJUTAN · RISET TERAPAN · KOLABORASI</div>
+              <h1 data-i18n="heroTitle">Membangun Solusi Teknologi Tepat Guna &amp; Berbagi Keilmuan yang Berkelanjutan.</h1>
+            </div>
+
+            <div class="hero-sub-col">
+              <p class="hero-lead" data-i18n="heroDesc">
+                Berangkat dari latar belakang Teknologi Informasi, <strong>MentayaSandbox</strong> adalah wadah ekspresi, riset terapan, dan kolaborasi terbuka oleh <strong>Adies</strong> untuk merancang sistem web berdaya rendah, eksperimen model AI/Computer Vision, serta dokumentasi pengetahuan yang dapat dipelajari kembali.
+              </p>
+              <div class="hero-actions">
+                <a href="#collab" class="btn btn-primary" data-i18n="btnJoin">Mulai Diskusi / Kolaborasi</a>
+                <a href="#riset" class="btn btn-outline" data-i18n="btnExplore">Pelajari Studi Kasus</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-metrics-banner" aria-label="Cakupan Ekosistem & Fokus Keilmuan">
+            <div class="metric-col">
+              <span class="metric-num">04</span>
+              <strong data-i18n="m1Title">Fokus Keilmuan Utama</strong>
+              <p data-i18n="m1Desc">Visi Komputer, Arsitektur Web Ringan, Otomasi Agrikultur, dan Pemetaan Komunitas.</p>
+            </div>
+            <div class="metric-col">
+              <span class="metric-num">06</span>
+              <strong data-i18n="m2Title">Studi Kasus &amp; Prototipe</strong>
+              <p data-i18n="m2Desc">Diuji langsung pada kebun hidroponik Omah Ijo, dapur usaha dalam.dapur, dan komunitas.</p>
+            </div>
+            <div class="metric-col">
+              <span class="metric-num">100%</span>
+              <strong data-i18n="m3Title">Prinsip Keberlanjutan</strong>
+              <p data-i18n="m3Desc">Sistem dirancang tanpa ketergantungan server mahal agar awet digunakan jangka panjang.</p>
+            </div>
+            <div class="metric-col accent-col">
+              <span class="metric-kicker" data-i18n="statParent">Ekosistem Terhubung</span>
+              <strong data-i18n="m4Title">Unit R&amp;D di Bawah cahyadies.</strong>
+              <p><a href="../index.html">Portal Induk</a> · <a href="../dalamdapur/index.html">dalam.dapur</a> · <a href="../omahijo/index.html">Omah Ijo</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="conscellence-section" id="layanan">
+        <div class="wrap">
+          <div class="sec-split-intro">
+            <div>
+              <span class="sec-kicker" data-i18n="pillarsHeading">BIDANG KEILMUAN &amp; LAYANAN</span>
+              <h2 data-i18n="pillarsMainTitle">Empat Ranah Eksplorasi &amp; Solusi Teknis</h2>
+            </div>
+            <p class="sec-intro-text" data-i18n="pillarsSub">
+              Setiap inisiatif di MentayaSandbox menggabungkan ketajaman analisis teknologi informasi dengan kebutuhan praktis di lapangan.
+            </p>
+          </div>
+
+          <div class="services-2x2-grid">
+            <article class="service-box">
+              <div class="srv-top">
+                <span class="srv-index">01</span>
+                <span class="srv-tag">AI &amp; Computer Vision</span>
+              </div>
+              <h3 data-i18n="p1Title">Eksperimen Visi Komputer &amp; Model AI Terapan</h3>
+              <p data-i18n="p1Desc">Pengembangan model deteksi objek, klasifikasi kematangan tanaman, dan pengukuran citra kamera yang dioptimalkan untuk perangkat lokal.</p>
+              <div class="srv-deliverables">
+                <span>Segmentasi Citra</span>
+                <span>Klasifikasi Kematangan</span>
+                <span>Kalibrasi Lapangan</span>
+              </div>
+            </article>
+
+            <article class="service-box">
+              <div class="srv-top">
+                <span class="srv-index">02</span>
+                <span class="srv-tag">Web Engineering</span>
+              </div>
+              <h3 data-i18n="p2Title">Arsitektur Aplikasi Web Cepat &amp; Berkelanjutan</h3>
+              <p data-i18n="p2Desc">Perancangan katalog digital, portal institusi, dan dashboard operasional yang ringan, cepat diakses di jaringan daerah, dan bebas biaya perawatan rumit.</p>
+              <div class="srv-deliverables">
+                <span>Zero-Bloatware Web</span>
+                <span>Katalog Interaktif</span>
+                <span>Offline-First Tool</span>
+              </div>
+            </article>
+
+            <article class="service-box">
+              <div class="srv-top">
+                <span class="srv-index">03</span>
+                <span class="srv-tag">Applied Agro &amp; SME Tech</span>
+              </div>
+              <h3 data-i18n="p4Title">Digitalisasi Agrikultur &amp; Usaha Keluarga</h3>
+              <p data-i18n="p4Desc">Penerapan alat hitung nutrisi hidroponik (PPM/EC), pemantauan jadwal panen (HST), dan sistem pemesanan terstruktur untuk usaha mandiri.</p>
+              <div class="srv-deliverables">
+                <span>Kalkulator Nutrisi</span>
+                <span>Sistem Jadwal HST</span>
+                <span>Otomasi Pesanan WA</span>
+              </div>
+            </article>
+
+            <article class="service-box">
+              <div class="srv-top">
+                <span class="srv-index">04</span>
+                <span class="srv-tag">Open Knowledge &amp; GIS</span>
+              </div>
+              <h3 data-i18n="p3Title">Berbagi Pengetahuan &amp; Arsip Spasial Komunitas</h3>
+              <p data-i18n="p3Desc">Penyusunan modul pembelajaran IT terbuka, catatan eksperimen, serta pemetaan web interaktif untuk mendokumentasikan sejarah dan potensi lokal.</p>
+              <div class="srv-deliverables">
+                <span>Web GIS Ringan</span>
+                <span>Modul Terbuka</span>
+                <span>Riset Kolaboratif</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="conscellence-section slate-bg" id="metodologi">
+        <div class="wrap">
+          <div class="sec-split-intro">
+            <div>
+              <span class="sec-kicker" style="color:#60a5fa;">PENDEKATAN &amp; METODOLOGI</span>
+              <h2 style="color:#ffffff;" data-i18n="approachTitle">Bagaimana Sebuah Gagasan Diuji hingga Berdampak Nyata</h2>
+            </div>
+            <p class="sec-intro-text" style="color:#cbd5e1;" data-i18n="approachSub">
+              Pendekatan sistematis yang memastikan setiap eksperimen kode maupun riset tidak berhenti sebagai wacana, melainkan dapat dipakai dan dipelajari ulang.
+            </p>
+          </div>
+
+          <div class="approach-3col">
+            <div class="approach-step">
+              <div class="step-header">
+                <span class="step-badge">TAHAP 01</span>
+                <span class="step-phase">Assessment &amp; Problem Framing</span>
+              </div>
+              <h3 data-i18n="step1Title">Observasi Masalah Lapangan</h3>
+              <p data-i18n="step1Desc">Membedah kendala nyata bersama pemilik masalah, baik di kebun hidroponik, dapur produksi, maupun komunitas, sebelum menentukan teknologi yang dipakai.</p>
+            </div>
+
+            <div class="approach-step">
+              <div class="step-header">
+                <span class="step-badge">TAHAP 02</span>
+                <span class="step-phase">Prototyping &amp; Validation</span>
+              </div>
+              <h3 data-i18n="step2Title">Eksperimen Terukur &amp; Efisien</h3>
+              <p data-i18n="step2Desc">Membangun prototipe model AI atau aplikasi web dengan kode yang bersih, menguji akurasi di kondisi nyata, dan memangkas kerumitan yang tidak perlu.</p>
+            </div>
+
+            <div class="approach-step">
+              <div class="step-header">
+                <span class="step-badge">TAHAP 03</span>
+                <span class="step-phase">Knowledge Transfer</span>
+              </div>
+              <h3 data-i18n="step3Title">Dokumentasi &amp; Keberlanjutan</h3>
+              <p data-i18n="step3Desc">Menuliskan hasil temuan, batasan teknis, dan panduan penggunaan secara terbuka supaya ilmu tersebut terus hidup dan dapat dikembangkan bersama.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="conscellence-section" id="riset">
+        <div class="wrap">
+          <div class="sec-split-head">
+            <div>
+              <span class="sec-kicker">PORTOFOLIO RISET &amp; IMPLEMENTASI</span>
+              <h2 data-i18n="sec1Title">Studi Kasus &amp; Eksperimen Terapan</h2>
+              <p class="sec-sub" data-i18n="sec1Sub">Klik pada setiap studi kasus untuk membaca metodologi dan catatan teknis lengkapnya.</p>
+            </div>
+            <div class="filter-bar" id="filterBar" role="group" aria-label="Filter topik eksperimen"></div>
+          </div>
+
+          <div class="cases-grid" id="projectLedger"></div>
+        </div>
+      </section>
+
+      <section class="conscellence-section alt-surface" id="keilmuan">
+        <div class="wrap">
+          <div class="sec-split-head">
+            <div>
+              <span class="sec-kicker">PUBLIKASI &amp; WAWASAN TEKNIS</span>
+              <h2 data-i18n="secNotesTitle">Catatan Keilmuan &amp; Artikel Lapangan</h2>
+              <p class="sec-sub" data-i18n="secNotesSub">Rangkuman pembelajaran dari proses membangun sistem web dan model visi komputer.</p>
+            </div>
+          </div>
+
+          <div class="insights-grid" id="notesGrid"></div>
+        </div>
+      </section>
+
+      <section class="conscellence-section" id="faq">
+        <div class="wrap faq-split-layout">
+          <div>
+            <span class="sec-kicker">PERTANYAAN UMUM (FAQ)</span>
+            <h2 style="font:700 28px/1.2 var(--display); margin:0 0 12px;">Hal yang Sering Ditanyakan Seputar MentayaSandbox</h2>
+            <p style="color:var(--mute); font-size:14.5px; line-height:1.6; margin:0;">
+              Penjelasan singkat mengenai cara kerja kolaborasi, sifat riset terbuka, dan pengembangan sistem di MentayaSandbox.
+            </p>
+          </div>
+
+          <div class="faq-accordion-list">
+            <details class="faq-card" open>
+              <summary>Apa tujuan utama dibentuknya MentayaSandbox?</summary>
+              <p>MentayaSandbox dibentuk sebagai ruang ekspresi keilmuan IT oleh Adies: tempat menggabungkan riset teknologi informasi (seperti Computer Vision dan Web Engineering) dengan kolaborasi terbuka agar ilmu yang dipelajari terus berkembang dan bermanfaat nyata.</p>
+            </details>
+
+            <details class="faq-card">
+              <summary>Siapa saja yang bisa mengajak kolaborasi di sini?</summary>
+              <p>Terbuka untuk rekan developer, mahasiswa yang sedang meneliti topik terapan, pegiat komunitas lokal, fotografer/penulis arsip daerah, hingga pelaku usaha yang memiliki studi kasus menarik untuk dipecahkan bersama.</p>
+            </details>
+
+            <details class="faq-card">
+              <summary>Apakah menerima konsultasi atau pembuatan sistem web/identitas kustom?</summary>
+              <p>Ya. Selain eksperimen terbuka, MentayaSandbox juga melayani perancangan aplikasi web ringan, kalkulator/alat bantu operasional, serta sistem identitas visual dengan pendekatan yang terukur dan transparan.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="conscellence-section" id="collab" style="border-bottom: none; padding-top: 12px;">
+        <div class="wrap">
+          <div class="consulting-cta-box">
+            <div class="collab-topics-col">
+              <span class="sec-kicker" style="color:#60a5fa;">INISIATIF &amp; KOLABORASI TERBUKA</span>
+              <h2 data-i18n="sec2Title" style="color:#ffffff;">Mari Jadwalkan Diskusi atau Kolaborasi Riset</h2>
+              <p class="sec-sub" data-i18n="sec2Desc" style="color:#cbd5e1; margin-bottom:20px;">
+                Berikut beberapa topik eksplorasi yang saat ini sedang dibuka untuk kolaborasi lintas disiplin:
+              </p>
+              <div class="collab-list" id="collabList"></div>
+            </div>
+
+            <div class="collab-form-card">
+              <h3 class="sub-heading" data-i18n="formHeading">Formulir Diskusi &amp; Pengajuan Kolaborasi</h3>
+              <p class="form-intro" data-i18n="formIntro">Isi rincian singkat di bawah ini untuk memulai percakapan melalui WhatsApp atau Email.</p>
+
+              <form id="collabForm" onsubmit="submitCollabForm(event)">
+                <div class="field-group">
+                  <label for="cName" data-i18n="lblName">Nama Anda / Instansi / Komunitas</label>
+                  <input id="cName" name="cName" type="text" required placeholder="Contoh: Raka - Komunitas Riset" />
+                </div>
+
+                <div class="field-group">
+                  <label for="cMode" data-i18n="lblMode">Topik Pembahasan</label>
+                  <select id="cMode" name="cMode">
+                    <option value="Kolaborasi Riset & Keilmuan IT" data-i18n="optCollab">Kolaborasi Riset &amp; Keilmuan IT</option>
+                    <option value="Berbagi Data / Proyek Komunitas" data-i18n="optData">Berbagi Data / Proyek Komunitas</option>
+                    <option value="Konsultasi & Pengembangan Sistem" data-i18n="optComm">Konsultasi &amp; Pengembangan Sistem</option>
+                  </select>
+                </div>
+
+                <div class="field-group">
+                  <label for="cMsg" data-i18n="lblMsg">Gagasan atau Kebutuhan yang Ingin Dibahas</label>
+                  <textarea id="cMsg" name="cMsg" rows="3" required placeholder="Ceritakan singkat ide, masalah teknis, atau rencana kolaborasi..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary" data-i18n="btnSendWa">Jadwalkan via WhatsApp</button>
+                  <button type="button" class="btn btn-outline" onclick="sendCollabEmail()" data-i18n="btnSendEmail">Kirim via Email</button>
+                </div>
+                <p id="formFeedback" class="form-feedback" role="status" aria-live="polite" hidden></p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="conscellence-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <strong>mentayasandbox.</strong> · Wadah Ekspresi, Keilmuan IT Berkelanjutan &amp; Kolaborasi oleh <a href="../index.html">Adies</a>
+        </div>
+        <div class="foot-links">
+          <a href="../index.html">Induk cahyadies.</a>
+          <span>·</span>
+          <a href="../dalamdapur/index.html">dalam.dapur</a>
+          <span>·</span>
+          <a href="../omahijo/index.html">Omah Ijo 1.0</a>
+          <span>·</span>
+          <a href="../omahijo-v2/index.html">Omah Ijo 2.0</a>
+        </div>
+      </div>
+    </footer>
+
+    <div
+      class="modal"
+      id="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="mTitle"
+      onclick="if(event.target === this) closeModal()"
+    >
+      <div class="modal-box">
+        <button type="button" class="modal-close" onclick="closeModal()" aria-label="Tutup jendela rincian">✕</button>
+        <div id="mType" class="modal-kicker"></div>
+        <h3 id="mTitle" class="modal-title"></h3>
+        <p id="mDesc" class="modal-desc"></p>
+        <div id="mCollab" class="modal-partner"></div>
+        <div id="mNotes" class="modal-notes"></div>
+      </div>
+    </div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

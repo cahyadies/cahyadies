@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>cahyadies — Editorial Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <!-- PIN AUTHENTICATION GATE -->
+    <div class="auth-gate" id="authGate">
+      <div class="auth-card">
+        <div class="auth-logo">cahyadies<span>.</span></div>
+        <div class="auth-desc">Editorial Studio · Masukkan PIN untuk akses</div>
+        <form onsubmit="handleAuth(event)">
+          <input type="password" id="adminPin" class="auth-input" placeholder="PIN Keamanan (Default: 1234)" autofocus />
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 11px;">Masuk Studio ↗</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="studio-nav">
+      <div class="nav-brand">
+        <div class="brand-title">cahyadies<span>.</span></div>
+        <span class="brand-pill">STUDIO</span>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-tab="posts" onclick="switchTab('posts')">
+          <span>✍️ Stories</span>
+        </button>
+        <button class="nav-tab" data-tab="works" onclick="switchTab('works')">
+          <span>💼 Karya</span>
+        </button>
+        <button class="nav-tab" data-tab="mentaya" onclick="switchTab('mentaya')">
+          <span>🔬 Mentaya</span>
+        </button>
+        <button class="nav-tab" data-tab="settings" onclick="switchTab('settings')">
+          <span>⚙️ Pengaturan</span>
+        </button>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-secondary btn-sm" onclick="openCompressorModal()" title="Kompresi foto besar tanpa mengurangi kualitas visual">
+          ⚡ Kompres Foto
+        </button>
+        <button class="btn btn-secondary btn-sm" onclick="downloadBackup()" title="Unduh backup data store">
+          📥 Backup
+        </button>
+        <button class="btn btn-primary btn-sm" id="btnPublish" onclick="publishChanges()" title="Sync dan deploy ke website Vercel">
+          🚀 Publish Web
+        </button>
+        <a href="../" target="_blank" class="btn btn-ghost btn-sm" title="Buka website publik">
+          Web ↗
+        </a>
+      </div>
+    </header>
+
+    <!-- MAIN STUDIO BODY -->
+    <main class="studio-body">
+      <!-- ==========================================
+           TAB 1: STORIES (BLOG & ZEN WRITER)
+           ========================================== -->
+      <section class="pane-view active" id="pane-posts">
+        <!-- SUB-VIEW 1: STORIES LIST -->
+        <div id="storiesListView">
+          <div class="section-header">
+            <div class="section-title">
+              <h1>Stories & Catatan</h1>
+              <p>Kelola artikel, tulisan pemikiran, dan ranking apresiasi (Likes) pembaca.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openZenWriter()">
+              + Tulis Cerita Baru ✍️
+            </button>
+          </div>
+
+          <div class="sub-filter-bar">
+            <div class="filter-chips">
+              <button class="filter-chip active" data-sort="all" onclick="filterStoriesSort('all', this)">Semua Tulisan</button>
+              <button class="filter-chip" data-sort="likes" onclick="filterStoriesSort('likes', this)">❤️ Populer (Banyak Like)</button>
+              <button class="filter-chip" data-sort="latest" onclick="filterStoriesSort('latest', this)">Terbaru</button>
+            </div>
+            <input type="text" class="search-input" id="searchPosts" placeholder="Cari cerita..." oninput="renderStoriesList()" />
+          </div>
+
+          <!-- STORIES CONTAINER (MEDIUM-STYLE CARDS) -->
+          <div class="stories-list" id="storiesContainer"></div>
+        </div>
+
+        <!-- SUB-VIEW 2: ZEN WRITING CANVAS -->
+        <div id="storyEditorView" style="display: none;">
+          <div class="zen-writer">
+            <!-- WRITER TOPBAR -->
+            <div class="writer-topbar">
+              <div class="writer-topbar-left">
+                <button class="btn btn-secondary btn-sm" onclick="closeZenWriter()">
+                  ← Kembali ke Stories
+                </button>
+                <div class="reading-estimate" id="editorWordStats">
+                  <span>📖 1 min read · 0 kata · Markdown GFM</span>
+                </div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <!-- Obsidian Mode Switcher -->
+                <div class="segmented-control" style="display: flex; gap: 2px; background: var(--bg); padding: 3px; border-radius: var(--r-full); border: 1px solid var(--line);">
+                  <button type="button" class="btn btn-sm btn-secondary" id="btnModeWrite" onclick="setEditorViewMode('write')" title="Hanya editor Markdown">
+                    ✏️ Write
+                  </button>
+                  <button type="button" class="btn btn-sm btn-ghost" id="btnModeSplit" onclick="setEditorViewMode('split')" title="Split mode ala Obsidian: Editor di kiri & Live Preview di kanan">
+                    ⚡ Split (Obsidian)
+                  </button>
+                  <button type="button" class="btn btn-sm btn-ghost" id="btnModePreview" onclick="setEditorViewMode('preview')" title="Pratinjau penuh artikel pembaca">
+                    👁️ Preview
+                  </button>
+                </div>
+
+                <!-- Language Switcher -->
+                <div class="segmented-control" style="display: flex; gap: 4px; background: var(--bg); padding: 3px; border-radius: var(--r-full); border: 1px solid var(--line);">
+                  <button type="button" class="btn btn-sm btn-secondary" id="btnLangId" onclick="switchEditorLang('id')">ID</button>
+                  <button type="button" class="btn btn-sm btn-ghost" id="btnLangEn" onclick="switchEditorLang('en')">EN</button>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="copyStoryIdToEn()" title="Salin teks dari ID ke English">
+                  📋 Salin ID
+                </button>
+                <button type="button" class="btn btn-primary" onclick="saveZenStory()">
+                  💾 Simpan Cerita
+                </button>
+              </div>
+            </div>
+
+            <!-- TITLE & EXCERPT -->
+            <input type="hidden" id="editStoryId" />
+            <input
+              type="text"
+              class="writer-title-input"
+              id="writerTitle"
+              placeholder="Judul Cerita..."
+              oninput="handleTitleChange()"
+            />
+            <input
+              type="text"
+              class="writer-excerpt-input"
+              id="writerExcerpt"
+              placeholder="Tulis ringkasan atau sub-judul singkat di sini..."
+              oninput="handleExcerptChange()"
+            />
+
+            <!-- META FIELDS (QUIET GRID) -->
+            <div class="writer-meta-grid">
+              <div class="writer-meta-field">
+                <label>Slug URL (ID)</label>
+                <input type="text" id="writerSlug" placeholder="judul-cerita" />
+              </div>
+              <div class="writer-meta-field">
+                <label>Tanggal Terbit</label>
+                <input type="date" id="writerDate" />
+              </div>
+              <div class="writer-meta-field">
+                <label>Kategori / Tag</label>
+                <input type="text" id="writerTag" placeholder="Design, Technology, Catatan..." />
+              </div>
+              <div class="writer-meta-field">
+                <label>❤️ Jumlah Likes (Pembaca)</label>
+                <input type="number" id="writerLikes" min="0" value="0" />
+              </div>
+            </div>
+
+            <!-- OBSIDIAN MARKDOWN TOOLBAR -->
+            <div class="format-toolbar" id="obsidianToolbar">
+              <button type="button" class="tool-btn" onclick="insertMd('h1')" title="Heading 1 (# )">H1</button>
+              <button type="button" class="tool-btn" onclick="insertMd('h2')" title="Heading 2 (## )">H2</button>
+              <button type="button" class="tool-btn" onclick="insertMd('h3')" title="Heading 3 (### )">H3</button>
+              <div class="toolbar-divider"></div>
+              <button type="button" class="tool-btn" onclick="insertMd('bold')" title="Tebal (**teks**) [Ctrl+B]"><b>B</b></button>
+              <button type="button" class="tool-btn" onclick="insertMd('italic')" title="Miring (*teks*) [Ctrl+I]"><i>I</i></button>
+              <button type="button" class="tool-btn" onclick="insertMd('strike')" title="Coret (~~teks~~)"><s>S</s></button>
+              <button type="button" class="tool-btn" onclick="insertMd('highlight')" title="Obsidian Highlight (==teks==)">==H==</button>
+              <button type="button" class="tool-btn" onclick="insertMd('code-inline')" title="Kode Inline (`code`)">&lt;/&gt;</button>
+              <button type="button" class="tool-btn" onclick="insertMd('code-block')" title="Blok Kode (```lang ... ```)">```</button>
+              <div class="toolbar-divider"></div>
+              <button type="button" class="tool-btn" onclick="insertMd('quote')" title="Kutipan (> quote)">❝</button>
+              <div style="position:relative; display:inline-block;">
+                <button type="button" class="tool-btn" onclick="toggleCalloutMenu(event)" title="Obsidian / GitHub Callout Box">💡 Callout ▾</button>
+                <div id="calloutMenuDropdown" class="callout-dropdown" style="display:none;">
+                  <div onclick="insertCallout('NOTE')">ℹ️ [!NOTE] Catatan</div>
+                  <div onclick="insertCallout('TIP')">💡 [!TIP] Tips</div>
+                  <div onclick="insertCallout('IMPORTANT')">⚡ [!IMPORTANT] Penting</div>
+                  <div onclick="insertCallout('WARNING')">⚠️ [!WARNING] Peringatan</div>
+                  <div onclick="insertCallout('CAUTION')">🛑 [!CAUTION] Perhatian</div>
+                </div>
+              </div>
+              <div class="toolbar-divider"></div>
+              <button type="button" class="tool-btn" onclick="insertMd('list-ul')" title="Daftar Poin (- item)">• List</button>
+              <button type="button" class="tool-btn" onclick="insertMd('list-ol')" title="Daftar Nomor (1. item)">1. List</button>
+              <button type="button" class="tool-btn" onclick="insertMd('task')" title="Checklist Task (- [ ] item)">☑ Task</button>
+              <button type="button" class="tool-btn" onclick="insertMd('table')" title="Tabel Markdown GFM">⊞ Tabel</button>
+              <div class="toolbar-divider"></div>
+              <button type="button" class="tool-btn" onclick="insertMd('link')" title="Tautan [teks](url) [Ctrl+K]">🔗 Link</button>
+              <label class="tool-btn" style="cursor:pointer; display:inline-flex; align-items:center; gap:4px; margin:0;" title="Pilih foto dari komputer, otomatis dikompresi ke WebP retina">
+                🖼️ Sisipkan Foto
+                <input type="file" id="blogImageInput" accept="image/*" style="display:none;" onchange="handleBlogImageInsert(this)">
+              </label>
+              <button type="button" class="tool-btn" onclick="insertMd('hr')" title="Garis Pemisah (---)">―</button>
+              <button type="button" class="tool-btn" onclick="openMarkdownHelpModal()" title="Panduan Lengkap Format Markdown Obsidian">❓ Bantuan MD</button>
+            </div>
+
+            <!-- OBSIDIAN WORKSPACE (SPLIT OR FULL VIEW) -->
+            <div class="obsidian-editor-workspace mode-write" id="obsidianEditorWorkspace">
+              <!-- LEFT: EDITOR PANE -->
+              <div class="obsidian-pane obsidian-pane-editor" id="obsidianEditorPane">
+                <textarea
+                  class="writer-textarea obsidian-mono-editor"
+                  id="writerBody"
+                  placeholder="# Tulis artikel Anda dengan Markdown ala Obsidian...
+
+Mulai menulis pemikiran, catatan teknis, atau dokumentasi di sini.
+Gunakan **teks tebal**, *miring*, `kode inline`, atau blok kode ```javascript.
+Ketik Enter untuk auto-indent daftar, dan ganti ke '⚡ Split (Obsidian)' untuk melihat pratinjau live!"
+                  oninput="handleWriterBodyInput()"
+                  onkeydown="handleWriterBodyKeydown(event)"
+                ></textarea>
+              </div>
+
+              <!-- RIGHT: LIVE GITHUB / OBSIDIAN PREVIEW PANE -->
+              <div class="obsidian-pane obsidian-pane-preview" id="obsidianPreviewPane" style="display:none;">
+                <div class="obsidian-preview-header">
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <span style="font-size:12px; font-weight:700; letter-spacing:0.04em;">GITHUB / OBSIDIAN PREVIEW</span>
+                    <span class="badge" style="font-size:10px; background:rgba(30,144,255,0.15); color:#60a5fa; font-weight:600; padding:2px 6px; border-radius:99px;">Live Sync</span>
+                  </div>
+                  <span style="font-size:11px; color:var(--mute);" id="previewCharStats">0 kata</span>
+                </div>
+                <div class="obsidian-preview-content markdown-body" id="livePreviewContent"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 2: WORKS (VISUAL PORTFOLIO)
+           ========================================== -->
+      <section class="pane-view" id="pane-works">
+        <div class="section-header">
+          <div class="section-title">
+            <h1>Karya & Proyek</h1>
+            <p>Master arsip karya digital: Website, Desain Identitas, dan Eksperimen Lab.</p>
+          </div>
+          <button class="btn btn-primary" onclick="openWorkModal()">
+            + Tambah Karya Baru 💼
+          </button>
+        </div>
+
+        <div class="sub-filter-bar">
+          <div class="filter-chips">
+            <button class="filter-chip active" data-cat="all" onclick="filterWorksCategory('all', this)">Semua Karya</button>
+            <button class="filter-chip" data-cat="website" onclick="filterWorksCategory('website', this)">🌐 Website</button>
+            <button class="filter-chip" data-cat="design" onclick="filterWorksCategory('design', this)">🎨 Design</button>
+            <button class="filter-chip" data-cat="others" onclick="filterWorksCategory('others', this)">🔬 Others</button>
+          </div>
+          <input type="text" class="search-input" id="searchWorks" placeholder="Cari karya..." oninput="renderWorksGrid()" />
+        </div>
+
+        <!-- VISUAL WORKS GRID -->
+        <div class="works-grid" id="worksGridContainer"></div>
+      </section>
+
+      <!-- ==========================================
+           TAB 3: MENTAYASANDBOX LAB & KOMISI
+           ========================================== -->
+      <section class="pane-view" id="pane-mentaya">
+        <div class="section-header">
+          <div class="section-title">
+            <h1>MentayaSandbox Lab</h1>
+            <p>Pengaturan ketersediaan proyek komisi, riset kode, dan integrasi WhatsApp.</p>
+          </div>
+          <button class="btn btn-primary" onclick="saveMentayaSettings()">
+            Simpan Pengaturan Lab
+          </button>
+        </div>
+
+        <div class="studio-panel">
+          <h2 class="studio-panel-title">Status Open Commission</h2>
+          <p class="studio-panel-desc">Status ini otomatis muncul di landing page MentayaSandbox dan arsip cahyadies.</p>
+
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label>Status Komisi Saat Ini</label>
+              <select id="mCommStatus">
+                <option value="open">🟢 Open for Projects (Menerima Proyek)</option>
+                <option value="limited">🟡 Limited Slots (Slot Terbatas)</option>
+                <option value="closed">🔴 Closed / Fully Booked (Penuh/Tutup)</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Keterangan Kuota / Periode</label>
+              <input type="text" id="mCommSlots" placeholder="Contoh: 2 slot tersedia untuk Q4 2026" />
+            </div>
+            <div class="form-field full">
+              <label>Link WhatsApp untuk Komisi Proyek</label>
+              <input type="text" id="mWaLink" />
+            </div>
+            <div class="form-field full">
+              <label>Link WhatsApp untuk Open Kolaborasi</label>
+              <input type="text" id="mCollabWaLink" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 4: PENGATURAN & SINKRONISASI
+           ========================================== -->
+      <section class="pane-view" id="pane-settings">
+        <div class="section-header">
+          <div class="section-title">
+            <h1>Profil & Sinkronisasi</h1>
+            <p>Pengaturan informasi bio, kunci keamanan PIN, dan koneksi GitHub API untuk auto-publish.</p>
+          </div>
+          <button class="btn btn-primary" onclick="saveAllSettings()">
+            Simpan Semua Pengaturan
+          </button>
+        </div>
+
+        <!-- PROFIL CAHYADIES -->
+        <div class="studio-panel">
+          <h2 class="studio-panel-title">Profil Website (cahyadies.)</h2>
+          <p class="studio-panel-desc">Bio ringkas dan deskripsi arsip persona di beranda.</p>
+
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label>Nama Display</label>
+              <input type="text" id="siteName" />
+            </div>
+            <div class="form-field">
+              <label>Basis Lokasi</label>
+              <input type="text" id="siteLocation" />
+            </div>
+            <div class="form-field full">
+              <label>Email Kontak</label>
+              <input type="text" id="siteEmail" />
+            </div>
+            <div class="form-field full">
+              <label>Tagline (Bahasa Indonesia)</label>
+              <input type="text" id="siteTaglineId" />
+            </div>
+            <div class="form-field full">
+              <label>Tagline (English)</label>
+              <input type="text" id="siteTaglineEn" />
+            </div>
+            <div class="form-field full">
+              <label>Bio / Intro Ringkas (ID)</label>
+              <textarea id="siteIntroId"></textarea>
+            </div>
+            <div class="form-field full">
+              <label>Bio / Intro Ringkas (EN)</label>
+              <textarea id="siteIntroEn"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- GITHUB SYNC & SECURITY -->
+        <div class="studio-panel">
+          <h2 class="studio-panel-title">Sinkronisasi Otomatis GitHub & Vercel</h2>
+          <p class="studio-panel-desc">
+            Masukkan GitHub Personal Access Token (PAT) agar tombol <strong>"🚀 Publish Web"</strong> langsung mengupdate website secara live tanpa perlu buka terminal.
+          </p>
+
+          <div class="form-grid-2">
+            <div class="form-field">
+              <label>GitHub Repository</label>
+              <input type="text" id="ghRepo" value="cahyadies/cahyadies" />
+            </div>
+            <div class="form-field">
+              <label>Ganti PIN Keamanan Studio (Default: 1234)</label>
+              <input type="password" id="newPin" placeholder="Ketik PIN baru jika ingin diubah" />
+            </div>
+            <div class="form-field full">
+              <label>GitHub Personal Access Token (PAT - Permission: Contents Write)</label>
+              <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODAL: ADD / EDIT WORK (DRAWER) -->
+    <div class="modal-overlay" id="modalWork">
+      <div class="modal-window">
+        <div class="modal-header">
+          <h3 id="modalWorkTitle">Tambah Karya Baru</h3>
+          <button class="modal-close-btn" onclick="closeModal('modalWork')">✕</button>
+        </div>
+        <form onsubmit="saveWorkItem(event)">
+          <input type="hidden" id="workEditId" />
+          <div class="form-grid-2">
+            <!-- COVER IMAGE WITH AUTO COMPRESSOR -->
+            <div class="form-field full">
+              <label>Cover / Foto Karya (Auto-Compress Retina)</label>
+              <div style="display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap;">
+                <div id="workCoverPreviewBox" style="width: 140px; height: 95px; border-radius: var(--r-sm); border: 1px dashed var(--line); background-size: cover; background-position: center; display: grid; place-items: center; background-color: var(--bg); overflow: hidden; position: relative;">
+                  <span id="workCoverPreviewPlaceholder" style="font-size: 11px; color: var(--mute); text-align: center; padding: 6px;">Pratinjau Cover</span>
+                </div>
+                <div style="flex: 1; min-width: 220px;">
+                  <div style="display:flex; gap:8px; margin-bottom:8px;">
+                    <label class="btn btn-secondary btn-sm" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+                      📁 Unggah & Kompres Foto
+                      <input type="file" accept="image/*" style="display:none;" onchange="handleWorkCoverUpload(this)" />
+                    </label>
+                    <button type="button" class="btn btn-ghost btn-sm" id="btnRemoveWorkCover" onclick="removeWorkCover()" style="display:none; color:#f87171;">
+                      🗑️ Hapus
+                    </button>
+                  </div>
+                  <input type="text" id="wImgUrl" placeholder="Atau tempel path / URL foto (misal: assets/works/...)" oninput="handleWorkImgUrlInput()" />
+                  <div id="workCoverCompressStatus" style="display:none; font-size:11.5px; color:#4ade80; margin-top:6px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label>Kategori Disiplin</label>
+              <select id="wCategory">
+                <option value="website">🌐 Website</option>
+                <option value="design">🎨 Design</option>
+                <option value="others">🔬 Others / Lab</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Inisiatif / Brand</label>
+              <select id="wInitiative">
+                <option value="mentayasandbox">MentayaSandbox</option>
+                <option value="dalamdapur">dalam.dapur</option>
+                <option value="omahijo">Omah Ijo</option>
+                <option value="naraicoder">naraicoder</option>
+                <option value="bakat creative hub">bakat creative hub</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>ID Slug</label>
+              <input type="text" id="wId" required placeholder="nama-karya" />
+            </div>
+            <div class="form-field">
+              <label>Tahun Pembuatan</label>
+              <input type="text" id="wYear" placeholder="2026" />
+            </div>
+            <div class="form-field">
+              <label>Warna Hue Cover (0 - 360)</label>
+              <input type="number" id="wHue" min="0" max="360" value="140" />
+            </div>
+            <div class="form-field">
+              <label>Tautan Proyek / Demo</label>
+              <input type="text" id="wLink" placeholder="https://... atau #" />
+            </div>
+
+            <!-- DUAL LANGUAGE SWITCHER & MIRROR BAR -->
+            <div class="form-field full" style="border-top: 1px solid var(--line); padding-top: 18px; margin-top: 6px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <label style="font-weight: 700; color: var(--fg); margin: 0;">Konten Bahasa:</label>
+                  <div class="segmented-control" style="display: flex; gap: 4px; background: var(--bg); padding: 3px; border-radius: var(--r-full); border: 1px solid var(--line);">
+                    <button type="button" class="btn btn-sm btn-secondary" id="btnWorkLangId" onclick="switchWorkModalLang('id')">🇮🇩 Indonesia</button>
+                    <button type="button" class="btn btn-sm btn-ghost" id="btnWorkLangEn" onclick="switchWorkModalLang('en')">🇬🇧 English</button>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="copyWorkIdToEn()" title="Salin seluruh konten dari tab Indonesia ke English">
+                  📋 Salin / Mirror ID ke EN
+                </button>
+              </div>
+              <p style="font-size: 11.5px; color: var(--mute); margin: 6px 0 0;">
+                💡 <em>Tip: Cukup tulis versi Indonesia jika ingin cepat. Jika versi English dikosongkan, sistem otomatis menerapkan mirroring.</em>
+              </p>
+            </div>
+
+            <div class="form-field full">
+              <label id="lblWorkTitle">Judul Karya (ID)</label>
+              <input type="text" id="wTitle" required placeholder="Contoh: Redesign Logo & Identitas NaraiCoder" />
+            </div>
+            <div class="form-field full">
+              <label id="lblWorkRole">Peran / Role (ID)</label>
+              <input type="text" id="wRole" placeholder="Contoh: Brand Identity & Graphic Design" />
+            </div>
+            <div class="form-field full">
+              <label id="lblWorkDesc">Deskripsi Singkat (ID)</label>
+              <textarea id="wDesc" rows="2" placeholder="Ringkasan 1-2 kalimat untuk preview di kartu karya..."></textarea>
+            </div>
+            <div class="form-field full">
+              <label id="lblWorkBody">Catatan Proses & Detail (ID)</label>
+              <textarea id="wBody" rows="6" placeholder="Cerita lengkap, filosofi, pilar desain, atau tag <img src='...'>..."></textarea>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:24px;">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('modalWork')">Batal</button>
+            <button type="submit" class="btn btn-primary">Simpan Karya</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODAL: STANDALONE IMAGE COMPRESSOR -->
+    <div class="modal-overlay" id="modalCompressor">
+      <div class="modal-window" style="max-width: 620px;">
+        <div class="modal-header">
+          <h3>⚡ Kompresor Foto Otomatis (Retina Quality)</h3>
+          <button class="modal-close-btn" onclick="closeModal('modalCompressor')">✕</button>
+        </div>
+        <div style="padding: 10px 0;">
+          <p style="font-size: 13px; color: var(--mute); margin-bottom: 16px; line-height: 1.5;">
+            Kecilkan ukuran file foto dari kamera, Figma, atau screenshot (hemat 80-95%) tanpa menurunkan ketajaman visual untuk web.
+          </p>
+
+          <div id="compressDropZone" class="compress-dropzone" onclick="document.getElementById('compressFileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+            <input type="file" id="compressFileInput" accept="image/*" style="display: none;" onchange="if(this.files[0]) handleStandaloneCompress(this.files[0])" />
+            <div style="font-size: 32px; margin-bottom: 6px;">📸</div>
+            <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">Pilih atau Seret Foto ke Sini</div>
+            <div style="font-size: 12px; color: var(--mute);">Mendukung PNG, JPG, JPEG, WebP (Berapapun ukurannya)</div>
+          </div>
+
+          <div id="compressResultBox" style="display: none; margin-top: 18px; border: 1px solid var(--line); border-radius: var(--r); padding: 16px; background: var(--card);">
+            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+              <img id="compressResultImg" style="width: 120px; height: 90px; object-fit: contain; background: #000; border-radius: 6px; border: 1px solid var(--line);" />
+              <div style="flex: 1; min-width: 200px;">
+                <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                  <span class="badge" style="background: rgba(16,185,129,0.15); color: #34d399; font-weight: 700; padding: 2px 8px; border-radius: 99px; font-size: 11px;" id="compressBadgePercent">-95%</span>
+                  <span style="font-size: 11px; color: var(--mute);" id="compressDimensions">1600 × 1200 px</span>
+                </div>
+                <div style="font-size: 13px; font-weight: 600; margin-bottom: 4px;" id="compressFileName">foto.jpg</div>
+                <div style="font-size: 12px; color: var(--fg); display: flex; gap: 12px; margin-bottom: 12px;">
+                  <span>Asli: <strong id="compressOrigSize" style="color:#ef4444;">8.2 MB</strong></span>
+                  <span>➔</span>
+                  <span>Hasil: <strong id="compressNewSize" style="color:#34d399;">165 KB</strong></span>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <button type="button" class="btn btn-primary btn-sm" id="btnDownloadCompressed" onclick="downloadCompressedResult()">
+                    ⬇️ Unduh WebP
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="copyCompressedDataUrl()">
+                    📋 Salin Data URL
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: OBSIDIAN & GFM MARKDOWN CHEAT SHEET -->
+    <div class="modal-overlay" id="modalMarkdownHelp">
+      <div class="modal-window" style="max-width: 720px; max-height: 85vh; overflow-y: auto;">
+        <div class="modal-header">
+          <h3>📖 Panduan Markdown (Obsidian & GitHub Pages)</h3>
+          <button class="modal-close-btn" onclick="closeModal('modalMarkdownHelp')">✕</button>
+        </div>
+        <div style="padding: 12px 0; font-size: 14px; line-height: 1.6;">
+          <p style="color: var(--mute); margin-bottom: 16px;">
+            Editor ini menggunakan format <strong>Markdown murni</strong> seperti Obsidian dan GitHub Pages. Anda bisa mengetik langsung atau klik tombol di toolbar.
+          </p>
+
+          <div style="display: grid; gap: 14px;">
+            <div style="background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;">
+              <strong style="color: var(--fg); display: block; margin-bottom: 6px;">1. Heading / Judul Bagian</strong>
+              <code style="display:block; background:rgba(0,0,0,0.2); padding:6px 10px; border-radius:4px; font-size:13px;"># Judul Utama (H1)<br>## Subjudul (H2)<br>### Topik Kecil (H3)</code>
+            </div>
+
+            <div style="background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;">
+              <strong style="color: var(--fg); display: block; margin-bottom: 6px;">2. Penekanan Teks & Highlight Obsidian</strong>
+              <code style="display:block; background:rgba(0,0,0,0.2); padding:6px 10px; border-radius:4px; font-size:13px;">**Teks Tebal** (Ctrl+B)<br>*Teks Miring* (Ctrl+I)<br>~~Teks Dicoret~~<br>==Teks Highlight Kuning ala Obsidian==</code>
+            </div>
+
+            <div style="background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;">
+              <strong style="color: var(--fg); display: block; margin-bottom: 6px;">3. Obsidian & GitHub Callouts (Kotak Sorot Berwarna)</strong>
+              <code style="display:block; background:rgba(0,0,0,0.2); padding:6px 10px; border-radius:4px; font-size:13px;">> [!NOTE] Catatan Penting<br>> Tulis isi catatan informatif di sini.<br><br>> [!TIP] Tips Desain<br>> Trik bermanfaat yang bisa dicoba.<br><br>> [!WARNING] Peringatan<br>> Hati-hati saat mengubah konfigurasi ini.</code>
+            </div>
+
+            <div style="background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;">
+              <strong style="color: var(--fg); display: block; margin-bottom: 6px;">4. Checklist / Task List</strong>
+              <code style="display:block; background:rgba(0,0,0,0.2); padding:6px 10px; border-radius:4px; font-size:13px;">- [ ] Tugas yang belum selesai<br>- [x] Tugas yang sudah selesai</code>
+            </div>
+
+            <div style="background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;">
+              <strong style="color: var(--fg); display: block; margin-bottom: 6px;">5. Blok Kode (Syntax Highlighting + Tombol Copy)</strong>
+              <code style="display:block; background:rgba(0,0,0,0.2); padding:6px 10px; border-radius:4px; font-size:13px;">```javascript<br>function halo() {<br>&nbsp;&nbsp;console.log("Halo dari Obsidian!");<br>}<br>```</code>
+            </div>
+
+            <div style="background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px;">
+              <strong style="color: var(--fg); display: block; margin-bottom: 6px;">6. Tabel Markdown</strong>
+              <code style="display:block; background:rgba(0,0,0,0.2); padding:6px 10px; border-radius:4px; font-size:13px;">| Fitur | Status | Keterangan |<br>| :--- | :---: | ---: |<br>| Markdown | Aktif | Sangat cepat |</code>
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="closeModal('modalMarkdownHelp')">Mengerti & Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast-msg"></div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

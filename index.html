@@ -1,40 +1,70 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>Eko — Portofolio</title>
+    <title>cahyadies: Arsip Karya, Eksperimen Model AI &amp; Catatan Pikiran</title>
+    <meta
+      name="description"
+      content="Arsip galeri karya desain, pengembangan web, eksperimen model AI, dan catatan pikiran oleh Adies, membawahi ekosistem MentayaSandbox, dalam.dapur, dan Omah Ijo."
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <div class="wrap">
+    <header class="mntn-header">
+      <div class="wrap header-inner">
         <a class="logo" href="#/">cahyadies<b>.</b></a>
 
-        <!-- Tombol Hamburger Mobile -->
-        <button id="hamburger" aria-label="Menu">☰</button>
+        <button
+          id="hamburger"
+          type="button"
+          aria-label="Buka menu navigasi"
+          aria-expanded="false"
+          aria-controls="nav"
+        >
+          <span aria-hidden="true">☰</span>
+        </button>
 
-        <nav id="nav"></nav>
+        <nav id="nav" aria-label="Navigasi Utama"></nav>
       </div>
     </header>
 
-    <main class="wrap" id="app"></main>
+    <aside class="mntn-left-rail" aria-label="Jejaring Sosial">
+      <span class="rail-label" id="railFollowLabel">Terhubung</span>
+      <a href="https://instagram.com/cahyadies" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+      <a href="https://linkedin.com/in/cahyadies" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">IN</a>
+      <a href="https://github.com/cahyadies" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GH</a>
+    </aside>
 
-    <footer>
+    <aside class="mntn-right-slider" id="mntnSlider" aria-label="Indikator Bagian Halaman">
+      <a href="#sec-start" data-step="start" class="active">Start</a>
+      <a href="#sec-01" data-step="01">01</a>
+      <a href="#sec-02" data-step="02">02</a>
+      <a href="#sec-03" data-step="03">03</a>
+    </aside>
+
+    <main id="app">
       <div class="wrap">
-        <div id="foot"></div>
+        <div class="state-box" role="status" aria-live="polite">
+          <p>Memuat halaman arsip cahyadies...</p>
+        </div>
       </div>
+    </main>
+
+    <footer class="mntn-footer">
+      <div class="wrap" id="foot"></div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>

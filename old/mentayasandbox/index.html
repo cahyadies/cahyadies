@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>mentayasandbox — Creative Tech Lab & Studio</title>
+    <meta
+      name="description"
+      content="Lab riset teknologi, galeri eksplorasi, open collab, dan studio komisi karya oleh Adies."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Grid spotlight background yang mengikuti kursor -->
+    <div class="grid-spotlight" id="gridSpotlight"></div>
+
+    <!-- HEADER -->
+    <header>
+      <div class="wrap">
+        <a class="logo" href="#hero">mentayasandbox<b>.</b></a>
+
+        <nav class="nav-links">
+          <a href="#gallery" data-i18n="navGallery">01. Galeri</a>
+          <a href="#collab" data-i18n="navCollab">02. Collab</a>
+          <a href="#commission" data-i18n="navComm">03. Komisi</a>
+          <a href="../#/" title="Kembali ke Portofolio Utama">cahyadies ↗</a>
+          
+          <!-- Language Switcher ID / EN -->
+          <div class="lang-switch">
+            <button class="lang-btn active" id="btnLangId" onclick="setLang('id')">ID</button>
+            <span class="lang-sep">/</span>
+            <button class="lang-btn" id="btnLangEn" onclick="setLang('en')">EN</button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <!-- HERO -->
+      <section class="hero" id="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="hero-tag" data-i18n="heroTag">// CREATIVE TECH LAB & EXPERIMENTAL STUDIO</div>
+            <h1 data-i18n="heroTitle">Eksplorasi kode, antarmuka visual, dan inisiatif nyata.</h1>
+            <p data-i18n="heroDesc">
+              MentayaSandbox adalah ruang eksperimen dan lab kreatif yang diinisiasi oleh 
+              <strong>Adies</strong>, berbasis di Surabaya. Terbuka untuk eksplorasi mandiri,
+              kolaborasi lintas disiplin, dan pembuatan karya kustom.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#gallery" class="btn btn-primary" data-i18n="btnGallery">Buka Galeri ↗</a>
+              <a href="#commission" class="btn btn-outline" data-i18n="btnComm">Order Komisi ↗</a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-pill">
+                <span data-i18n="statStatus">Status:</span> <b style="color:var(--comm)" data-i18n="statStatusVal">● Open for Projects</b>
+              </div>
+              <div class="stat-pill">
+                <span data-i18n="statFocus">Fokus:</span> <b data-i18n="statFocusVal">Web, UI/UX, AI/CV</b>
+              </div>
+              <div class="stat-pill">
+                <span data-i18n="statBase">Basis:</span> <b data-i18n="statBaseVal">Surabaya & Remote</b>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Code / Telemetry Card (Brick Style) -->
+          <div class="hero-preview">
+            <div class="code-card">
+              <div class="code-header">
+                <div class="code-dots">
+                  <span class="dot dot-red"></span>
+                  <span class="dot dot-yellow"></span>
+                  <span class="dot dot-green"></span>
+                </div>
+                <span class="code-title">Lab::Telemetry.json</span>
+                <button class="copy-btn" id="copyCodeBtn" onclick="copySnippet()">Copy</button>
+              </div>
+              <pre class="code-body"><code id="telemetryCodeBody"></code></pre>
+              <div class="code-footer">
+                <span class="pulse-dot"></span>
+                <span data-i18n="telemetryReady">Ready to build & collaborate</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 1: GALLERY & LAB LOGS -->
+      <section id="gallery">
+        <div class="sec-head">
+          <h2><span>[01]</span> <span data-i18n="sec1Title">Galeri & Catatan Eksplorasi</span></h2>
+          <span data-i18n="sec1Sub">Kanban Progres Lab</span>
+        </div>
+
+        <div class="filter-bar" id="filterBar"></div>
+        <div class="cols" id="cols"></div>
+      </section>
+
+      <!-- SECTION 2: OPEN COLLAB -->
+      <section id="collab">
+        <div class="sec-head">
+          <h2><span style="color:var(--collab)">[02]</span> <span data-i18n="sec2Title">Wadah Open Collab</span></h2>
+          <span data-i18n="sec2Sub">Eksperimen Kolektif</span>
+        </div>
+
+        <div class="collab-grid">
+          <div>
+            <p data-i18n="sec2Desc" style="color:var(--mute); margin-top:0; font-size:13px;">
+              Punya ide yang ingin dieksplorasi bersama? MentayaSandbox menyambut kolaborasi dengan 
+              developer, desainer, fotografer, pegiat literasi, atau komunitas lokal.
+            </p>
+            <div class="collab-list" id="collabList"></div>
+          </div>
+
+          <div class="action-card">
+            <div>
+              <span class="badge badge-collab" style="margin-bottom:12px; display:inline-block;" data-i18n="collabPitchTag">LET'S BUILD TOGETHER</span>
+              <h3 data-i18n="collabPitchTitle">Ajak Kolaborasi Proyek</h3>
+              <p data-i18n="collabPitchDesc">
+                Jika kamu punya dataset menarik, masalah lokal yang butuh solusi digital, atau ingin bikin karya bareng.
+              </p>
+            </div>
+            <a
+              href="https://wa.me/6281234567890?text=Halo%20Adies,%20saya%20tertarik%20untuk%20mengajak%20kolaborasi%20di%20MentayaSandbox."
+              target="_blank"
+              class="btn btn-primary"
+              data-i18n="collabPitchBtn"
+            >
+              Kirim Ide / Pitch ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: OPEN COMMISSION -->
+      <section id="commission">
+        <div class="sec-head">
+          <h2><span style="color:var(--comm)">[03]</span> <span data-i18n="sec3Title">Layanan Open Commission</span></h2>
+          <span data-i18n="sec3Sub">Pekerjaan Kustom & Komersial</span>
+        </div>
+
+        <p data-i18n="sec3Desc" style="color:var(--mute); margin-top:0; font-size:13px; max-width:70ch;">
+          Butuh website dengan performa kilat, identitas visual yang solid, atau antarmuka digital yang fungsional? 
+          Saya menerima proyek komisi terpilih dengan pendekatan detail dan jujur.
+        </p>
+
+        <div class="comm-cards" id="commList"></div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="wrap foot-content">
+        <div>
+          <strong>mentayasandbox.</strong> // <span data-i18n="footerInitiated">Diinisiasi oleh</span> <a href="../#/" style="color:var(--fg); text-decoration:none; border-bottom:1px dashed var(--mute);">Adies</a>
+        </div>
+        <div data-i18n="footerLoc">
+          Surabaya, Jawa Timur · 2026
+        </div>
+      </div>
+    </footer>
+
+    <!-- DETAIL MODAL -->
+    <div class="modal" id="modal" onclick="if(event.target === this) closeModal()">
+      <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div id="mType" style="color:var(--mute); font-size:11px; margin-bottom:8px;"></div>
+        <h3 id="mTitle" style="margin:0 0 10px; font-size:18px;"></h3>
+        <p id="mDesc" style="color:var(--fg); margin:0 0 16px; font-size:13px; line-height:1.5;"></p>
+        <div id="mCollab" style="color:var(--collab); font-size:12px; margin-bottom:12px; display:none;"></div>
+        <div id="mNotes" style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:12px; border-radius:4px; font-size:12px; color:var(--mute); line-height:1.6;"></div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
