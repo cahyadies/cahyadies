@@ -11,7 +11,7 @@ const I18N = {
     navProcess: 'Proses',
     navNotes: 'Dokumentasi',
     navStudio: 'Studio',
-    navCta: 'Mulai Kolaborasi',
+    navCta: 'Kontak',
     heroTitle: 'Dari Gagasan Keilmuan Menjadi Sistem Terapan',
     heroSubtitle:
       'MentayaSandbox merancang eksperimen computer vision, produk web hemat sumber daya, dan sistem terapan untuk riset akademik maupun inisiatif nyata. Diskusikan ide Anda, mari wujudkan bersama.',
@@ -137,7 +137,7 @@ const I18N = {
     navProcess: 'Process',
     navNotes: 'Docs',
     navStudio: 'Studio',
-    navCta: 'Start Collaboration',
+    navCta: 'Contact',
     heroTitle: 'From Scientific Idea to Working Applied System',
     heroSubtitle:
       'MentayaSandbox designs computer vision experiments, low-overhead web products, and applied systems for academic research and growing initiatives. Discuss your idea with us to bring it to life.',
