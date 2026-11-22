@@ -336,6 +336,11 @@ function renderNav() {
 
   const isHome = page === '' || page.startsWith('sec-');
 
+  const themeIconSvg =
+    state.theme === 'dark'
+      ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>`
+      : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>`;
+
   nav.innerHTML = `
     <div class="nav-links">
       <a class="nav-link ${isHome ? 'active' : ''}" href="#/">${labels.home}</a>
@@ -345,8 +350,8 @@ function renderNav() {
       <a class="nav-link ${page === 'kontak' ? 'active' : ''}" href="#/kontak">${labels.contact}</a>
     </div>
     <div class="nav-controls">
-      <button type="button" class="ctrl-btn" id="langBtn" aria-label="Ganti bahasa">${state.lang.toUpperCase()}</button>
-      <button type="button" class="ctrl-btn" id="themeBtn" aria-label="Ganti tema warna">${state.theme === 'dark' ? 'LIGHT' : 'DARK'}</button>
+      <button type="button" class="ctrl-btn" id="langBtn" aria-label="Ganti bahasa">${state.lang === 'id' ? 'EN' : 'ID'}</button>
+      <button type="button" class="ctrl-btn" id="themeBtn" aria-label="Ganti tema warna">${themeIconSvg}</button>
     </div>
   `;
 
@@ -814,7 +819,7 @@ function contactView() {
             <div class="contact-list">
               <div class="contact-item">
                 <span>Email Utama</span>
-                <strong>halo@cahyadies.my.id</strong>
+                <strong>ekosugengcahyadi@gmail.com</strong>
               </div>
               <div class="contact-item">
                 <span>GitHub &amp; Eksperimen Kode</span>
@@ -822,7 +827,7 @@ function contactView() {
               </div>
               <div class="contact-item">
                 <span>Basis Domisili</span>
-                <strong>Sampit (Kalimantan Tengah) &amp; Surabaya</strong>
+                <strong>Surabaya</strong>
               </div>
             </div>
           </div>
@@ -943,7 +948,7 @@ function bindEvents() {
       const msg = document.getElementById('cMsg')?.value || '';
       const subject = encodeURIComponent(`[cahyadies] ${topic} - ${name}`);
       const body = encodeURIComponent(`Halo Adies,\n\nNama: ${name}\nTopik: ${topic}\n\n${msg}`);
-      window.location.href = `mailto:halo@cahyadies.my.id?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:ekosugengcahyadi@gmail.com?subject=${subject}&body=${body}`;
     });
   }
 }

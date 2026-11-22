@@ -1,5 +1,5 @@
 const WA_NUMBER = '6282157058512';
-const EMAIL_ADDR = 'halo@cahyadies.my.id';
+const EMAIL_ADDR = 'ekosugengcahyadi@gmail.com';
 
 let currentLang = localStorage.getItem('mentaya_lang') || 'id';
 let currentFilter = 'semua';
@@ -482,7 +482,7 @@ window.toggleMobileNav = function () {
 
 function applyTranslations() {
   const langBtn = document.getElementById('langToggle');
-  if (langBtn) langBtn.textContent = currentLang.toUpperCase();
+  if (langBtn) langBtn.textContent = currentLang === 'id' ? 'EN' : 'ID';
 
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
