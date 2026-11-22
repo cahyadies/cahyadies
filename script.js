@@ -369,7 +369,7 @@ function renderFooter() {
               : 'Portfolio archive of design works, web systems, AI model experiments, and written thoughts anchoring MentayaSandbox, dalam.dapur, and Omah Ijo.'
           }</p>
         </div>
-        <div class="mntn-footer-copy">Copyright 2026 cahyadies. Sampit &amp; Surabaya.</div>
+        <div class="mntn-footer-copy">Copyright 2026 cahyadies. - Surabaya.</div>
       </div>
 
       <div class="mntn-footer-col">
