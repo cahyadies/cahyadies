@@ -1401,6 +1401,17 @@ body.has-pointer .bp-grid-cell-highlight {
   gap: 14px;
 }
 
+.bp-inline-parent-link {
+  color: var(--bp-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bp-inline-parent-link:hover {
+  color: var(--bp-ink);
+}
+
 .bp-footer-theme-pill {
   min-height: 38px;
   padding: 0 14px;
