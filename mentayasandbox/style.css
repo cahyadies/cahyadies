@@ -16,11 +16,18 @@
   --bp-hairline: rgba(255, 255, 255, 0.09);
   --bp-hairline-strong: rgba(255, 255, 255, 0.2);
   --bp-grid-line: rgba(255, 255, 255, 0.045);
+  --bp-grid-hover: rgba(96, 165, 250, 0.22);
+  --bp-cursor-glow: rgba(96, 165, 250, 0.09);
+  --bp-card-spotlight: rgba(96, 165, 250, 0.11);
+  --bp-cell-fill: rgba(96, 165, 250, 0.07);
+  --bp-cell-border: rgba(96, 165, 250, 0.32);
   --bp-success: #4ade80;
   --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --mouse-x: 50vw;
+  --mouse-y: 35vh;
 }
 
 :root[data-theme="light"] {
@@ -40,6 +47,11 @@
   --bp-hairline: rgba(15, 23, 42, 0.09);
   --bp-hairline-strong: rgba(15, 23, 42, 0.2);
   --bp-grid-line: rgba(15, 23, 42, 0.045);
+  --bp-grid-hover: rgba(37, 99, 235, 0.2);
+  --bp-cursor-glow: rgba(37, 99, 235, 0.075);
+  --bp-card-spotlight: rgba(37, 99, 235, 0.08);
+  --bp-cell-fill: rgba(37, 99, 235, 0.055);
+  --bp-cell-border: rgba(37, 99, 235, 0.26);
   --bp-success: #15803d;
 }
 
@@ -113,10 +125,92 @@ summary,
   background-size: 48px 48px;
 }
 
+.bp-grid-hover-layer {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--bp-grid-hover) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bp-grid-hover) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(
+    320px circle at var(--mouse-x, 50vw) var(--mouse-y, 35vh),
+    #000000 0%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    320px circle at var(--mouse-x, 50vw) var(--mouse-y, 35vh),
+    #000000 0%,
+    transparent 100%
+  );
+}
+
+.bp-grid-cell-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  background: var(--bp-cell-fill);
+  border: 1px solid var(--bp-cell-border);
+  box-shadow: 0 0 24px var(--bp-cursor-glow);
+  transform: translate3d(var(--cell-x, -100px), var(--cell-y, -100px), 0);
+  transition: transform 0.08s ease-out, opacity 0.2s ease;
+  opacity: 0;
+}
+
+body.has-pointer .bp-grid-cell-highlight {
+  opacity: 1;
+}
+
+.bp-cursor-spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    540px circle at var(--mouse-x, 50vw) var(--mouse-y, 35vh),
+    var(--bp-cursor-glow),
+    transparent 70%
+  );
+}
+
 .bp-vignette-layer {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 50% 25%, transparent 15%, var(--bp-canvas) 92%);
+}
+
+.bp-overview-card,
+.bp-service-card,
+.bp-engage-card,
+.bp-note-card,
+.bp-final-cta-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.bp-overview-card::after,
+.bp-service-card::after,
+.bp-engage-card::after,
+.bp-note-card::after,
+.bp-final-cta-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--card-mx, 50%) var(--card-my, 50%),
+    var(--bp-card-spotlight),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.bp-overview-card:hover::after,
+.bp-service-card:hover::after,
+.bp-engage-card:hover::after,
+.bp-note-card:hover::after,
+.bp-final-cta-card:hover::after {
+  opacity: 1;
 }
 
 .bp-container {

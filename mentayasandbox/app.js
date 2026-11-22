@@ -740,6 +740,37 @@ window.submitCollabForm = function (e) {
   }
 };
 
+let pointerRaf = null;
+window.addEventListener(
+  'pointermove',
+  (e) => {
+    if (e.pointerType === 'touch') return;
+    document.body.classList.add('has-pointer');
+    if (pointerRaf) cancelAnimationFrame(pointerRaf);
+    pointerRaf = requestAnimationFrame(() => {
+      const x = e.clientX;
+      const y = e.clientY;
+      const root = document.documentElement;
+      root.style.setProperty('--mouse-x', `${x}px`);
+      root.style.setProperty('--mouse-y', `${y}px`);
+      const cellX = Math.floor(x / 48) * 48;
+      const cellY = Math.floor(y / 48) * 48;
+      root.style.setProperty('--cell-x', `${cellX}px`);
+      root.style.setProperty('--cell-y', `${cellY}px`);
+
+      const card = e.target.closest(
+        '.bp-overview-card, .bp-service-card, .bp-engage-card, .bp-note-card, .bp-final-cta-card'
+      );
+      if (card) {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--card-mx', `${x - rect.left}px`);
+        card.style.setProperty('--card-my', `${y - rect.top}px`);
+      }
+    });
+  },
+  { passive: true }
+);
+
 document.addEventListener('DOMContentLoaded', () => {
   setTheme(localStorage.getItem('mentaya_theme') || 'dark');
   applyTranslations();
