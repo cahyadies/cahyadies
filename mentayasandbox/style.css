@@ -1114,13 +1114,40 @@ body.has-pointer .bp-grid-cell-highlight {
   border-color: var(--bp-hairline-strong);
 }
 
+.bp-note-top-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
 .bp-note-tag {
   display: inline-block;
   font: 600 11px var(--font-sans);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--bp-accent);
-  margin-bottom: 10px;
+}
+
+.bp-doc-code {
+  font: 600 11px var(--font-mono);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid var(--bp-hairline);
+  background: var(--bp-elevated);
+  color: var(--bp-muted);
+}
+
+.bp-doc-spec {
+  font: 500 12px/1.45 var(--font-mono);
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--bp-hairline);
+  background: var(--bp-elevated);
+  color: var(--bp-secondary);
+  margin: 0 0 16px;
+  overflow-x: auto;
 }
 
 .bp-note-card h3 {

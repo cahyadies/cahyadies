@@ -9,7 +9,7 @@ const I18N = {
   id: {
     navWork: 'Riset & Karya',
     navProcess: 'Proses',
-    navNotes: 'Catatan',
+    navNotes: 'Dokumentasi',
     navStudio: 'Studio',
     navCta: 'Mulai Kolaborasi',
     heroTitle: 'Dari Gagasan Keilmuan Menjadi Sistem Terapan',
@@ -94,11 +94,11 @@ const I18N = {
     tr6Free: 'Diskusi Terbuka',
     tr6Consult: 'Konsultasi Gratis',
     scopeCtaPrimary: 'Diskusikan Rencana Proyek',
-    scopeCtaSecondary: 'Baca Catatan Keilmuan',
-    notesTitle: 'Catatan Keilmuan & Dokumentasi Lab',
+    scopeCtaSecondary: 'Lihat Dokumentasi Teknis',
+    notesTitle: 'Dokumentasi Teknis & Keilmuan',
     notesSub:
-      'Ringkasan tertulis dari eksperimen, arsitektur perangkat lunak, dan pengamatan teknis di MentayaSandbox.',
-    readNote: 'Baca Catatan Teknis',
+      'Dokumentasi arsitektur sistem, spesifikasi eksperimen, dan modul keilmuan terbuka di MentayaSandbox.',
+    readNote: 'Buka Dokumentasi',
     faqTitle: 'Pertanyaan yang Sering Diajukan',
     faqAskLink: 'Ajukan pertanyaan lain',
     faqQ1: 'Apa hubungan MentayaSandbox dengan website induk cahyadies?',
@@ -135,7 +135,7 @@ const I18N = {
   en: {
     navWork: 'Work & Research',
     navProcess: 'Process',
-    navNotes: 'Notes',
+    navNotes: 'Docs',
     navStudio: 'Studio',
     navCta: 'Start Collaboration',
     heroTitle: 'From Scientific Idea to Working Applied System',
@@ -220,11 +220,11 @@ const I18N = {
     tr6Free: 'Open Discussion',
     tr6Consult: 'Free Consultation',
     scopeCtaPrimary: 'Discuss Your Project Scope',
-    scopeCtaSecondary: 'Read Technical Notes',
-    notesTitle: 'Knowledge Notes & Lab Documentation',
+    scopeCtaSecondary: 'View Technical Docs',
+    notesTitle: 'Technical & Scientific Documentation',
     notesSub:
-      'Written summaries of experiments, software architecture decisions, and technical observations at MentayaSandbox.',
-    readNote: 'Read Technical Note',
+      'System architecture documentation, experiment specifications, and open engineering modules at MentayaSandbox.',
+    readNote: 'Read Documentation',
     faqTitle: 'Frequently Asked Questions',
     faqAskLink: 'Ask another question',
     faqQ1: 'How does MentayaSandbox relate to the parent cahyadies website?',
@@ -366,48 +366,54 @@ const PROJECTS = [
 const KNOWLEDGE_NOTES = [
   {
     id: 'note-cv-agri',
-    tagId: 'Visi Komputer Terapan',
-    tagEn: 'Applied Computer Vision',
-    titleId: 'Segmentasi Warna Daun untuk Estimasi Panen tanpa Sensor Mahal',
-    titleEn: 'Leaf Color Segmentation for Harvest Estimation Without Costly Sensors',
+    docCode: 'DOC-01 · v1.2',
+    specSnippet: 'hsv_canopy_mask(frame) -> ratio >= 0.88 (Ready HST)',
+    tagId: 'Dokumentasi Visi Komputer',
+    tagEn: 'Computer Vision Docs',
+    titleId: 'Spesifikasi Pipeline Segmentasi Daun untuk Estimasi Panen',
+    titleEn: 'Leaf Segmentation Pipeline Specification for Harvest Estimation',
     summaryId:
-      'Bagaimana kamera ponsel biasa dan normalisasi pencahayaan sederhana dapat membantu memantau pertumbuhan sayuran hidroponik.',
+      'Dokumentasi kalibrasi ruang warna HSV dan ekstraksi kontur kanopi daun dari citra kamera ponsel untuk memantau pertumbuhan sayuran hidroponik.',
     summaryEn:
-      'How a standard phone camera and simple illumination normalization can track hydroponic crop growth.',
+      'Documentation of HSV color-space calibration and canopy contour extraction from phone camera frames to track hydroponic growth.',
     bodyId:
-      'Dalam penerapan AI untuk kebun skala keluarga seperti Omah Ijo, tantangan terbesar bukanlah memilih arsitektur deep learning paling rumit, melainkan menjaga konsistensi pembacaan warna daun saat cuaca mendung atau terik. Dengan kalibrasi kartu warna sederhana di tepi meja tanam, algoritma kontur ringan sudah mampu memberi estimasi pertumbuhan kanopi yang andal.',
+      'Modul ini mendokumentasikan tahapan pra-pemrosesan citra pada meja instalasi NFT Omah Ijo: (1) Normalisasi pencahayaan menggunakan kartu referensi di tepi talang, (2) Masking rentang warna hijau klorofil pada ruang HSV, dan (3) Perhitungan rasio luas piksel kanopi terhadap usia tanam (HST) untuk menentukan ambang siap panen.',
     bodyEn:
-      'In family-scale agricultural AI like Omah Ijo, the main challenge is not picking the heaviest deep learning model, but maintaining color consistency across shifting sunlight. Using a simple reference marker on the growing table allows lightweight contour algorithms to measure canopy growth reliably.'
+      'This module documents the image preprocessing stages on Omah Ijo NFT tables: (1) Illumination normalization using a reference marker on the channel edge, (2) Chlorophyll green range masking in HSV space, and (3) Canopy pixel area ratio calculation against Days After Planting (HST).'
   },
   {
     id: 'note-zero-bloat',
-    tagId: 'Arsitektur Web Berkelanjutan',
-    tagEn: 'Sustainable Web Architecture',
-    titleId: 'Membangun Sistem Informasi Usaha Keluarga yang Tahan 5 Tahun ke Depan',
-    titleEn: 'Engineering Family Business Information Systems Built to Last 5+ Years',
+    docCode: 'DOC-02 · v2.0',
+    specSnippet: 'store.json -> static_render() | 0 runtime dependencies',
+    tagId: 'Dokumentasi Arsitektur Web',
+    tagEn: 'Web Architecture Docs',
+    titleId: 'Standar Arsitektur Web Tanpa Dependensi untuk Sistem Usaha Keluarga',
+    titleEn: 'Zero-Dependency Web Architecture Standard for Family Systems',
     summaryId:
-      'Prinsip merancang katalog digital dan arsip portofolio dengan HTML, CSS, dan JavaScript murni agar bebas dari kerusakan rantai dependensi.',
+      'Dokumentasi struktur data JSON terpusat, pola komponen HTML/CSS murni, dan integrasi nota pesanan langsung ke WhatsApp.',
     summaryEn:
-      'Principles for building digital catalogs and portfolio archives with vanilla HTML, CSS, and JS free from dependency rot.',
+      'Documentation of centralized JSON data stores, vanilla HTML/CSS component patterns, and direct WhatsApp order slip integration.',
     bodyId:
-      'Keberlanjutan perangkat lunak berarti sistem tetap dapat dibuka, diedit, dan dijalankan tanpa error meskipun tidak disentuh selama berbulan-bulan. Dengan mengandalkan standar web murni dan struktur data JSON yang jelas, biaya perawatan menjadi nol dan kecepatan muat halaman tetap maksimal.',
+      'Dokumen spesifikasi teknis untuk membangun sistem katalog digital (seperti dalam.dapur dan Omah Ijo) yang tahan lebih dari 5 tahun tanpa risiko kerusakan paket npm. Mencakup skema penyimpanan state ringan di localStorage, pembuatan payload pesan WhatsApp terstruktur, dan pemisahan token tema CSS.',
     bodyEn:
-      'Software sustainability means a system can still be opened, edited, and deployed without build errors even after months untouched. Relying on web standards and clean JSON structures keeps maintenance overhead at zero and page speed instantaneous.'
+      'Technical specification for building digital catalog systems (such as dalam.dapur and Omah Ijo) engineered to last 5+ years without npm dependency rot. Covers lightweight localStorage state schemas, structured WhatsApp payload generation, and CSS theme token isolation.'
   },
   {
     id: 'note-mentaya-gis',
-    tagId: 'Arsip Spasial & Komunitas',
-    tagEn: 'Spatial Archive & Community',
-    titleId: 'Inisiatif Pemetaan Terbuka Daerah Aliran Sungai Mentaya',
-    titleEn: 'Open Spatial Mapping Initiative for the Mentaya River Basin',
+    docCode: 'DOC-03 · v0.9',
+    specSnippet: 'mentaya_basin.geojson -> SpatialLayer [EPSG:4326]',
+    tagId: 'Dokumentasi Spasial & GIS',
+    tagEn: 'Spatial & GIS Docs',
+    titleId: 'Skema Data GeoJSON & Dokumentasi Pemetaan Sungai Mentaya',
+    titleEn: 'GeoJSON Data Schema & Mentaya River Spatial Mapping Docs',
     summaryId:
-      'Gagasan mendokumentasikan titik ekologi, dermaga rakyat, dan jejak sejarah lokal Sampit melalui peta web interaktif yang ringan.',
+      'Dokumentasi struktur atribut koordinat, klasifikasi titik dermaga dan ekologi, serta panduan kontribusi data terbuka kawasan Sampit.',
     summaryEn:
-      'Documenting ecological points, local docks, and cultural history along the Mentaya River in Sampit via lightweight interactive web maps.',
+      'Documentation of coordinate attribute schemas, dock and ecological point classifications, and open data contribution guides for Sampit.',
     bodyId:
-      'Sungai Mentaya adalah urat nadi kehidupan di Sampit dan Kotawaringin Timur. Proyek riset terbuka ini mengumpulkan koordinat spasial dan narasi sejarah lokal ke dalam lapisan GeoJSON ringan yang dapat diakses oleh pelajar, peneliti, maupun warga.',
+      'Mendefinisikan format standar lapisan GeoJSON untuk arsip spasial Daerah Aliran Sungai Mentaya di Kotawaringin Timur. Setiap fitur titik dan poligon memuat metadata kategori (ekologi, infrastruktur sungai, riwayat lokal), sumber observasi, serta koordinat WGS84 yang ringan dirender di peramban.',
     bodyEn:
-      'The Mentaya River is the lifeblood of Sampit and East Kotawaringin. This open research initiative gathers spatial coordinates and local historical narratives into lightweight GeoJSON layers accessible to students, researchers, and residents.'
+      'Defines the standard GeoJSON layer schema for the Mentaya River basin spatial archive in East Kotawaringin. Each point and polygon feature carries category metadata (ecology, river infrastructure, local history), observation source, and browser-ready WGS84 coordinates.'
   }
 ];
 
@@ -610,8 +616,12 @@ function renderNotes() {
         onclick="openNoteModal('${n.id}', this)"
       >
         <div>
-          <span class="bp-note-tag">${tag}</span>
+          <div class="bp-note-top-meta">
+            <span class="bp-note-tag">${tag}</span>
+            <span class="bp-doc-code">${n.docCode}</span>
+          </div>
           <h3>${title}</h3>
+          <div class="bp-doc-spec">${n.specSnippet}</div>
           <p>${summary}</p>
         </div>
         <span class="bp-note-more">${t('readNote')}</span>
@@ -680,7 +690,8 @@ window.openNoteModal = function (id, triggerEl) {
     currentLang === 'en' ? n.titleEn : n.titleId;
   document.getElementById('mDesc').textContent =
     currentLang === 'en' ? n.summaryEn : n.summaryId;
-  document.getElementById('mCollab').textContent = 'MentayaSandbox Knowledge Note';
+  document.getElementById('mCollab').textContent =
+    n.docCode + ' · ' + n.specSnippet;
   document.getElementById('mNotes').textContent =
     currentLang === 'en' ? n.bodyEn : n.bodyId;
 
