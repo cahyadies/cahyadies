@@ -13,7 +13,7 @@ const DATA = {
         id: 'Wadah ekspresi, kolaborasi terbuka, dan dokumentasi keilmuan teknologi informasi berkelanjutan: mencakup eksperimen computer vision, arsitektur web hemat sumber daya, serta catatan teknis.',
         en: 'A space for expression, open collaboration, and sustainable IT research documentation covering computer vision experiments, low-overhead web architecture, and technical notes.'
       },
-      href: 'mentayasandbox/index.html',
+      href: 'https://mentayasandbox.vercel.app/',
       cta: { id: 'Buka MentayaSandbox', en: 'Open MentayaSandbox' }
     },
     {
@@ -23,7 +23,7 @@ const DATA = {
         id: 'Katalog digital yang menghimpun seluruh hasil olahan masakan Ibu di Sampit: mulai dari makanan berat seperti nasi bakar dan mie ayam, aneka roti lembut, kue basah, kue kering, hingga frozen food.',
         en: 'Digital catalog gathering Mother’s homemade culinary creations in Sampit: grilled rice, chicken noodles, soft bakery items, traditional cakes, dry pastries, and frozen food.'
       },
-      href: 'dalamdapur/index.html',
+      href: 'https://dalamdapur.vercel.app/',
       cta: { id: 'Buka Katalog dalam.dapur', en: 'Open dalam.dapur Catalog' }
     },
     {
@@ -33,7 +33,7 @@ const DATA = {
         id: 'Katalog hasil perkebunan hidroponik punya Bapak yang dikelola keluarga: memantau sayur yang sedang ready siap petik, berapa lama masa tunggu hingga siap jual, serta layanan permintaan pasar.',
         en: 'Catalog for Father’s family-run hydroponic garden: tracking ready-to-harvest greens, countdown days until ready to sell, and custom market supply requests.'
       },
-      href: 'omahijo/index.html',
+      href: 'https://omahijo.vercel.app/',
       cta: { id: 'Buka Katalog Omah Ijo', en: 'Open Omah Ijo Catalog' }
     }
   ],
@@ -375,9 +375,9 @@ function renderFooter() {
       <div class="mntn-footer-col">
         <h4>${state.lang === 'id' ? 'Lebih Lanjut di Ekosistem' : 'More on Ecosystem'}</h4>
         <ul>
-          <li><a href="mentayasandbox/index.html">MentayaSandbox</a></li>
-          <li><a href="dalamdapur/index.html">dalam.dapur</a></li>
-          <li><a href="omahijo/index.html">Omah Ijo</a></li>
+          <li><a href="https://mentayasandbox.vercel.app/">MentayaSandbox</a></li>
+          <li><a href="https://dalamdapur.vercel.app/">dalam.dapur</a></li>
+          <li><a href="https://omahijo.vercel.app/">Omah Ijo</a></li>
         </ul>
       </div>
 
@@ -442,7 +442,7 @@ function homeView() {
               ? 'Di bawah payung cahyadies, tiga inisiatif berjalan beriringan sesuai perannya masing-masing: MentayaSandbox sebagai ruang ekspresi dan keilmuan IT berkelanjutan, dalam.dapur sebagai katalog olahan masakan serta kue buatan Ibu, dan Omah Ijo sebagai katalog panen kebun hidroponik yang dikelola Bapak bersama keluarga.'
               : 'Under the cahyadies umbrella, three initiatives run side by side: MentayaSandbox as a space for sustainable IT knowledge and collaboration, dalam.dapur as Mother’s homemade culinary catalog, and Omah Ijo as Father’s family-run hydroponic harvest catalog.'
           }</p>
-          <a class="mntn-read-more" href="mentayasandbox/index.html">${
+          <a class="mntn-read-more" href="https://mentayasandbox.vercel.app/">${
             state.lang === 'id' ? 'jelajahi ekosistem' : 'explore ecosystem'
           }</a>
         </div>

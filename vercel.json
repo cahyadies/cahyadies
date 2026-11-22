@@ -1,0 +1,34 @@
+{
+  "redirects": [
+    {
+      "source": "/mentayasandbox",
+      "destination": "https://mentayasandbox.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/mentayasandbox/index.html",
+      "destination": "https://mentayasandbox.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/dalamdapur",
+      "destination": "https://dalamdapur.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/dalamdapur/index.html",
+      "destination": "https://dalamdapur.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/omahijo",
+      "destination": "https://omahijo.vercel.app/",
+      "permanent": false
+    },
+    {
+      "source": "/omahijo/index.html",
+      "destination": "https://omahijo.vercel.app/",
+      "permanent": false
+    }
+  ]
+}

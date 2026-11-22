@@ -286,7 +286,7 @@ const PROJECTS = [
     type: 'desain',
     badge: 'Design System',
     s: 'selesai',
-    img: '../assets/works/naraicoder-preview.png',
+    img: 'assets/naraicoder-preview.png',
     collabWith: 'NaraiCoder Kalimantan Tengah',
     id_content: {
       n: 'Arsitektur Identitas Visual & Grid Perisai Telawang NaraiCoder',
@@ -326,7 +326,7 @@ const PROJECTS = [
     type: 'web',
     badge: 'Web Product',
     s: 'selesai',
-    img: '../dalamdapur/images/samosa.jpg',
+    img: 'assets/samosa.jpg',
     collabWith: 'dalam.dapur (Keluarga Ibu)',
     id_content: {
       n: 'Sistem Katalog Digital & Laci Nota Pesanan dalam.dapur',
@@ -584,7 +584,7 @@ function renderProjects() {
       <div class="bp-work-bottom">
         <p class="bp-work-desc">${t('archiveSub')}</p>
         <div class="bp-work-foot">
-          <a href="../index.html#/karya" class="bp-cta-pill">
+          <a href="https://cahyadies.vercel.app/#/karya" class="bp-cta-pill">
             ${t('archiveCta')}
           </a>
         </div>
