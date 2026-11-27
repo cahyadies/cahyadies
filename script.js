@@ -898,31 +898,19 @@ function syncSliderOnScroll() {
   const slider = document.getElementById('mntnSlider');
   if (!slider) return;
   const sections = ['sec-start', 'sec-01', 'sec-02', 'sec-03'];
-  const els = sections.map((id) => document.getElementById(id));
-  if (!els[0]) return;
+  let activeIndex = 0;
+  const triggerLine = window.innerHeight * 0.45;
 
-  const scrollY = window.scrollY;
-  const triggerOffset = window.innerHeight * 0.35;
-  const positions = els.map((el) =>
-    el ? Math.max(0, el.getBoundingClientRect().top + scrollY - triggerOffset) : 0
-  );
-
-  let continuousStep = 0;
-  for (let i = 0; i < positions.length - 1; i++) {
-    const start = positions[i];
-    const end = positions[i + 1];
-    if (scrollY >= end) {
-      continuousStep = i + 1;
-    } else if (scrollY > start && end > start) {
-      continuousStep = i + (scrollY - start) / (end - start);
-      break;
-    } else {
-      break;
+  sections.forEach((id, idx) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.top <= triggerLine) {
+      activeIndex = idx;
     }
-  }
+  });
 
-  const activeIndex = Math.min(sections.length - 1, Math.max(0, Math.round(continuousStep)));
-  slider.style.setProperty('--active-step', continuousStep.toFixed(3));
+  slider.style.setProperty('--active-step', String(activeIndex));
   const activeId = sections[activeIndex];
 
   slider.querySelectorAll('a').forEach((link) => {

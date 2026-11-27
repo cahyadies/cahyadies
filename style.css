@@ -226,7 +226,7 @@ select {
   height: 48px;
   background: var(--text);
   transform: translate3d(0, calc(var(--active-step, 0) * 48px), 0);
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
   pointer-events: none;
 }
