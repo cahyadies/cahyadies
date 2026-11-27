@@ -414,13 +414,13 @@ function homeView() {
           }</div>
           <h1 class="mntn-hero-title">${
             state.lang === 'id'
-              ? 'Merangkai arsip pemikiran, rekayasa sistem, dan inisiatif keluarga.'
-              : 'Connecting thought archives, software engineering, and family initiatives.'
+              ? 'Arsip dari hal-hal yang saya buat, eksplorasi, dan pelajari.'
+              : "An archive of things I've made, explored, and learned."
           }</h1>
           <p class="mntn-hero-lead">${
             state.lang === 'id'
-              ? 'Sebagai rumah induk, cahyadies mendokumentasikan pekerjaan desain identitas, pengembangan web, dan eksperimen model AI, sekaligus menaungi tiga website mandiri: MentayaSandbox, dalam.dapur milik Ibu, dan Omah Ijo milik Bapak.'
-              : 'As the parent hub, cahyadies documents visual identity design, web development, and AI model experiments while anchoring three independent sites: MentayaSandbox, Mother’s dalam.dapur, and Father’s Omah Ijo.'
+              ? 'Catatan dan arsip karya seputar desain, website, dan proyek mandiri berbasis di Surabaya.'
+              : 'Notes and work archive covering design, websites, and independent projects based in Surabaya.'
           }</p>
           <a class="mntn-scroll-down" href="#sec-01">
             <span>${state.lang === 'id' ? 'gulir ke bawah' : 'scroll down'}</span>
