@@ -894,35 +894,35 @@ function updateSliderVisibility(isHome) {
   slider.style.display = isHome && window.innerWidth >= 1200 ? 'flex' : 'none';
 }
 
-let lastSliderIndex = 0;
-let sliderMoveTimer = null;
-
 function syncSliderOnScroll() {
   const slider = document.getElementById('mntnSlider');
   if (!slider) return;
   const sections = ['sec-start', 'sec-01', 'sec-02', 'sec-03'];
-  let activeIndex = 0;
-  const triggerLine = window.innerHeight * 0.38;
+  const els = sections.map((id) => document.getElementById(id));
+  if (!els[0]) return;
 
-  sections.forEach((id, idx) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    if (rect.top <= triggerLine) {
-      activeIndex = idx;
+  const scrollY = window.scrollY;
+  const triggerOffset = window.innerHeight * 0.35;
+  const positions = els.map((el) =>
+    el ? Math.max(0, el.getBoundingClientRect().top + scrollY - triggerOffset) : 0
+  );
+
+  let continuousStep = 0;
+  for (let i = 0; i < positions.length - 1; i++) {
+    const start = positions[i];
+    const end = positions[i + 1];
+    if (scrollY >= end) {
+      continuousStep = i + 1;
+    } else if (scrollY > start && end > start) {
+      continuousStep = i + (scrollY - start) / (end - start);
+      break;
+    } else {
+      break;
     }
-  });
-
-  if (activeIndex !== lastSliderIndex) {
-    lastSliderIndex = activeIndex;
-    slider.classList.add('is-moving');
-    if (sliderMoveTimer) clearTimeout(sliderMoveTimer);
-    sliderMoveTimer = setTimeout(() => {
-      slider.classList.remove('is-moving');
-    }, 560);
   }
 
-  slider.style.setProperty('--active-step', String(activeIndex));
+  const activeIndex = Math.min(sections.length - 1, Math.max(0, Math.round(continuousStep)));
+  slider.style.setProperty('--active-step', continuousStep.toFixed(3));
   const activeId = sections[activeIndex];
 
   slider.querySelectorAll('a').forEach((link) => {

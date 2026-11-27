@@ -226,12 +226,9 @@ select {
   height: 48px;
   background: var(--text);
   transform: translate3d(0, calc(var(--active-step, 0) * 48px), 0);
-  transition: transform 0.58s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
   pointer-events: none;
-}
-
-.mntn-right-slider.is-moving .mntn-slider-indicator {
-  background: var(--accent);
 }
 
 .mntn-right-slider a {
@@ -245,20 +242,15 @@ select {
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--subtle);
-  transform: translate3d(0, 0, 0) scale(1);
-  transform-origin: right center;
-  transition:
-    color 0.25s ease,
-    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: color 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .mntn-right-slider a:hover {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .mntn-right-slider a.active {
   color: var(--text);
-  transform: translate3d(-6px, 0, 0) scale(1.14);
 }
 
 @media (min-width: 1200px) {
