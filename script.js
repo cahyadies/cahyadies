@@ -7,7 +7,10 @@ const state = {
 const DATA = {
   ecosystem: [
     {
-      code: '01 / KEILMUAN IT & RISET TERAPAN',
+      code: {
+        id: '01 / KEILMUAN IT & RISET TERAPAN',
+        en: '01 / IT SCIENCE & APPLIED RESEARCH'
+      },
       name: 'MentayaSandbox',
       desc: {
         id: 'Wadah ekspresi, kolaborasi terbuka, dan dokumentasi keilmuan teknologi informasi berkelanjutan: mencakup eksperimen computer vision, arsitektur web hemat sumber daya, serta catatan teknis.',
@@ -17,7 +20,10 @@ const DATA = {
       cta: { id: 'Buka MentayaSandbox', en: 'Open MentayaSandbox' }
     },
     {
-      code: '02 / KATALOG OLAHAN DAPUR IBU',
+      code: {
+        id: '02 / KATALOG OLAHAN DAPUR IBU',
+        en: "02 / MOTHER'S CULINARY CATALOG"
+      },
       name: 'dalam.dapur',
       desc: {
         id: 'Katalog digital yang menghimpun seluruh hasil olahan masakan Ibu di Sampit: mulai dari makanan berat seperti nasi bakar dan mie ayam, aneka roti lembut, kue basah, kue kering, hingga frozen food.',
@@ -27,7 +33,10 @@ const DATA = {
       cta: { id: 'Buka Katalog dalam.dapur', en: 'Open dalam.dapur Catalog' }
     },
     {
-      code: '03 / KEBUN HIDROPONIK KELUARGA BAPAK',
+      code: {
+        id: '03 / KEBUN HIDROPONIK KELUARGA BAPAK',
+        en: "03 / FATHER'S HYDROPONIC GARDEN"
+      },
       name: 'Omah Ijo',
       desc: {
         id: 'Katalog hasil perkebunan hidroponik punya Bapak yang dikelola keluarga: memantau sayur yang sedang ready siap petik, berapa lama masa tunggu hingga siap jual, serta layanan permintaan pasar.',
@@ -42,7 +51,7 @@ const DATA = {
       id: 'naraicoder',
       cat: 'design',
       catLabel: { id: 'Desain & Identitas', en: 'Design & Identity' },
-      client: 'NaraiCoder Kalimantan Tengah',
+      client: { id: 'NaraiCoder Kalimantan Tengah', en: 'NaraiCoder Central Kalimantan' },
       year: '2026',
       specCode: 'SPEC-ID / 01',
       deliverables: ['Telawang Grid', 'Responsive Logo', 'Brand Guideline'],
@@ -68,17 +77,41 @@ const DATA = {
         ]
       },
       gallery: [
-        { src: 'assets/works/naraicoder-preview.png', cap: 'Konsep geometri Telawang dan struktur huruf utama NaraiCoder' },
-        { src: 'assets/works/naraicoder-mockup-objects.jpg', cap: 'Penerapan identitas visual pada berbagai media dan merchandise komunitas' },
-        { src: 'assets/works/naraicoder-logo.svg', cap: 'Eksplorasi simbol dan proporsi grid modular' },
-        { src: 'assets/works/naraicoder-responsive-system.jpg', cap: 'Sistem arsitektur logo responsif lintas ukuran layar' }
+        {
+          src: 'assets/works/naraicoder-preview.png',
+          cap: {
+            id: 'Konsep geometri Telawang dan struktur huruf utama NaraiCoder',
+            en: 'Telawang shield geometry concept and primary NaraiCoder wordmark'
+          }
+        },
+        {
+          src: 'assets/works/naraicoder-mockup-objects.jpg',
+          cap: {
+            id: 'Penerapan identitas visual pada berbagai media dan merchandise komunitas',
+            en: 'Visual identity application across community media and merchandise'
+          }
+        },
+        {
+          src: 'assets/works/naraicoder-logo.svg',
+          cap: {
+            id: 'Eksplorasi simbol dan proporsi grid modular',
+            en: 'Symbol exploration and modular grid proportions'
+          }
+        },
+        {
+          src: 'assets/works/naraicoder-responsive-system.jpg',
+          cap: {
+            id: 'Sistem arsitektur logo responsif lintas ukuran layar',
+            en: 'Responsive logo architecture across screen sizes'
+          }
+        }
       ]
     },
     {
       id: 'cv-bottle-volume',
       cat: 'ai',
       catLabel: { id: 'Model AI & Riset', en: 'AI Models & Research' },
-      client: 'MentayaSandbox R&D',
+      client: { id: 'MentayaSandbox R&D', en: 'MentayaSandbox R&D' },
       year: '2026',
       specCode: 'CV-MOD / 02',
       deliverables: ['OpenCV Contour', 'Perspective Calibration', 'Python Pipeline'],
@@ -107,7 +140,7 @@ const DATA = {
       id: 'dalamdapur-web',
       cat: 'web',
       catLabel: { id: 'Sistem Web', en: 'Web Systems' },
-      client: 'dalam.dapur (Keluarga Ibu)',
+      client: { id: 'dalam.dapur (Keluarga Ibu)', en: "dalam.dapur (Mother's Kitchen)" },
       year: '2026',
       specCode: 'WEB-CAT / 03',
       deliverables: ['6 Culinary Categories', 'Live Order Drawer', 'WhatsApp Checkout'],
@@ -131,15 +164,27 @@ const DATA = {
         ]
       },
       gallery: [
-        { src: 'dalamdapur/images/samosa.jpg', cap: 'Samosa rempah buatan Ibu yang tersedia dalam varian siap santap maupun frozen pack' },
-        { src: 'dalamdapur/images/roti manis.jpg', cap: 'Roti manis panggang segar dari dapur Ibu' }
+        {
+          src: 'dalamdapur/images/samosa.jpg',
+          cap: {
+            id: 'Samosa rempah buatan Ibu yang tersedia dalam varian siap santap maupun frozen pack',
+            en: "Mother's spiced samosas available ready-to-eat or as frozen packs"
+          }
+        },
+        {
+          src: 'dalamdapur/images/roti manis.jpg',
+          cap: {
+            id: 'Roti manis panggang segar dari dapur Ibu',
+            en: "Freshly baked sweet bread from Mother's kitchen"
+          }
+        }
       ]
     },
     {
       id: 'omahijo-board',
       cat: 'web',
       catLabel: { id: 'Sistem Web', en: 'Web Systems' },
-      client: 'Omah Ijo (Kebun Hidroponik Bapak)',
+      client: { id: 'Omah Ijo (Kebun Hidroponik Bapak)', en: "Omah Ijo (Father's Hydroponic Garden)" },
       year: '2026',
       specCode: 'AGR-SYS / 04',
       deliverables: ['HST Progress Tracker', 'Harvest Booking', 'Farmino UI'],
@@ -168,7 +213,7 @@ const DATA = {
       id: 'shuttle-gerigi-its',
       cat: 'design',
       catLabel: { id: 'Desain & Identitas', en: 'Design & Identity' },
-      client: 'GERIGI ITS Surabaya',
+      client: { id: 'GERIGI ITS Surabaya', en: 'GERIGI ITS Surabaya' },
       year: '2025',
       specCode: 'WAY-ID / 05',
       deliverables: ['Route Signage', 'Vehicle Identification', 'Event Wayfinding'],
@@ -195,7 +240,7 @@ const DATA = {
       id: 'dalamdapur-packaging',
       cat: 'design',
       catLabel: { id: 'Desain & Identitas', en: 'Design & Identity' },
-      client: 'dalam.dapur',
+      client: { id: 'dalam.dapur', en: 'dalam.dapur' },
       year: '2025',
       specCode: 'PKG-SYS / 06',
       deliverables: ['Jar Seal Labels', 'Frozen Pack Instructions', 'Typography System'],
@@ -217,15 +262,21 @@ const DATA = {
         ]
       },
       gallery: [
-        { src: 'dalamdapur/images/rotisisir.jpg', cap: 'Tampilan produk olahan dapur Ibu yang siap dikemas untuk pelanggan' }
+        {
+          src: 'dalamdapur/images/rotisisir.jpg',
+          cap: {
+            id: 'Tampilan produk olahan dapur Ibu yang siap dikemas untuk pelanggan',
+            en: "Mother's kitchen products ready to be packaged for customers"
+          }
+        }
       ]
     }
   ],
   posts: [
     {
       id: 'arsitektur-ekosistem-keluarga',
-      date: '14 Nov 2026',
-      readTime: '4 mnt baca',
+      date: { id: '14 Nov 2026', en: '14 Nov 2026' },
+      readTime: { id: '4 mnt baca', en: '4 min read' },
       cat: { id: 'Arsitektur Web', en: 'Web Architecture' },
       title: {
         id: 'Merancang Ekosistem Web Keluarga Tanpa Ketergantungan Berlebih',
@@ -248,8 +299,8 @@ const DATA = {
     },
     {
       id: 'filosofi-telawang-naraicoder',
-      date: '02 Nov 2026',
-      readTime: '5 mnt baca',
+      date: { id: '02 Nov 2026', en: '02 Nov 2026' },
+      readTime: { id: '5 mnt baca', en: '5 min read' },
       cat: { id: 'Desain Identitas', en: 'Identity Design' },
       title: {
         id: 'Menyatukan Geometri Perisai Telawang dan Logika Biner pada Logo NaraiCoder',
@@ -272,8 +323,8 @@ const DATA = {
     },
     {
       id: 'visi-komputer-kebun-hidroponik',
-      date: '19 Okt 2026',
-      readTime: '6 mnt baca',
+      date: { id: '19 Okt 2026', en: '19 Oct 2026' },
+      readTime: { id: '6 mnt baca', en: '6 min read' },
       cat: { id: 'AI & Riset Terapan', en: 'AI & Applied Research' },
       title: {
         id: 'Penerapan Computer Vision Sederhana untuk Pemantauan Usia Panen Hidroponik',
@@ -318,7 +369,7 @@ function toggleLang() {
   state.lang = state.lang === 'id' ? 'en' : 'id';
   document.documentElement.lang = state.lang;
   localStorage.setItem('cahyadies_lang', state.lang);
-  render();
+  render({ keepScroll: true });
 }
 
 function renderNav() {
@@ -459,7 +510,7 @@ function homeView() {
                 .map(
                   (unit) => `
                 <a class="mntn-eco-item" href="${unit.href}">
-                  <span class="mntn-eco-kicker">${unit.code}</span>
+                  <span class="mntn-eco-kicker">${t(unit.code)}</span>
                   <h3>${unit.name}</h3>
                   <p>${t(unit.desc)}</p>
                   <span class="mntn-eco-cta">${t(unit.cta)}</span>
@@ -513,7 +564,7 @@ function homeView() {
                   <span class="mntn-work-idx">0${idx + 2}</span>
                   <div class="mntn-work-info">
                     <strong>${t(w.title)}</strong>
-                    <span>${w.client}</span>
+                    <span>${t(w.client)}</span>
                   </div>
                   <span class="mntn-work-year">${w.year}</span>
                 </a>
@@ -557,9 +608,9 @@ function homeView() {
                 <div class="mntn-journal-meta">
                   <span>${t(p.cat)}</span>
                   <span>/</span>
-                  <span>${p.date}</span>
+                  <span>${t(p.date)}</span>
                   <span>/</span>
-                  <span>${p.readTime}</span>
+                  <span>${t(p.readTime)}</span>
                 </div>
                 <h3>${t(p.title)}</h3>
                 <p>${t(p.excerpt)}</p>
@@ -629,7 +680,7 @@ function worksView() {
                       <span>${w.specCode}</span>
                       <span>${w.year}</span>
                     </div>
-                    <div class="work-arch-spec-mid">${w.client}</div>
+                    <div class="work-arch-spec-mid">${t(w.client)}</div>
                     <div class="work-arch-spec-bot">
                       ${w.deliverables.map((d) => `<span>${d}</span>`).join(' · ')}
                     </div>
@@ -638,7 +689,7 @@ function worksView() {
                 }
               </div>
               <div class="work-arch-body">
-                <div class="work-arch-meta">${t(w.catLabel)} · ${w.client} · ${w.year}</div>
+                <div class="work-arch-meta">${t(w.catLabel)} · ${t(w.client)} · ${w.year}</div>
                 <h3><a href="#/karya/${w.id}">${t(w.title)}</a></h3>
                 <p>${t(w.summary)}</p>
                 <div class="work-arch-foot">
@@ -677,7 +728,7 @@ function workDetailView(id) {
           <div class="detail-meta-grid">
             <div>
               <span>${state.lang === 'id' ? 'Mitra / Unit' : 'Client / Unit'}</span>
-              <strong>${item.client}</strong>
+              <strong>${t(item.client)}</strong>
             </div>
             <div>
               <span>${state.lang === 'id' ? 'Tahun' : 'Year'}</span>
@@ -705,8 +756,8 @@ function workDetailView(id) {
                 .map(
                   (g) => `
                 <figure>
-                  <img src="${g.src}" alt="${g.cap}" loading="lazy" />
-                  <figcaption>${g.cap}</figcaption>
+                  <img src="${g.src}" alt="${t(g.cap)}" loading="lazy" />
+                  <figcaption>${t(g.cap)}</figcaption>
                 </figure>
               `
                 )
@@ -745,9 +796,9 @@ function blogView() {
               <div class="mntn-journal-meta">
                 <span>${t(p.cat)}</span>
                 <span>/</span>
-                <span>${p.date}</span>
+                <span>${t(p.date)}</span>
                 <span>/</span>
-                <span>${p.readTime}</span>
+                <span>${t(p.readTime)}</span>
               </div>
               <h3>${t(p.title)}</h3>
               <p>${t(p.excerpt)}</p>
@@ -776,9 +827,9 @@ function postDetailView(id) {
           <div class="mntn-journal-meta" style="margin-bottom:14px">
             <span>${t(post.cat)}</span>
             <span>/</span>
-            <span>${post.date}</span>
+            <span>${t(post.date)}</span>
             <span>/</span>
-            <span>${post.readTime}</span>
+            <span>${t(post.readTime)}</span>
           </div>
           <h1 class="mntn-story-title">${t(post.title)}</h1>
           <div class="article-prose" style="margin-top:24px">
@@ -818,15 +869,15 @@ function contactView() {
             }</p>
             <div class="contact-list">
               <div class="contact-item">
-                <span>Email Utama</span>
+                <span>${state.lang === 'id' ? 'Email Utama' : 'Primary Email'}</span>
                 <strong>ekosugengcahyadi@gmail.com</strong>
               </div>
               <div class="contact-item">
-                <span>GitHub &amp; Eksperimen Kode</span>
+                <span>${state.lang === 'id' ? 'GitHub & Eksperimen Kode' : 'GitHub & Code Experiments'}</span>
                 <strong>github.com/cahyadies</strong>
               </div>
               <div class="contact-item">
-                <span>Basis Domisili</span>
+                <span>${state.lang === 'id' ? 'Basis Domisili' : 'Base Location'}</span>
                 <strong>Surabaya</strong>
               </div>
             </div>
@@ -843,10 +894,26 @@ function contactView() {
               <div class="form-row">
                 <label for="cTopic">${state.lang === 'id' ? 'Topik Keperluan' : 'Inquiry Topic'}</label>
                 <select id="cTopic" name="topic">
-                  <option value="Desain & Web cahyadies">Desain &amp; Pengembangan Web (cahyadies)</option>
-                  <option value="Kolaborasi Riset MentayaSandbox">Kolaborasi Riset IT (MentayaSandbox)</option>
-                  <option value="Pesanan Masakan dalam.dapur">Pesanan Kuliner Ibu (dalam.dapur)</option>
-                  <option value="Pasokan Sayur Omah Ijo">Pasokan Hidroponik Bapak (Omah Ijo)</option>
+                  <option value="Desain & Web cahyadies">${
+                    state.lang === 'id'
+                      ? 'Desain & Pengembangan Web (cahyadies)'
+                      : 'Design & Web Development (cahyadies)'
+                  }</option>
+                  <option value="Kolaborasi Riset MentayaSandbox">${
+                    state.lang === 'id'
+                      ? 'Kolaborasi Riset IT (MentayaSandbox)'
+                      : 'IT Research Collaboration (MentayaSandbox)'
+                  }</option>
+                  <option value="Pesanan Masakan dalam.dapur">${
+                    state.lang === 'id'
+                      ? 'Pesanan Kuliner Ibu (dalam.dapur)'
+                      : "Mother's Culinary Inquiry (dalam.dapur)"
+                  }</option>
+                  <option value="Pasokan Sayur Omah Ijo">${
+                    state.lang === 'id'
+                      ? 'Pasokan Hidroponik Bapak (Omah Ijo)'
+                      : "Father's Hydroponic Supply (Omah Ijo)"
+                  }</option>
                 </select>
               </div>
               <div class="form-row">
@@ -923,7 +990,7 @@ function bindEvents() {
   document.querySelectorAll('[data-filter]').forEach((btn) => {
     btn.addEventListener('click', () => {
       state.workFilter = btn.getAttribute('data-filter') || 'all';
-      render();
+      render({ keepScroll: true });
     });
   });
 
@@ -941,7 +1008,9 @@ function bindEvents() {
   }
 }
 
-function render() {
+function render(options = {}) {
+  const keepScroll = Boolean(options && options.keepScroll);
+  const savedScrollY = window.scrollY;
   applyTheme();
   const rawHash = location.hash.slice(1) || '/';
   const app = document.getElementById('app');
@@ -949,7 +1018,7 @@ function render() {
 
   if (rawHash.startsWith('sec-')) {
     const targetEl = document.getElementById(rawHash);
-    if (!targetEl) {
+    if (!targetEl || keepScroll) {
       app.innerHTML = homeView();
       bindEvents();
     }
@@ -957,7 +1026,11 @@ function render() {
     renderFooter();
     updateSliderVisibility(true);
     requestAnimationFrame(() => {
-      document.getElementById(rawHash)?.scrollIntoView({ behavior: 'smooth' });
+      if (keepScroll) {
+        window.scrollTo({ top: savedScrollY, behavior: 'auto' });
+      } else {
+        document.getElementById(rawHash)?.scrollIntoView({ behavior: 'smooth' });
+      }
       syncSliderOnScroll();
     });
     return;
@@ -982,7 +1055,7 @@ function render() {
   renderFooter();
   bindEvents();
   updateSliderVisibility(isHome);
-  window.scrollTo({ top: 0, behavior: 'auto' });
+  window.scrollTo({ top: keepScroll ? savedScrollY : 0, behavior: 'auto' });
   syncSliderOnScroll();
 }
 
