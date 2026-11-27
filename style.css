@@ -461,78 +461,279 @@ select {
   color: var(--accent);
 }
 
-.mntn-work-stage {
-  background: var(--surface);
+.work-fan-carousel {
+  position: relative;
+  width: 100%;
+  user-select: none;
 }
 
-.mntn-work-stage-img {
+.work-fan-stage {
+  --drag-x: 0px;
+  --drag-rot: 0deg;
+  position: relative;
   width: 100%;
-  height: 360px;
+  height: 390px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: pan-y;
+  cursor: grab;
+  perspective: 1200px;
+}
+
+.work-fan-stage.is-dragging {
+  cursor: grabbing;
+}
+
+.work-fan-card {
+  position: absolute;
+  width: 76%;
+  height: 356px;
+  background: var(--bg-soft);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 26px 56px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  transition:
+    transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.42s ease,
+    box-shadow 0.42s ease;
+  will-change: transform, opacity;
+}
+
+.work-fan-stage.is-dragging .work-fan-card[data-pos="active"] {
+  transition: none;
+}
+
+.work-fan-card[data-pos="active"] {
+  z-index: 4;
+  opacity: 1;
+  filter: brightness(1);
+  transform: translate3d(var(--drag-x), 0, 0) scale(1) rotate(var(--drag-rot));
+  border-color: var(--accent);
+}
+
+.work-fan-card[data-pos="prev"] {
+  z-index: 2;
+  opacity: 0.72;
+  filter: brightness(0.68);
+  transform: translate3d(-24%, 18px, 0) scale(0.84) rotate(-8deg);
+  cursor: pointer;
+}
+
+.work-fan-card[data-pos="prev"]:hover {
+  opacity: 0.9;
+  filter: brightness(0.85);
+  transform: translate3d(-26%, 14px, 0) scale(0.86) rotate(-8.5deg);
+}
+
+.work-fan-card[data-pos="next"] {
+  z-index: 2;
+  opacity: 0.72;
+  filter: brightness(0.68);
+  transform: translate3d(24%, 18px, 0) scale(0.84) rotate(8deg);
+  cursor: pointer;
+}
+
+.work-fan-card[data-pos="next"]:hover {
+  opacity: 0.9;
+  filter: brightness(0.85);
+  transform: translate3d(26%, 14px, 0) scale(0.86) rotate(8.5deg);
+}
+
+.work-fan-card[data-pos="hidden"] {
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 28px, 0) scale(0.72) rotate(0deg);
+}
+
+.work-fan-card-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
+  pointer-events: none;
 }
 
-.mntn-work-stage-caption {
-  padding: 28px 32px;
-  border-bottom: 1px solid var(--line);
-}
-
-.mntn-work-stage-caption h3 {
-  font: 600 24px/1.3 var(--serif);
-  margin: 6px 0 10px;
-}
-
-.mntn-work-stage-caption p {
-  font-size: 15px;
-  color: var(--muted);
-  margin: 0;
-}
-
-.mntn-work-rows {
+.work-fan-card-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
 }
 
-.mntn-work-row {
-  display: grid;
-  grid-template-columns: 40px 1fr auto;
-  gap: 16px;
-  align-items: baseline;
-  padding: 18px 32px;
-  border-bottom: 1px solid var(--line);
-  transition: background-color 0.2s ease;
-}
-
-.mntn-work-row:last-child {
-  border-bottom: none;
-}
-
-.mntn-work-row:hover {
-  background: rgba(251, 215, 132, 0.05);
-}
-
-.mntn-work-idx {
-  font-size: 13px;
+.work-fan-card-tag span {
+  background: rgba(11, 29, 38, 0.84);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line-strong);
+  padding: 5px 10px;
+  font-size: 11px;
   font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--accent);
 }
 
-.mntn-work-info strong {
-  display: block;
-  font-size: 15.5px;
-  font-weight: 700;
+.work-fan-plaque {
+  position: relative;
+  z-index: 6;
+  width: 84%;
+  margin: -56px auto 0;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.38);
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.work-fan-plaque-main h3 {
+  font: 600 22px/1.28 var(--serif);
+  margin: 4px 0 8px;
   color: var(--text);
 }
 
-.mntn-work-info span {
-  font-size: 13px;
+.work-fan-plaque-main h3 a:hover {
+  color: var(--accent);
+}
+
+.work-fan-plaque-main p {
+  font-size: 14.5px;
+  line-height: 1.62;
+  color: var(--muted);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.work-fan-plaque-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding-left: 22px;
+  border-left: 1px solid var(--line);
+  min-width: 124px;
+  text-align: right;
+}
+
+.work-fan-stat-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--subtle);
 }
 
-.mntn-work-year {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--muted);
+.work-fan-stat-num {
+  font: 700 38px/1.05 var(--sans);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  margin: 4px 0 8px;
+}
+
+.work-fan-stat-num span {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--subtle);
+  margin-left: 2px;
+}
+
+.work-fan-stat-link {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.work-fan-stat-link:hover {
+  text-decoration: underline;
+}
+
+.work-fan-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.work-fan-nav-btn {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.work-fan-nav-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.work-fan-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.work-fan-dot {
+  width: 22px;
+  height: 4px;
+  padding: 0;
+  background: var(--line-strong);
+  border: none;
+  cursor: pointer;
+  transition: width 0.28s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.28s ease;
+}
+
+.work-fan-dot.active {
+  width: 40px;
+  background: var(--accent);
+}
+
+@media (max-width: 680px) {
+  .work-fan-stage {
+    height: 290px;
+  }
+  .work-fan-card {
+    width: 82%;
+    height: 260px;
+  }
+  .work-fan-plaque {
+    width: 92%;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 20px;
+  }
+  .work-fan-plaque-stat {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-left: 0;
+    padding-top: 12px;
+    border-left: none;
+    border-top: 1px solid var(--line);
+    width: 100%;
+  }
 }
 
 .mntn-journal-list {

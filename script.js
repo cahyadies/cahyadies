@@ -1,7 +1,8 @@
 const state = {
   lang: localStorage.getItem('cahyadies_lang') || 'id',
   theme: localStorage.getItem('cahyadies_theme') || 'dark',
-  workFilter: 'all'
+  workFilter: 'all',
+  workSlide: 0
 };
 
 const DATA = {
@@ -115,7 +116,7 @@ const DATA = {
       year: '2026',
       specCode: 'CV-MOD / 02',
       deliverables: ['OpenCV Contour', 'Perspective Calibration', 'Python Pipeline'],
-      thumb: '',
+      thumb: 'assets/works/cv-bottle-volume.svg',
       title: {
         id: 'Estimasi Volume Objek Mengapung dengan Computer Vision',
         en: 'Floating Object Volume Estimation via Computer Vision'
@@ -188,7 +189,7 @@ const DATA = {
       year: '2026',
       specCode: 'AGR-SYS / 04',
       deliverables: ['HST Progress Tracker', 'Harvest Booking', 'Farmino UI'],
-      thumb: '',
+      thumb: 'assets/works/omahijo-board.svg',
       title: {
         id: 'Katalog Kebun Hidroponik & Estimasi Masa Tunggu Omah Ijo',
         en: 'Omah Ijo Hydroponic Garden Catalog & Harvest Countdown'
@@ -217,7 +218,7 @@ const DATA = {
       year: '2025',
       specCode: 'WAY-ID / 05',
       deliverables: ['Route Signage', 'Vehicle Identification', 'Event Wayfinding'],
-      thumb: '',
+      thumb: 'assets/works/shuttle-gerigi-its.svg',
       title: {
         id: 'Identitas Visual & Sistem Wayfinding Shuttle GERIGI ITS',
         en: 'Shuttle GERIGI ITS Visual Identity & Wayfinding System'
@@ -450,9 +451,64 @@ function renderFooter() {
   `;
 }
 
+function getWorkCardPos(idx, activeIdx, total) {
+  if (idx === activeIdx) return 'active';
+  const prevIdx = (activeIdx - 1 + total) % total;
+  const nextIdx = (activeIdx + 1) % total;
+  if (idx === prevIdx) return 'prev';
+  if (idx === nextIdx) return 'next';
+  return 'hidden';
+}
+
+function renderWorkFanPlaqueInner(idx) {
+  const w = DATA.works[idx] || DATA.works[0];
+  const numStr = String(idx + 1).padStart(2, '0');
+  const totalStr = String(DATA.works.length).padStart(2, '0');
+  return `
+    <div class="work-fan-plaque-main">
+      <span class="mntn-eco-kicker">${t(w.catLabel)} · ${t(w.client)}</span>
+      <h3><a href="#/karya/${w.id}">${t(w.title)}</a></h3>
+      <p>${t(w.summary)}</p>
+    </div>
+    <div class="work-fan-plaque-stat">
+      <span class="work-fan-stat-label">${state.lang === 'id' ? 'Karya Pilihan' : 'Selected Work'}</span>
+      <strong class="work-fan-stat-num">${numStr}<span>/${totalStr}</span></strong>
+      <a class="work-fan-stat-link" href="#/karya/${w.id}">${
+        state.lang === 'id' ? 'Buka Studi Kasus' : 'Open Case Study'
+      }</a>
+    </div>
+  `;
+}
+
+function setWorkSlide(nextIndex) {
+  const total = DATA.works.length;
+  if (!total) return;
+  state.workSlide = ((nextIndex % total) + total) % total;
+
+  const stage = document.getElementById('workFanStage');
+  if (stage) {
+    stage.querySelectorAll('.work-fan-card').forEach((card) => {
+      const idx = Number(card.getAttribute('data-index') || 0);
+      const pos = getWorkCardPos(idx, state.workSlide, total);
+      card.setAttribute('data-pos', pos);
+      card.setAttribute('aria-hidden', pos === 'active' ? 'false' : 'true');
+    });
+  }
+
+  const plaque = document.getElementById('workFanPlaque');
+  if (plaque) {
+    plaque.innerHTML = renderWorkFanPlaqueInner(state.workSlide);
+  }
+
+  document.querySelectorAll('.work-fan-dot').forEach((dot) => {
+    const idx = Number(dot.getAttribute('data-slide-to') || 0);
+    dot.classList.toggle('active', idx === state.workSlide);
+  });
+}
+
 function homeView() {
-  const flagship = DATA.works[0];
-  const otherWorks = DATA.works.slice(1);
+  const totalWorks = DATA.works.length;
+  const activeSlide = ((state.workSlide % totalWorks) + totalWorks) % totalWorks;
 
   return `
     <section class="mntn-hero" id="sec-start">
@@ -547,30 +603,69 @@ function homeView() {
         </div>
 
         <div class="mntn-story-visual">
-          <div class="mntn-work-stage">
-            <a href="#/karya/${flagship.id}">
-              <img class="mntn-work-stage-img" src="assets/works/naraicoder-preview.png" alt="Konsep geometri logo NaraiCoder PARDI" loading="lazy" />
-            </a>
-            <div class="mntn-work-stage-caption">
-              <span class="mntn-eco-kicker">${t(flagship.catLabel)} · ${flagship.year}</span>
-              <h3><a href="#/karya/${flagship.id}">${t(flagship.title)}</a></h3>
-              <p>${t(flagship.summary)}</p>
-            </div>
-            <div class="mntn-work-rows">
-              ${otherWorks
-                .map(
-                  (w, idx) => `
-                <a class="mntn-work-row" href="#/karya/${w.id}">
-                  <span class="mntn-work-idx">0${idx + 2}</span>
-                  <div class="mntn-work-info">
-                    <strong>${t(w.title)}</strong>
-                    <span>${t(w.client)}</span>
+          <div class="work-fan-carousel" aria-label="${
+            state.lang === 'id' ? 'Galeri Geser Karya Pilihan' : 'Swipeable Selected Works Gallery'
+          }">
+            <div class="work-fan-stage" id="workFanStage">
+              ${DATA.works
+                .map((w, idx) => {
+                  const pos = getWorkCardPos(idx, activeSlide, totalWorks);
+                  return `
+                <article
+                  class="work-fan-card"
+                  data-index="${idx}"
+                  data-pos="${pos}"
+                  data-id="${w.id}"
+                  aria-hidden="${pos === 'active' ? 'false' : 'true'}"
+                >
+                  <img
+                    class="work-fan-card-img"
+                    src="${w.thumb}"
+                    alt="${t(w.title)}"
+                    draggable="false"
+                    loading="lazy"
+                  />
+                  <div class="work-fan-card-tag">
+                    <span>${w.specCode}</span>
+                    <span>${w.year}</span>
                   </div>
-                  <span class="mntn-work-year">${w.year}</span>
-                </a>
-              `
-                )
+                </article>
+              `;
+                })
                 .join('')}
+            </div>
+
+            <div class="work-fan-plaque" id="workFanPlaque">
+              ${renderWorkFanPlaqueInner(activeSlide)}
+            </div>
+
+            <div class="work-fan-controls">
+              <button
+                type="button"
+                class="work-fan-nav-btn"
+                id="workFanPrev"
+                aria-label="${state.lang === 'id' ? 'Karya sebelumnya' : 'Previous work'}"
+              >‹</button>
+              <div class="work-fan-dots" role="tablist">
+                ${DATA.works
+                  .map(
+                    (w, idx) => `
+                  <button
+                    type="button"
+                    class="work-fan-dot ${idx === activeSlide ? 'active' : ''}"
+                    data-slide-to="${idx}"
+                    aria-label="${t(w.title)}"
+                  ></button>
+                `
+                  )
+                  .join('')}
+              </div>
+              <button
+                type="button"
+                class="work-fan-nav-btn"
+                id="workFanNext"
+                aria-label="${state.lang === 'id' ? 'Karya berikutnya' : 'Next work'}"
+              >›</button>
             </div>
           </div>
         </div>
@@ -991,6 +1086,123 @@ function bindEvents() {
     btn.addEventListener('click', () => {
       state.workFilter = btn.getAttribute('data-filter') || 'all';
       render({ keepScroll: true });
+    });
+  });
+
+  const fanStage = document.getElementById('workFanStage');
+  if (fanStage) {
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
+    let isPointerDown = false;
+    let hasSwiped = false;
+    let wheelCooldown = false;
+
+    fanStage.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      isPointerDown = true;
+      hasSwiped = false;
+      startX = e.clientX;
+      startY = e.clientY;
+      currentX = e.clientX;
+      fanStage.classList.add('is-dragging');
+    });
+
+    fanStage.addEventListener('pointermove', (e) => {
+      if (!isPointerDown) return;
+      currentX = e.clientX;
+      const dx = currentX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+        if (!hasSwiped) {
+          hasSwiped = true;
+          try {
+            fanStage.setPointerCapture(e.pointerId);
+          } catch (_) {}
+        }
+        fanStage.style.setProperty('--drag-x', `${Math.max(-90, Math.min(90, dx * 0.42))}px`);
+        fanStage.style.setProperty('--drag-rot', `${Math.max(-6, Math.min(6, dx * 0.03))}deg`);
+      }
+    });
+
+    const finishDrag = (e) => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      const dx = currentX - startX;
+      fanStage.classList.remove('is-dragging');
+      fanStage.style.setProperty('--drag-x', '0px');
+      fanStage.style.setProperty('--drag-rot', '0deg');
+      if (hasSwiped) {
+        try {
+          if (e && e.pointerId !== undefined && fanStage.hasPointerCapture(e.pointerId)) {
+            fanStage.releasePointerCapture(e.pointerId);
+          }
+        } catch (_) {}
+        if (dx <= -42) {
+          setWorkSlide(state.workSlide + 1);
+        } else if (dx >= 42) {
+          setWorkSlide(state.workSlide - 1);
+        }
+      }
+    };
+
+    fanStage.addEventListener('pointerup', finishDrag);
+    fanStage.addEventListener('pointercancel', finishDrag);
+    fanStage.addEventListener('pointerleave', (e) => {
+      if (isPointerDown && !hasSwiped) {
+        finishDrag(e);
+      }
+    });
+
+    fanStage.querySelectorAll('.work-fan-card').forEach((card) => {
+      card.addEventListener('click', (e) => {
+        if (hasSwiped) {
+          e.preventDefault();
+          return;
+        }
+        const pos = card.getAttribute('data-pos');
+        const id = card.getAttribute('data-id');
+        if (pos === 'prev') {
+          setWorkSlide(state.workSlide - 1);
+        } else if (pos === 'next') {
+          setWorkSlide(state.workSlide + 1);
+        } else if (pos === 'active' && id) {
+          location.hash = `#/karya/${id}`;
+        }
+      });
+    });
+
+    fanStage.addEventListener(
+      'wheel',
+      (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 26) {
+          e.preventDefault();
+          if (wheelCooldown) return;
+          wheelCooldown = true;
+          if (e.deltaX > 0) {
+            setWorkSlide(state.workSlide + 1);
+          } else {
+            setWorkSlide(state.workSlide - 1);
+          }
+          setTimeout(() => {
+            wheelCooldown = false;
+          }, 420);
+        }
+      },
+      { passive: false }
+    );
+  }
+
+  document.getElementById('workFanPrev')?.addEventListener('click', () => {
+    setWorkSlide(state.workSlide - 1);
+  });
+  document.getElementById('workFanNext')?.addEventListener('click', () => {
+    setWorkSlide(state.workSlide + 1);
+  });
+  document.querySelectorAll('.work-fan-dot').forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const idx = Number(dot.getAttribute('data-slide-to') || 0);
+      setWorkSlide(idx);
     });
   });
 
